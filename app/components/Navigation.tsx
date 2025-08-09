@@ -103,6 +103,9 @@ export function Navigation() {
                   <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(200, 180, 160, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      window.location.href = '/#contact';
+                    }}
                     className="bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
                   >
                     Get Started
@@ -141,6 +144,9 @@ export function Navigation() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
+                      onClick={() => {
+                        window.location.href = '/#contact';
+                      }}
                       className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300"
                     >
                       Get Started
@@ -199,6 +205,9 @@ export function Navigation() {
                   <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(200, 180, 160, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      window.location.href = '/#contact';
+                    }}
                     className="bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm ml-2"
                   >
                     Get Started
@@ -237,6 +246,9 @@ export function Navigation() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
+                      onClick={() => {
+                        window.location.href = '/#contact';
+                      }}
                       className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 text-sm"
                     >
                       Get Started

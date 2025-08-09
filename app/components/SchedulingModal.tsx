@@ -140,7 +140,13 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
         setErrors({});
       } else {
         const error = await response.json();
-        toast.error(error.message || "Failed to schedule consultation");
+        if (response.status === 429) {
+          // Rate limiting error
+          const remainingTime = error.remainingTime || 300;
+          toast.error(`Too many scheduling attempts. Please wait ${remainingTime} seconds before trying again.`);
+        } else {
+          toast.error(error.message || "Failed to schedule consultation");
+        }
       }
     } catch (error) {
       toast.error("Failed to schedule consultation. Please try again.");

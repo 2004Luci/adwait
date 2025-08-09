@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './ui/ImageWithFallback';
 import { BackgroundElements } from './ui/BackgroundElements';
 import { AnimatedText } from './ui/AnimatedText';
 import { TypewriterText } from './ui/TypewriterText';

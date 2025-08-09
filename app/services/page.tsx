@@ -203,10 +203,7 @@ export default function ServicesPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
+                window.location.href = '/#contact';
               }}
               className="cursor-pointer border border-sage-200/30 text-sage-200 px-8 py-4 rounded-xl hover:bg-sage-200/10 transition-all duration-300"
             >

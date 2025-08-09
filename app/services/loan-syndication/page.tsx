@@ -216,6 +216,9 @@ export default function LoanSyndicationPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    window.location.href = '/#contact';
+                  }}
                   className="cursor-pointer w-full border border-sage-600/30 text-sage-600 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
                 >
                   <Mail className="w-4 h-4 mr-2" />
@@ -265,16 +268,13 @@ export default function LoanSyndicationPage() {
             </div>
           </div>
         </motion.div>
-      </div>
-    </div>
-  );
-}
 
-      {/* Scheduling Modal */}
-      <SchedulingModal 
-        isOpen={isSchedulingModalOpen} 
-        onClose={() => setIsSchedulingModalOpen(false)} 
-      />
+        {/* Scheduling Modal */}
+        <SchedulingModal 
+          isOpen={isSchedulingModalOpen} 
+          onClose={() => setIsSchedulingModalOpen(false)} 
+        />
+      </div>
     </div>
   );
 } 

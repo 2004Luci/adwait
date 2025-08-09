@@ -218,6 +218,9 @@ export default function FinancialAdvisoryPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    window.location.href = '/#contact';
+                  }}
                   className="cursor-pointer w-full border border-sage-700/30 text-sage-700 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
                 >
                   <Mail className="w-4 h-4 mr-2" />

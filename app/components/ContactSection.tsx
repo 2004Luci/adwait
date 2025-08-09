@@ -7,6 +7,19 @@ import { BackgroundElements } from './ui/BackgroundElements';
 import { AnimatedText } from './ui/AnimatedText';
 import { z } from 'zod';
 import { toast } from 'sonner';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 interface ContactInfo {
   icon: React.ComponentType<{ className?: string }>;
@@ -22,11 +35,14 @@ const contactFormSchema = z.object({
     .min(2, "Name must be at least 2 characters")
     .max(50, "Name must be less than 50 characters")
     .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
-  email: z.email("Please enter a valid email address"),
-  company: z.optional(z.string().max(100, "Company name must be less than 100 characters")),
-  phone: z.optional(z.string().regex(/^\+?[0-9\s\-\(\)]+$/, "Phone number can only contain numbers, spaces, hyphens, and parentheses")
+  email: z.string().email("Please enter a valid email address"),
+  company: z.string().max(100, "Company name must be less than 100 characters").optional(),
+  phone: z.string()
+    .regex(/^\+?[0-9\s\-\(\)]+$/, "Phone number can only contain numbers, spaces, hyphens, and parentheses")
     .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number must be less than 15 digits")),
+    .max(15, "Phone number must be less than 15 digits")
+    .optional()
+    .or(z.literal('')),
   service: z.string()
     .min(1, "Please select a service"),
   message: z.string()
@@ -37,93 +53,89 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export function ContactSection() {
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
-  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      company: '',
+      phone: '',
+      service: '',
+      message: ''
+    },
+    mode: 'onSubmit',
+  });
 
-    // Validate form data using Zod
-    const result = contactFormSchema.safeParse(formData);
-
-    if (!result.success) {
-      const newErrors: Partial<ContactFormData> = {};
-      result.error.issues.forEach((issue) => {
-        if (issue.path[0]) {
-          newErrors[issue.path[0] as keyof ContactFormData] = issue.message;
-        }
-      });
-      setErrors(newErrors);
-      toast.error("Please fix the errors in the form");
-      return;
-    }
-
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Send the form data to the API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (response.status === 429) {
+          // Rate limiting error
+          const remainingTime = errorData.remainingTime || 60;
+          throw new Error(`Too many contact form submissions. Please wait ${remainingTime} seconds before trying again.`);
+        }
+        throw new Error(errorData.message || 'Failed to send message');
+      }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
 
+      // Show success toast with more details
+      toast.success("Message sent successfully!", {
+        description: `Thank you ${data.name}! We'll get back to you at ${data.email} within 24 hours.`,
+        duration: 5000,
+      });
+
       // Reset form after 3 seconds
       setTimeout(() => {
         setIsSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          phone: '',
-          service: '',
-          message: ''
-        });
-        setErrors({});
+        form.reset();
       }, 3000);
-
-      toast.success("Message sent successfully! We'll get back to you soon.");
     } catch (error) {
       setIsSubmitting(false);
-      toast.error("Failed to send message. Please try again.");
+      console.error('Form submission error:', error);
+      toast.error("Failed to send message", {
+        description: error instanceof Error ? error.message : "Please check your internet connection and try again. If the problem persists, please contact us directly.",
+        duration: 6000,
+      });
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    // Clear error when user starts typing
-    if (errors[name as keyof ContactFormData]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: undefined
-      }));
-    }
+  const onError = (errors: any) => {
+    // Show a toast with the number of errors
+    const errorCount = Object.keys(errors).length;
+    toast.error(`Please fix ${errorCount} error${errorCount > 1 ? 's' : ''} in the form`, {
+      description: "Please review the highlighted fields and correct the errors.",
+      duration: 4000,
+    });
   };
 
   const contactInfo: ContactInfo[] = [
     {
       icon: Mail,
       title: 'Email',
-      details: ['info@adwaitartha.com', 'support@adwaitartha.com'],
+              details: ['contact@adwaitartha.com'],
       color: 'from-sage-200 to-sage-300'
     },
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+91-79-40305119'],
+      details: ['+91 7940305119'],
       color: 'from-sage-300 to-sage-400'
     },
     {
@@ -147,7 +159,8 @@ export function ContactSection() {
     'Corporate Law Services',
     'Loan Syndication',
     'Financial Advisory',
-    'Regulatory Compliance'
+    'Regulatory Compliance',
+    'Other'
   ];
 
   return (
@@ -209,150 +222,163 @@ export function ContactSection() {
                 <p className="text-sage-300">Thank you for contacting us. We'll get back to you soon.</p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sage-200 font-medium mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit, onError)} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
                       name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.name ? 'border-red-500' : 'border-sage-600/30'
-                        }`}
-                      placeholder="Enter your full name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sage-200 font-medium data-[error=true]:text-sage-200">
+                            Full Name *
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              placeholder="Enter your full name"
+                              className="bg-sage-700/50 border-sage-600/30 text-sage-100 placeholder-sage-400 focus:ring-sage-200/50 focus:border-sage-200/50"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400 text-xs" />
+                        </FormItem>
+                      )}
                     />
-                    {errors.name && (
-                      <p className="text-red-400 text-xs mt-1">{errors.name}</p>
-                    )}
-                  </div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sage-200 font-medium mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
+                    <FormField
+                      control={form.control}
                       name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.email ? 'border-red-500' : 'border-sage-600/30'
-                        }`}
-                      placeholder="Enter your email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sage-200 font-medium data-[error=true]:text-sage-200">
+                            Email Address *
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="email"
+                              placeholder="Enter your email"
+                              className="bg-sage-700/50 border-sage-600/30 text-sage-100 placeholder-sage-400 focus:ring-sage-200/50 focus:border-sage-200/50"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400 text-xs" />
+                        </FormItem>
+                      )}
                     />
-                    {errors.email && (
-                      <p className="text-red-400 text-xs mt-1">{errors.email}</p>
-                    )}
                   </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="company" className="block text-sage-200 font-medium mb-2">
-                      Company Name
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
                       name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.company ? 'border-red-500' : 'border-sage-600/30'
-                        }`}
-                      placeholder="Enter company name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sage-200 font-medium data-[error=true]:text-sage-200">
+                            Company Name
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              placeholder="Enter company name"
+                              className="bg-sage-700/50 border-sage-600/30 text-sage-100 placeholder-sage-400 focus:ring-sage-200/50 focus:border-sage-200/50"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400 text-xs" />
+                        </FormItem>
+                      )}
                     />
-                    {errors.company && (
-                      <p className="text-red-400 text-xs mt-1">{errors.company}</p>
-                    )}
-                  </div>
 
-                  <div>
-                    <label htmlFor="phone" className="block text-sage-200 font-medium mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
+                    <FormField
+                      control={form.control}
                       name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.phone ? 'border-red-500' : 'border-sage-600/30'
-                        }`}
-                      placeholder="Enter phone number"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sage-200 font-medium data-[error=true]:text-sage-200">
+                            Phone Number
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="tel"
+                              placeholder="Enter phone number"
+                              className="bg-sage-700/50 border-sage-600/30 text-sage-100 placeholder-sage-400 focus:ring-sage-200/50 focus:border-sage-200/50"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400 text-xs" />
+                        </FormItem>
+                      )}
                     />
-                    {errors.phone && (
-                      <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
-                    )}
                   </div>
-                </div>
 
-                <div>
-                  <label htmlFor="service" className="block text-sage-200 font-medium mb-2">
-                    Service Required *
-                  </label>
-                  <select
-                    id="service"
+                  <FormField
+                    control={form.control}
                     name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className={`cursor-pointer w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.service ? 'border-red-500' : 'border-sage-600/30'
-                      }`}
-                  >
-                    <option value="">Select a service</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service} className="cursor-pointer bg-sage-700 text-sage-100">
-                        {service}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.service && (
-                    <p className="text-red-400 text-xs mt-1">{errors.service}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sage-200 font-medium mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={5}
-                    className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all resize-none ${errors.message ? 'border-red-500' : 'border-sage-600/30'
-                      }`}
-                    placeholder="Tell us about your requirements..."
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sage-200 font-medium data-[error=true]:text-sage-200">
+                          Service Required *
+                        </FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-sage-700/50 border-sage-600/30 text-sage-100 focus:ring-sage-200/50 focus:border-sage-200/50">
+                              <SelectValue placeholder="Select a service" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="bg-sage-700 text-sage-100 border-sage-600">
+                            {services.map((service, index) => (
+                              <SelectItem key={index} value={service} className="cursor-pointer hover:bg-sage-600">
+                                {service}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage className="text-red-400 text-xs" />
+                      </FormItem>
+                    )}
                   />
-                  {errors.message && (
-                    <p className="text-red-400 text-xs mt-1">{errors.message}</p>
-                  )}
-                </div>
 
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 py-4 rounded-lg font-semibold hover:from-sage-100 hover:to-sage-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-sage-900 border-t-transparent rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      Send Message
-                    </>
-                  )}
-                </motion.button>
-              </form>
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sage-200 font-medium data-[error=true]:text-sage-200">
+                          Message *
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            rows={5}
+                            placeholder="Tell us about your requirements..."
+                            className="bg-sage-700/50 border-sage-600/30 text-sage-100 placeholder-sage-400 focus:ring-sage-200/50 focus:border-sage-200/50 resize-none"
+                          />
+                        </FormControl>
+                        <FormMessage className="text-red-400 text-xs" />
+                      </FormItem>
+                    )}
+                  />
+
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 py-4 rounded-lg font-semibold hover:from-sage-100 hover:to-sage-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-sage-900 border-t-transparent rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        Send Message
+                      </>
+                    )}
+                  </motion.button>
+                </form>
+              </Form>
             )}
           </motion.div>
 

@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Award, Users, Globe, Shield } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './ui/ImageWithFallback';
 import { BackgroundElements } from './ui/BackgroundElements';
 import { AnimatedText } from './ui/AnimatedText';
 
@@ -109,7 +109,7 @@ export function AboutSection() {
           </h2>
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
             Adwait Artha LLP is a prestigious financial advisory firm headquartered in Ahmedabad, Gujarat, 
-            delivering exceptional financial and legal services for over two decades. Our clientele is located all over Gujarat, Maharashtra and overseas at USA, Netherland, Singapore etc.
+            delivering exceptional financial and legal services for over two decades. Our clientele spans across Gujarat, Maharashtra, and various regions throughout India, as well as international markets including the USA, Netherlands, and Singapore.
           </p>
         </motion.div>
 
@@ -221,7 +221,7 @@ export function AboutSection() {
         </div>
 
         {/* Partners Section */}
-        <div className="mb-24">
+        <div id="team" className="mb-24">
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

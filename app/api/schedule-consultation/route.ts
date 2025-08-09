@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { format } from 'date-fns';
 import { EmailTemplate } from '@/app/components/email-template';
 import { Resend } from 'resend';
+import { arcjetConfig, getClientIP } from '../arcjet/route';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -15,6 +16,24 @@ interface ScheduleRequest {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting check using Arcjet
+    const clientIP = getClientIP(request);
+    const decision = await arcjetConfig.protect(request, { 
+      ip: clientIP,
+      requested: 4 // Deduct 4 tokens for scheduling consultation (3 company emails + 1 user email)
+    });
+
+    if (decision.isDenied()) {
+      return NextResponse.json(
+        { 
+          message: `Too many scheduling attempts. Please try again later.`,
+          reason: decision.reason,
+          remainingTime: 300 // Scheduling rate limit is 5 minutes (allows ~2 submissions per 5 minutes)
+        },
+        { status: 429 }
+      );
+    }
+
     const body: ScheduleRequest = await request.json();
     const { date, time, email, name, phone } = body;
 
@@ -65,13 +84,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Send emails to the team
-    const teamEmails = ['mit4s.dev@gmail.com'];
+    const companyEmails = ['contact@adwaitartha.com', 'sandip@adwaitartha.com', 'prashant@adwaitartha.com'];
     
-    for (const teamEmail of teamEmails) {
+    for (const companyEmail of companyEmails) {
       try {
         const { data, error } = await resend.emails.send({
-          from: 'Acme <onboarding@resend.dev>',
-          to: [teamEmail],
+          from: 'Adwait Artha <contact@adwaitartha.com>',
+          to: [companyEmail],
           subject: 'New Consultation Booking - Adwait Artha LLP',
           react: EmailTemplate({
             consultationDate: formattedDate,
@@ -84,19 +103,25 @@ export async function POST(request: NextRequest) {
         });
 
         if (error) {
-          console.error(`Failed to send team email to ${teamEmail}:`, error);
+          console.error(`Failed to send team email to ${companyEmail}:`, error);
         } else {
-          console.log(`Team email sent successfully to ${teamEmail}:`, data);
+          console.log(`Team email sent successfully to ${companyEmail}:`, data);
         }
+        
+        // Add delay between emails to respect Resend's rate limit (2 requests per second)
+        await new Promise(resolve => setTimeout(resolve, 600)); // 600ms delay = ~1.67 requests per second
       } catch (error) {
-        console.error(`Error sending team email to ${teamEmail}:`, error);
+        console.error(`Error sending team email to ${companyEmail}:`, error);
       }
     }
+
+    // Add delay before sending client email to respect Resend's rate limit
+    await new Promise(resolve => setTimeout(resolve, 600));
 
     // Send confirmation email to the client
     try {
       const { data, error } = await resend.emails.send({
-        from: 'Acme <onboarding@resend.dev>',
+        from: 'Adwait Artha LLP <contact@adwaitartha.com>',
         to: [email],
         subject: 'Consultation Confirmed - Adwait Artha LLP',
         react: EmailTemplate({

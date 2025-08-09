@@ -12,20 +12,20 @@ export function Footer() {
 
   const footerLinks = {
     services: [
-      'IPO Advisory',
-      'Legal Drafting & Audit',
-      'Corporate Law Services',
-      'Loan Syndication',
-      'Financial Advisory',
-      'Regulatory Compliance'
+      { name: 'IPO Advisory', href: '/services/ipo-sme-ipo-advisory' },
+      { name: 'Legal Drafting & Audit', href: '/services/legal-drafting-audit' },
+      { name: 'Corporate Law Services', href: '/services/corporate-law' },
+      { name: 'Loan Syndication', href: '/services/loan-syndication' },
+      { name: 'Financial Advisory', href: '/services/financial-advisory' },
+      { name: 'Regulatory Compliance', href: '/services/law-tribunals' }
     ],
     company: [
-      'About Us',
-      'Our Team',
-      'Case Studies',
-      'Testimonials',
-      'Careers',
-      'Contact'
+      { name: 'About Us', href: '#about' },
+      { name: 'Our Team', href: '#team' },
+      { name: 'Case Studies', href: '#case-studies' },
+      { name: 'Testimonials', href: '#testimonials' },
+      { name: 'Careers', href: '#careers' },
+      { name: 'Contact', href: '#contact' }
     ],
     resources: [
       'Blog',
@@ -63,7 +63,7 @@ export function Footer() {
     },
     {
       icon: Mail,
-      text: 'info@adwaitartha.com'
+              text: 'contact@adwaitartha.com'
     },
     {
       icon: Clock,
@@ -140,10 +140,10 @@ export function Footer() {
                 {footerLinks.services.map((service, index) => (
                   <li key={index}>
                     <a 
-                      href="#" 
+                      href={service.href} 
                       className="text-sage-800 hover:text-sage-900 transition-colors duration-300 text-sm"
                     >
-                      {service}
+                      {service.name}
                     </a>
                   </li>
                 ))}
@@ -162,10 +162,19 @@ export function Footer() {
                 {footerLinks.company.map((item, index) => (
                   <li key={index}>
                     <a 
-                      href="#" 
+                      href={item.href} 
                       className="text-sage-800 hover:text-sage-900 transition-colors duration-300 text-sm"
+                      onClick={(e) => {
+                        if (item.href.startsWith('#')) {
+                          e.preventDefault();
+                          const element = document.querySelector(item.href);
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }
+                      }}
                     >
-                      {item}
+                      {item.name}
                     </a>
                   </li>
                 ))}

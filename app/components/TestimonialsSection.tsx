@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import { Star, Quote, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './ui/ImageWithFallback';
 import { BackgroundElements } from './ui/BackgroundElements';
 import { AnimatedText } from './ui/AnimatedText';
 
@@ -185,7 +185,7 @@ export function TestimonialsSection() {
         </div>
 
         {/* Case Studies */}
-        <div>
+        <div id="case-studies">
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
