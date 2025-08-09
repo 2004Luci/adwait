@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { cn } from "./ui/utils";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
+import { SchedulingModal } from "./SchedulingModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,6 +81,7 @@ function ServiceCard({ icon, title, description, features, color, index, slug }:
 export function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -241,11 +243,18 @@ export function ServicesSection() {
             whileHover={{ scale: 1.05, boxShadow: "0 15px 35px rgba(200, 180, 160, 0.3)" }}
             whileTap={{ scale: 0.95 }}
             className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
+            onClick={() => setIsSchedulingModalOpen(true)}
           >
             Discuss Your Requirements
           </motion.button>
         </motion.div>
       </div>
+
+      {/* Scheduling Modal */}
+      <SchedulingModal 
+        isOpen={isSchedulingModalOpen} 
+        onClose={() => setIsSchedulingModalOpen(false)} 
+      />
     </section>
   );
 }
