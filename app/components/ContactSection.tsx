@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
 import { BackgroundElements } from './ui/BackgroundElements';
 import { AnimatedText } from './ui/AnimatedText';
+import { z } from 'zod';
+import { toast } from 'sonner';
 
 interface ContactInfo {
   icon: React.ComponentType<{ className?: string }>;
@@ -14,8 +16,28 @@ interface ContactInfo {
   clickable?: boolean;
 }
 
+// Zod validation schema for contact form
+const contactFormSchema = z.object({
+  name: z.string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters")
+    .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
+  email: z.email("Please enter a valid email address"),
+  company: z.optional(z.string().max(100, "Company name must be less than 100 characters")),
+  phone: z.optional(z.string().regex(/^\+?[0-9\s\-\(\)]+$/, "Phone number can only contain numbers, spaces, hyphens, and parentheses")
+    .min(10, "Phone number must be at least 10 digits")
+    .max(15, "Phone number must be less than 15 digits")),
+  service: z.string()
+    .min(1, "Please select a service"),
+  message: z.string()
+    .min(10, "Message must be at least 10 characters")
+    .max(1000, "Message must be less than 1000 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
+
 export function ContactSection() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     company: '',
@@ -23,38 +45,72 @@ export function ContactSection() {
     service: '',
     message: ''
   });
+  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        service: '',
-        message: ''
+
+    // Validate form data using Zod
+    const result = contactFormSchema.safeParse(formData);
+
+    if (!result.success) {
+      const newErrors: Partial<ContactFormData> = {};
+      result.error.issues.forEach((issue) => {
+        if (issue.path[0]) {
+          newErrors[issue.path[0] as keyof ContactFormData] = issue.message;
+        }
       });
-    }, 3000);
+      setErrors(newErrors);
+      toast.error("Please fix the errors in the form");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+        setErrors({});
+      }, 3000);
+
+      toast.success("Message sent successfully! We'll get back to you soon.");
+    } catch (error) {
+      setIsSubmitting(false);
+      toast.error("Failed to send message. Please try again.");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
+
+    // Clear error when user starts typing
+    if (errors[name as keyof ContactFormData]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
   };
 
   const contactInfo: ContactInfo[] = [
@@ -80,7 +136,7 @@ export function ContactSection() {
     {
       icon: Clock,
       title: 'Business Hours',
-      details: ['Mon - Fri: 9:00 AM - 6:00 PM', 'Sat: 9:00 AM - 1:00 PM'],
+      details: ['Mon - Fri: 10:00 AM - 6:00 PM', 'Sat: 10:00 AM - 4:00 PM'],
       color: 'from-sage-500 to-sage-600'
     }
   ];
@@ -97,7 +153,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="relative py-24 bg-gradient-to-br from-sage-300 via-sage-400 to-sage-500 overflow-hidden">
       {/* Background Elements */}
-      <BackgroundElements 
+      <BackgroundElements
         showGrid={true}
         showFloatingElements={true}
         showCornerElements={false}
@@ -116,9 +172,9 @@ export function ContactSection() {
             <Mail className="h-4 w-4 mr-2" />
             Get In Touch
           </div>
-          
+
           <h2 className="text-4xl lg:text-5xl font-bold text-sage-50 mb-6">
-            <AnimatedText 
+            <AnimatedText
               text="Let's Start a Conversation"
               className="text-sage-50"
               delay={200}
@@ -126,7 +182,7 @@ export function ContactSection() {
             />
           </h2>
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
-            Ready to take your business to the next level? Contact our expert team 
+            Ready to take your business to the next level? Contact our expert team
             for personalized financial advisory services tailored to your needs.
           </p>
         </motion.div>
@@ -141,7 +197,7 @@ export function ContactSection() {
             className="bg-sage-800/50 backdrop-blur-sm rounded-2xl p-8 border border-sage-700/30"
           >
             <h3 className="text-2xl font-bold text-sage-100 mb-6">Send us a Message</h3>
-            
+
             {isSubmitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -165,12 +221,15 @@ export function ContactSection() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-sage-700/50 border border-sage-600/30 rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all"
+                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.name ? 'border-red-500' : 'border-sage-600/30'
+                        }`}
                       placeholder="Enter your full name"
                     />
+                    {errors.name && (
+                      <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                    )}
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-sage-200 font-medium mb-2">
                       Email Address *
@@ -181,10 +240,13 @@ export function ContactSection() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-sage-700/50 border border-sage-600/30 rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all"
+                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.email ? 'border-red-500' : 'border-sage-600/30'
+                        }`}
                       placeholder="Enter your email"
                     />
+                    {errors.email && (
+                      <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -199,11 +261,15 @@ export function ContactSection() {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-sage-700/50 border border-sage-600/30 rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all"
+                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.company ? 'border-red-500' : 'border-sage-600/30'
+                        }`}
                       placeholder="Enter company name"
                     />
+                    {errors.company && (
+                      <p className="text-red-400 text-xs mt-1">{errors.company}</p>
+                    )}
                   </div>
-                  
+
                   <div>
                     <label htmlFor="phone" className="block text-sage-200 font-medium mb-2">
                       Phone Number
@@ -214,30 +280,38 @@ export function ContactSection() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-sage-700/50 border border-sage-600/30 rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all"
+                      className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.phone ? 'border-red-500' : 'border-sage-600/30'
+                        }`}
                       placeholder="Enter phone number"
                     />
+                    {errors.phone && (
+                      <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="service" className="block text-sage-200 font-medium mb-2">
-                    Service Required
+                    Service Required *
                   </label>
                   <select
                     id="service"
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-sage-700/50 border border-sage-600/30 rounded-lg text-sage-100 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all"
+                    className={`cursor-pointer w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all ${errors.service ? 'border-red-500' : 'border-sage-600/30'
+                      }`}
                   >
                     <option value="">Select a service</option>
                     {services.map((service, index) => (
-                      <option key={index} value={service} className="bg-sage-700 text-sage-100">
+                      <option key={index} value={service} className="cursor-pointer bg-sage-700 text-sage-100">
                         {service}
                       </option>
                     ))}
                   </select>
+                  {errors.service && (
+                    <p className="text-red-400 text-xs mt-1">{errors.service}</p>
+                  )}
                 </div>
 
                 <div>
@@ -249,11 +323,14 @@ export function ContactSection() {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
                     rows={5}
-                    className="w-full px-4 py-3 bg-sage-700/50 border border-sage-600/30 rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all resize-none"
+                    className={`w-full px-4 py-3 bg-sage-700/50 border rounded-lg text-sage-100 placeholder-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-200/50 focus:border-sage-200/50 transition-all resize-none ${errors.message ? 'border-red-500' : 'border-sage-600/30'
+                      }`}
                     placeholder="Tell us about your requirements..."
                   />
+                  {errors.message && (
+                    <p className="text-red-400 text-xs mt-1">{errors.message}</p>
+                  )}
                 </div>
 
                 <motion.button
@@ -290,7 +367,7 @@ export function ContactSection() {
             <div>
               <h3 className="text-2xl font-bold text-sage-100 mb-6">Contact Information</h3>
               <p className="text-sage-300 leading-relaxed mb-8">
-                Get in touch with our expert team for personalized financial advisory services. 
+                Get in touch with our expert team for personalized financial advisory services.
                 We're here to help you navigate complex financial landscapes with confidence.
               </p>
             </div>
@@ -311,8 +388,8 @@ export function ContactSection() {
                   <div>
                     <h4 className="text-lg font-semibold text-sage-100 mb-2">{info.title}</h4>
                     {info.details.map((detail, detailIndex) => (
-                      <p 
-                        key={detailIndex} 
+                      <p
+                        key={detailIndex}
                         className={`text-sage-300 ${info.clickable ? 'cursor-pointer hover:text-sage-200 transition-colors duration-300' : ''}`}
                         onClick={info.clickable ? () => {
                           const footer = document.querySelector('footer');
