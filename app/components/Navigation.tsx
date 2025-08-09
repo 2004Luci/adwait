@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Home, Briefcase, Award, MessageSquare, User, Phone, ArrowRight } from 'lucide-react';
+import { Menu, X, Home, Briefcase, Award, Users, User, Phone, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -51,7 +51,7 @@ export function Navigation() {
     { name: 'Home', href: '#home', icon: Home },
     { name: 'Services', href: '/services', icon: Briefcase },
     { name: 'Expertise', href: '#expertise', icon: Award },
-    { name: 'Testimonials', href: '#testimonials', icon: MessageSquare },
+    { name: 'Careers', href: '/careers', icon: Users },
     { name: 'About', href: '#about', icon: User },
     { name: 'Contact', href: '#contact', icon: Phone }
   ];
