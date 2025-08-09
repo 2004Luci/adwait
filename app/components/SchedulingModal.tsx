@@ -90,7 +90,12 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
         }
       });
       setErrors(newErrors);
-      toast.error("Please fix the errors in the form");
+      // Show a toast with the number of errors
+      const errorCount = Object.keys(newErrors).length;
+      toast.error(`Please fix ${errorCount} error${errorCount > 1 ? 's' : ''} in the form`, {
+        description: "Please review the highlighted fields and correct the errors.",
+        duration: 4000,
+      });
     }
   };
 
@@ -107,7 +112,10 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
     const scheduleResult = scheduleDetailsSchema.safeParse(scheduleDetails);
     
     if (!scheduleResult.success) {
-      toast.error("Please select a date and time");
+      toast.error("Please select a date and time", {
+        description: "Please choose both a consultation date and time to proceed.",
+        duration: 4000,
+      });
       return;
     }
 
@@ -128,9 +136,11 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
       });
 
       if (response.ok) {
-        toast.success("Consultation scheduled successfully! Check your email for confirmation.");
+        toast.success("Consultation scheduled successfully!", {
+          description: `Thank you ${name}! We've sent a confirmation email to ${email}. Please check your inbox and spam folder.`,
+          duration: 5000,
+        });
         onClose();
-        // Reset form
         setStep(1);
         setSelectedDate(undefined);
         setSelectedTime("");
@@ -143,13 +153,22 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
         if (response.status === 429) {
           // Rate limiting error
           const remainingTime = error.remainingTime || 300;
-          toast.error(`Too many scheduling attempts. Please wait ${remainingTime} seconds before trying again.`);
+          toast.error("Too many scheduling attempts", {
+            description: `Please wait ${remainingTime} seconds before trying again.`,
+            duration: 6000,
+          });
         } else {
-          toast.error(error.message || "Failed to schedule consultation");
+          toast.error("Failed to schedule consultation", {
+            description: error.message || "Please check your internet connection and try again. If the problem persists, please contact us directly.",
+            duration: 6000,
+          });
         }
       }
     } catch (error) {
-      toast.error("Failed to schedule consultation. Please try again.");
+      toast.error("Failed to schedule consultation", {
+        description: "Please check your internet connection and try again. If the problem persists, please contact us directly.",
+        duration: 6000,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -165,8 +184,6 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
     setErrors({});
     onClose();
   };
-
-  const isFormValid = name.trim() && phone.trim() && email.trim() && selectedDate && selectedTime;
 
   return (
     <AnimatePresence>
@@ -200,7 +217,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
               </div>
               <button
                 onClick={resetForm}
-                className="p-2 hover:bg-sage-800 rounded-lg transition-colors"
+                className="cursor-pointer p-2 hover:bg-sage-800 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5 text-sage-300" />
               </button>
@@ -389,7 +406,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           <button
                             key={time}
                             onClick={() => handleTimeSelect(time)}
-                            className={`p-3 rounded-lg text-sm font-medium transition-all ${
+                            className={`cursor-pointer p-3 rounded-lg text-sm font-medium transition-all ${
                               selectedTime === time
                                 ? "bg-sage-600 text-sage-50 border-2 border-sage-400"
                                 : "bg-sage-800 text-sage-200 border border-sage-700 hover:bg-sage-700 hover:border-sage-600"
@@ -443,14 +460,14 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   <Button
                     onClick={resetForm}
                     variant="outline"
-                    className="flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
+                    className="cursor-pointer flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
                   >
                     Cancel
                   </Button>
                   <Button
                     onClick={handleNext}
                     disabled={!name.trim() || !phone.trim() || !email.trim()}
-                    className="flex-1 bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 hover:from-sage-300 hover:to-sage-400 disabled:opacity-50"
+                    className="cursor-pointer flex-1 bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 hover:from-sage-300 hover:to-sage-400 disabled:opacity-50"
                   >
                     <div className="flex items-center gap-2">
                       Next
@@ -463,7 +480,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   <Button
                     onClick={handleBack}
                     variant="outline"
-                    className="flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
+                    className="cursor-pointer flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
                   >
                     <div className="flex items-center gap-2">
                       <ArrowLeft className="w-4 h-4" />
@@ -473,7 +490,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   <Button
                     onClick={handleScheduleSubmit}
                     disabled={!selectedDate || !selectedTime || isSubmitting}
-                    className="flex-1 bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 hover:from-sage-300 hover:to-sage-400 disabled:opacity-50"
+                    className="cursor-pointer flex-1 bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 hover:from-sage-300 hover:to-sage-400 disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center gap-2">

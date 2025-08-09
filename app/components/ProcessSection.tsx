@@ -142,10 +142,10 @@ export function ProcessSection() {
 
         {/* Process Steps */}
         <div className="relative">
-          {/* Process Line */}
+          {/* Process Line - Hidden on mobile, visible on desktop */}
           <div 
             ref={processLineRef}
-            className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-sage-200 to-sage-300 transform -translate-x-1/2"
+            className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-sage-200 to-sage-300 transform -translate-x-1/2"
             style={{ transformOrigin: "top" }}
           />
           
@@ -153,16 +153,16 @@ export function ProcessSection() {
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                className={`process-step flex items-center ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                } gap-12`}
+                className={`process-step relative ${
+                  index % 2 === 0 ? 'lg:flex lg:items-center lg:flex-row' : 'lg:flex lg:items-center lg:flex-row-reverse'
+                } lg:gap-12`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
                 {/* Content */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                <div className={`lg:flex-1 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'} text-center lg:text-left mb-8 lg:mb-0`}>
                   <div className="inline-flex items-center px-3 py-1 rounded-full bg-sage-200/20 text-sage-200 text-sm font-medium mb-4">
                     {step.number}
                   </div>
@@ -170,8 +170,8 @@ export function ProcessSection() {
                   <p className="text-sage-300 leading-relaxed">{step.description}</p>
                 </div>
 
-                {/* Icon */}
-                <div className="relative z-10">
+                {/* Icon Container - Centered on mobile, positioned on desktop */}
+                <div className="relative z-10 flex justify-center">
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     className="w-16 h-16 bg-gradient-to-br from-sage-200 to-sage-300 rounded-full flex items-center justify-center shadow-lg"
@@ -182,8 +182,8 @@ export function ProcessSection() {
                   </motion.div>
                 </div>
 
-                {/* Spacer for odd items */}
-                <div className="flex-1" />
+                {/* Spacer for odd items on desktop */}
+                <div className="hidden lg:block lg:flex-1" />
               </motion.div>
             ))}
           </div>

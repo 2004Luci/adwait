@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, Briefcase, Award, MessageSquare, User, Phone, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -48,12 +48,12 @@ export function Navigation() {
   }, [lastScrollY]);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '/services' },
-    { name: 'Expertise', href: '#expertise' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '#home', icon: Home },
+    { name: 'Services', href: '/services', icon: Briefcase },
+    { name: 'Expertise', href: '#expertise', icon: Award },
+    { name: 'Testimonials', href: '#testimonials', icon: MessageSquare },
+    { name: 'About', href: '#about', icon: User },
+    { name: 'Contact', href: '#contact', icon: Phone }
   ];
 
   return (
@@ -134,9 +134,10 @@ export function Navigation() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="block px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-800/50 rounded-lg transition-colors"
+                      className="flex items-center gap-3 px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-800/50 rounded-lg transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
+                      <item.icon className="w-4 h-4" />
                       {item.name}
                     </a>
                   ))}
@@ -147,9 +148,10 @@ export function Navigation() {
                       onClick={() => {
                         window.location.href = '/#contact';
                       }}
-                      className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300"
+                      className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       Get Started
+                      <ArrowRight className="w-4 h-4" />
                     </motion.button>
                   </div>
                 </div>
@@ -208,7 +210,7 @@ export function Navigation() {
                     onClick={() => {
                       window.location.href = '/#contact';
                     }}
-                    className="bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm ml-2"
+                    className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm ml-2"
                   >
                     Get Started
                   </motion.button>
@@ -236,9 +238,10 @@ export function Navigation() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="block px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-700/50 rounded-lg transition-colors text-sm"
+                      className="flex items-center gap-3 px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-700/50 rounded-lg transition-colors text-sm"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
+                      <item.icon className="w-4 h-4" />
                       {item.name}
                     </a>
                   ))}
@@ -249,9 +252,10 @@ export function Navigation() {
                       onClick={() => {
                         window.location.href = '/#contact';
                       }}
-                      className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 text-sm"
+                      className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 text-sm flex items-center justify-center gap-2"
                     >
                       Get Started
+                      <ArrowRight className="w-4 h-4" />
                     </motion.button>
                   </div>
                 </div>
