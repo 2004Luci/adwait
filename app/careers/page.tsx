@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
@@ -17,8 +16,10 @@ import {
   DollarSign,
   ArrowRight,
   Building2,
-  Target
+  Target,
+  ArrowLeft
 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function CareersPage() {
   const openPositions = [
@@ -92,76 +93,61 @@ export default function CareersPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
-      <Navigation />
+      {/* Background Elements */}
+      <BackgroundElements
+        showGrid={true}
+        showFloatingElements={true}
+        showCornerElements={true}
+      />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-sage-900 via-black to-sage-800">
-        {/* Background Elements */}
-        <BackgroundElements
-          showGrid={true}
-          showFloatingElements={true}
-          showCornerElements={true}
-        />
-
-        {/* Additional floating geometric shapes */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -100, 0],
-              rotate: [0, 180, 360]
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-full"
-          />
-          <motion.div
-            animate={{
-              x: [0, -150, 0],
-              y: [0, 100, 0],
-              rotate: [0, -180, -360]
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute bottom-40 left-20 w-24 h-24 bg-gradient-to-br from-sage-100/20 to-sage-200/20 rotate-45"
-          />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mb-8"
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
+        {/* Back Button */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
+          <Link href="/">
+            <motion.button
+              whileHover={{ scale: 1.05, x: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer flex items-center text-sage-200 hover:text-sage-100 font-medium bg-sage-800/50 hover:bg-sage-800/70 backdrop-blur-sm px-4 py-2 rounded-xl border border-sage-700/30 transition-all duration-300 group"
             >
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-sage-50 mb-6">
-                Join Our Team
-              </h1>
-              <p className="text-xl text-sage-300 mb-8 max-w-3xl mx-auto">
-                Build your career with Adwait Artha LLP and be part of a team that's shaping the future of legal and financial services in India.
-              </p>
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 hover:from-sage-300 hover:to-sage-400 px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
-              >
-                View Open Positions
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+              <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
+              Back to Home
+            </motion.button>
+          </Link>
+        </motion.div>
 
-      {/* Why Join Us Section */}
-      <section className="py-20 px-6 lg:px-8 bg-gradient-to-br from-sage-800 via-sage-900 to-black">
-        <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-sage-200/10 text-sage-200 text-sm font-medium mb-4">
+            <Briefcase className="h-4 w-4 mr-2" />
+            Career Opportunities
+          </div>
+          
+          <h1 className="text-4xl lg:text-6xl font-bold text-sage-50 mb-6">
+            <AnimatedText 
+              text="Join Our Team"
+              className="text-sage-50"
+              delay={200}
+              staggerDelay={0.1}
+            />
+          </h1>
+          
+          <p className="text-xl text-sage-300 max-w-3xl mx-auto">
+            Build your career with Adwait Artha LLP and be part of a team that's shaping the future of legal and financial services in India.
+          </p>
+        </motion.div>
+
+        {/* Why Join Us Section */}
+        <section className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -209,19 +195,10 @@ export default function CareersPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Open Positions Section */}
-      <section className="py-20 px-6 lg:px-8 bg-gradient-to-br from-sage-900 via-black to-sage-800 relative overflow-hidden">
-        {/* Background Elements */}
-        <BackgroundElements
-          showGrid={true}
-          showFloatingElements={false}
-          showCornerElements={false}
-        />
-
-        <div className="max-w-7xl mx-auto relative z-10">
+        {/* Open Positions Section */}
+        <section className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -304,19 +281,18 @@ export default function CareersPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section className="py-20 px-6 lg:px-8 bg-gradient-to-br from-sage-800 via-sage-900 to-black">
-        <div className="max-w-4xl mx-auto text-center">
+        {/* Contact Section */}
+        <section className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="text-center bg-sage-800/30 backdrop-blur-sm rounded-2xl p-12 border border-sage-700/30"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-sage-50 mb-4">
+            <h2 className="text-3xl font-bold text-sage-50 mb-4">
               Don't See the Right Fit?
             </h2>
             <p className="text-lg text-sage-300 mb-8">
@@ -332,8 +308,8 @@ export default function CareersPage() {
               </Button>
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <Footer />
     </div>
