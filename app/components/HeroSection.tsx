@@ -382,7 +382,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 1.0 }}
           className="text-center mt-16"
         >
-          <div className="mb-4 w-16 h-px bg-gradient-to-r from-transparent via-sage-200 to-transparent opacity-30"></div>
+          <div className="mb-4 w-16 h-px bg-gradient-to-r from-transparent via-sage-200 to-transparent opacity-30" />
           <h2 className="text-xs md:text-sm font-mono font-light text-sage-200 uppercase tracking-[0.2em] opacity-80">
             <AnimatedText 
               text="Building financial futures with integrity and expertise"
@@ -395,9 +395,9 @@ export function HeroSection() {
           {/* Additional details */}
           <div className="mt-6 flex justify-center space-x-4 opacity-0" 
                style={{ animation: 'word-appear 1s ease-out forwards', animationDelay: '4.5s' }}>
-            <div className="w-1 h-1 bg-sage-200 rounded-full opacity-40"></div>
-            <div className="w-1 h-1 bg-sage-200 rounded-full opacity-60"></div>
-            <div className="w-1 h-1 bg-sage-200 rounded-full opacity-40"></div>
+            <div className="w-1 h-1 bg-sage-200 rounded-full opacity-40" />
+            <div className="w-1 h-1 bg-sage-200 rounded-full opacity-60" />
+            <div className="w-1 h-1 bg-sage-200 rounded-full opacity-40" />
           </div>
         </motion.div>
       </div>

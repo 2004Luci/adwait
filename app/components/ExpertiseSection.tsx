@@ -4,8 +4,7 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CheckCircle, ArrowRight, Target, Lightbulb, FileCheck, TrendingUp } from 'lucide-react';
-import { cn } from "./ui/utils";
+import { ArrowRight, Target, Lightbulb, FileCheck, TrendingUp } from 'lucide-react';
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 
@@ -188,7 +187,6 @@ export function ExpertiseSection() {
             <TrendingUp className="h-4 w-4 mr-2" />
             Our Expertise
           </div>
-          
           <h2 
             ref={titleRef}
             className="text-4xl lg:text-5xl font-bold text-sage-50 mb-6"
@@ -200,14 +198,11 @@ export function ExpertiseSection() {
               staggerDelay={0.1}
             />
           </h2>
-          
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
             A systematic approach to delivering exceptional financial advisory services 
             with proven methodologies and industry expertise.
           </p>
         </motion.div>
-
-        {/* Expertise Areas */}
         <div>
           <h3 className="text-3xl font-bold text-sage-50 text-center mb-12">
             <AnimatedText 
@@ -217,7 +212,6 @@ export function ExpertiseSection() {
               staggerDelay={0.1}
             />
           </h3>
-          
           <div className="grid md:grid-cols-2 gap-8">
             {expertiseAreas.map((area, index) => (
               <ExpertiseCard 
