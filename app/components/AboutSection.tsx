@@ -78,15 +78,12 @@ export function AboutSection() {
 
   return (
     <section id="about" className="relative py-24 bg-gradient-to-br from-sage-800 via-sage-900 to-black overflow-hidden">
-      {/* Background Elements */}
       <BackgroundElements 
         showGrid={true}
         showFloatingElements={true}
         showCornerElements={false}
       />
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -97,8 +94,7 @@ export function AboutSection() {
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-sage-200/10 text-sage-200 text-sm font-medium mb-4">
             <Award className="h-4 w-4 mr-2" />
             Our Story
-          </div>
-          
+          </div> 
           <h2 className="text-4xl lg:text-5xl font-bold text-sage-50 mb-6">
             <AnimatedText 
               text="About Adwait Artha LLP"
@@ -112,10 +108,7 @@ export function AboutSection() {
             delivering exceptional financial and legal services for over two decades. Our clientele spans across Gujarat, Maharashtra, and various regions throughout India, as well as international markets including the USA, Netherlands, and Singapore.
           </p>
         </motion.div>
-
-        {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
-          {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -136,7 +129,6 @@ export function AboutSection() {
                 The Firm "Adwait Artha LLP" is in the field of fund raising, equity capital market (IPO's) primary market or secondary market, debt syndication, corporate law, finance, management audit, budgeting, legal drafting and other related areas. With 23+ years of experience and a team of dedicated professionals, we provide niche solutions to our valued clients.
               </p>
             </div>
-
             <div>
               <h3 className="text-2xl font-bold text-sage-100 mb-4">
                 <AnimatedText 
@@ -150,7 +142,6 @@ export function AboutSection() {
                 To provide comprehensive financial advisory services that empower businesses to achieve their growth objectives through strategic planning, regulatory compliance, and innovative solutions. We strive to be the trusted partner for all financial and legal needs.
               </p>
             </div>
-
             <div>
               <h3 className="text-2xl font-bold text-sage-100 mb-4">
                 <AnimatedText 
@@ -165,8 +156,6 @@ export function AboutSection() {
               </p>
             </div>
           </motion.div>
-
-          {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -179,10 +168,7 @@ export function AboutSection() {
               transition={{ duration: 0.3 }}
               className="relative"
             >
-              {/* Glow effect behind the image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-2xl blur-xl scale-110"></div>
-              
-              {/* Image container with border and shadow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-2xl blur-xl scale-110" />
               <div className="relative bg-gradient-to-br from-sage-800/50 to-sage-900/50 backdrop-blur-sm border border-sage-700/30 rounded-2xl p-4 shadow-2xl">
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=800&fit=crop&crop=center"
@@ -190,8 +176,6 @@ export function AboutSection() {
                   className="w-full h-[600px] object-cover rounded-xl"
                 />
               </div>
-              
-              {/* Floating elements around the image */}
               <motion.div
                 animate={{
                   y: [0, -10, 0],
@@ -219,8 +203,6 @@ export function AboutSection() {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Partners Section */}
         <div id="team" className="mb-24">
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
@@ -236,7 +218,6 @@ export function AboutSection() {
               staggerDelay={0.1}
             />
           </motion.h3>
-          
           <div className="grid md:grid-cols-2 gap-12">
             {partners.map((partner, index) => (
               <motion.div
@@ -257,8 +238,7 @@ export function AboutSection() {
                     <h4 className="text-xl font-bold text-sage-100 mb-2">{partner.name}</h4>
                     <p className="text-sage-300 mb-4">{partner.role}</p>
                     <p className="text-sage-400 text-sm mb-4">{partner.experience}</p>
-                    <p className="text-sage-300 text-sm leading-relaxed">{partner.description}</p>
-                    
+                    <p className="text-sage-300 text-sm leading-relaxed">{partner.description}</p>  
                     <div className="mt-4 flex flex-wrap gap-2">
                       {partner.expertise.map((skill, skillIndex) => (
                         <span
@@ -275,8 +255,6 @@ export function AboutSection() {
             ))}
           </div>
         </div>
-
-        {/* Achievements Section */}
         <div className="mb-24">
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
@@ -292,7 +270,6 @@ export function AboutSection() {
               staggerDelay={0.1}
             />
           </motion.h3>
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
               <motion.div
@@ -312,8 +289,6 @@ export function AboutSection() {
             ))}
           </div>
         </div>
-
-        {/* Client Logos Section */}
         <div>
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
@@ -328,8 +303,7 @@ export function AboutSection() {
               delay={1400}
               staggerDelay={0.1}
             />
-          </motion.h3>
-          
+          </motion.h3>  
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {clientLogos.map((logo, index) => (
               <motion.div

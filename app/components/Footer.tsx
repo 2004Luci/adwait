@@ -74,15 +74,12 @@ export function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-br from-sage-200 via-sage-300 to-sage-400 overflow-hidden">
-      {/* Background Elements */}
       <BackgroundElements
         showGrid={true}
         showFloatingElements={false}
         showCornerElements={false}
       />
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Main Footer Content */}
         <div className="py-16">
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 gap-8 md:gap-12">
             {/* Company Info */}

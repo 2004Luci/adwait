@@ -27,18 +27,14 @@ function ExpertiseCard({ category, skills, percentage, color, index }: Expertise
       viewport={{ once: true, margin: "-100px" }}
       className="group relative bg-sage-800/50 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-sage-700/30 overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${color} opacity-5 rounded-full transform translate-x-8 -translate-y-8 transition-all duration-300 group-hover:scale-150`} />
-      
+      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${color} opacity-5 rounded-full transform translate-x-8 -translate-y-8 transition-all duration-300 group-hover:scale-150`} />   
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-4">
           <h4 className="text-xl font-semibold text-sage-100">{category}</h4>
           <span className={`text-2xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent`}>
             {percentage}%
           </span>
-        </div>
-        
-        {/* Progress Bar */}
+        </div>        
         <div className="w-full bg-sage-700/30 rounded-full h-3 mb-6">
           <motion.div
             initial={{ width: 0 }}
@@ -46,10 +42,8 @@ function ExpertiseCard({ category, skills, percentage, color, index }: Expertise
             transition={{ duration: 1.5, delay: index * 0.2 }}
             viewport={{ once: true }}
             className={`bg-gradient-to-r ${color} h-3 rounded-full shadow-lg`}
-          ></motion.div>
+          />
         </div>
-
-        {/* Skills */}
         <div className="grid grid-cols-2 gap-2">
           {skills.map((skill, skillIndex) => (
             <div key={skillIndex} className="flex items-center text-sage-300">
@@ -64,8 +58,8 @@ function ExpertiseCard({ category, skills, percentage, color, index }: Expertise
 }
 
 export function ExpertiseSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -166,16 +160,12 @@ export function ExpertiseSection() {
         <div className="absolute top-40 left-10 w-64 h-64 rounded-full bg-sage-200/10 blur-3xl" />
         <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-sage-300/10 blur-3xl" />
       </motion.div>
-
-      {/* Background Elements */}
       <BackgroundElements 
         showGrid={true}
         showFloatingElements={true}
         showCornerElements={false}
       />
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
