@@ -10,10 +10,10 @@ import { Label } from "./ui/label";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { toast } from "sonner";
-import { z } from "zod";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { cn } from "./ui/utils";
+import { PersonalDetails, ScheduleDetails, personalDetailsSchema, scheduleDetailsSchema } from "@/lib/schema";
 
 interface SchedulingModalProps {
   isOpen: boolean;
@@ -25,30 +25,6 @@ const timeSlots = [
   "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM",
   "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM"
 ];
-
-// Zod validation schema
-const personalDetailsSchema = z.object({
-  name: z.string()
-    .min(2, "Name must be at least 2 characters")
-    .max(50, "Name must be less than 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
-  phone: z.string()
-    .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number must be less than 15 digits")
-    .regex(/^\+?[0-9\s\-\(\)]+$/, "Phone number can only contain numbers, spaces, hyphens, and parentheses"),
-  email: z.string()
-    .email("Please enter a valid email address")
-    .min(5, "Email must be at least 5 characters")
-    .max(100, "Email must be less than 100 characters"),
-});
-
-const scheduleDetailsSchema = z.object({
-  date: z.date(),
-  time: z.string().min(1, "Please select a time"),
-});
-
-type PersonalDetails = z.infer<typeof personalDetailsSchema>;
-type ScheduleDetails = z.infer<typeof scheduleDetailsSchema>;
 
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   const [step, setStep] = useState(1);
