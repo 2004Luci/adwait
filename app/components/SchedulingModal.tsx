@@ -52,12 +52,12 @@ type ScheduleDetails = z.infer<typeof scheduleDetailsSchema>;
 
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   const [step, setStep] = useState(1);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
-  const [selectedTime, setSelectedTime] = useState<string>("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<ScheduleDetails["date"] | undefined>(undefined);
+  const [selectedTime, setSelectedTime] = useState<ScheduleDetails["time"]>("");
+  const [name, setName] = useState<PersonalDetails["name"]>("");
+  const [phone, setPhone] = useState<PersonalDetails["phone"]>("");
+  const [email, setEmail] = useState<PersonalDetails["email"]>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<PersonalDetails>>({});
 
   // Disable current day, next 2 days, and weekends
