@@ -3,13 +3,13 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Scale, CheckCircle, ArrowLeft, Phone, Mail, Shield, Users, FileText } from 'lucide-react';
+import { Scale, CheckCircle, ArrowLeft, Phone, Mail, Shield } from 'lucide-react';
 import { SchedulingModal } from '../../components/SchedulingModal';
 import { BackgroundElements } from '../../components/ui/BackgroundElements';
 import { AnimatedText } from '../../components/ui/AnimatedText';
 
 export default function LawTribunalsPage() {
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
   const services = [
     'NCLT Representation',
     'ROC Compliance & Filings',
@@ -101,12 +101,8 @@ export default function LawTribunalsPage() {
             Our unique ability to perform within given time frames ensures successful outcomes for your legal matters.
           </p>
         </motion.div>
-
-        {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-12 mb-16">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
-            {/* Overview */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -124,8 +120,6 @@ export default function LawTribunalsPage() {
                 ensuring your interests are protected and matters are resolved efficiently and effectively.
               </p>
             </motion.div>
-
-            {/* Tribunals & Forums */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -157,10 +151,7 @@ export default function LawTribunalsPage() {
               </div>
             </motion.div>
           </div>
-
-          {/* Sidebar */}
           <div className="space-y-8">
-            {/* Services */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -177,8 +168,6 @@ export default function LawTribunalsPage() {
                 ))}
               </ul>
             </motion.div>
-
-            {/* Expertise */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -195,8 +184,6 @@ export default function LawTribunalsPage() {
                 ))}
               </ul>
             </motion.div>
-
-            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -231,8 +218,6 @@ export default function LawTribunalsPage() {
             </motion.div>
           </div>
         </div>
-
-        {/* Why Choose Us */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -272,15 +257,10 @@ export default function LawTribunalsPage() {
           </div>
         </motion.div>
       </div>
-    </div>
-  );
-}
-
-      {/* Scheduling Modal */}
       <SchedulingModal 
         isOpen={isSchedulingModalOpen} 
         onClose={() => setIsSchedulingModalOpen(false)} 
       />
     </div>
   );
-} 
+}

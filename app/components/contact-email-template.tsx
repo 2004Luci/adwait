@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { contactEmail, contactPhone } from '../../lib/constants';
 
 interface ContactEmailTemplateProps {
   name: string;
@@ -22,7 +22,6 @@ export function ContactEmailTemplate({
   if (emailType === 'user') {
     return (
       <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-        {/* Header */}
         <div style={{ 
           background: 'linear-gradient(135deg, #4a5568 0%, #2d3748 100%)', 
           color: 'white', 
@@ -33,8 +32,6 @@ export function ContactEmailTemplate({
           <h1 style={{ margin: '0', fontSize: '28px', fontWeight: 'bold' }}>Inquiry Received</h1>
           <p style={{ margin: '10px 0 0 0', fontSize: '16px', opacity: '0.9' }}>Adwait Artha LLP</p>
         </div>
-
-        {/* Content */}
         <div style={{ 
           background: '#f7fafc', 
           padding: '30px',
@@ -42,12 +39,9 @@ export function ContactEmailTemplate({
           borderTop: 'none'
         }}>
           <h2 style={{ color: '#2d3748', marginBottom: '20px' }}>Thank you for your inquiry, {name}!</h2>
-          
           <p style={{ color: '#4a5568', lineHeight: '1.6', marginBottom: '20px' }}>
             We have received your inquiry and our expert team will review it carefully. We'll get back to you within 24 hours with a detailed response.
           </p>
-
-          {/* Inquiry Details */}
           <div style={{ 
             background: 'white', 
             padding: '20px', 
@@ -74,8 +68,6 @@ export function ContactEmailTemplate({
               </div>
             </div>
           </div>
-
-          {/* What Happens Next */}
           <div style={{ 
             background: 'linear-gradient(135deg, #4a5568 0%, #2d3748 100%)', 
             color: 'white', 
@@ -91,13 +83,10 @@ export function ContactEmailTemplate({
               <li>You'll receive personalized recommendations for your needs</li>
             </ul>
           </div>
-
           <p style={{ color: '#4a5568', lineHeight: '1.6' }}>
             If you have any urgent questions, please don't hesitate to contact us directly at +91 7940305119.
           </p>
         </div>
-
-        {/* Footer */}
         <div style={{ 
           background: '#2d3748', 
           color: 'white', 
@@ -109,17 +98,15 @@ export function ContactEmailTemplate({
           <p style={{ margin: '0 0 10px 0' }}><strong>Adwait Artha LLP</strong></p>
           <p style={{ margin: '0 0 5px 0' }}>Financial Advisory Services</p>
           <p style={{ margin: '0', opacity: '0.8' }}>
-            Contact: contact@adwaitartha.com | +91 7940305119
+            Contact: {contactEmail} | {contactPhone}
           </p>
         </div>
       </div>
     );
   }
 
-  // Company notification email
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-      {/* Header */}
       <div style={{ 
         background: 'linear-gradient(135deg, #4a5568 0%, #2d3748 100%)', 
         color: 'white', 
@@ -130,8 +117,6 @@ export function ContactEmailTemplate({
         <h1 style={{ margin: '0', fontSize: '28px', fontWeight: 'bold' }}>New Contact Inquiry</h1>
         <p style={{ margin: '10px 0 0 0', fontSize: '16px', opacity: '0.9' }}>Adwait Artha LLP</p>
       </div>
-
-      {/* Content */}
       <div style={{ 
         background: '#f7fafc', 
         padding: '30px',
@@ -139,8 +124,6 @@ export function ContactEmailTemplate({
         borderTop: 'none'
       }}>
         <h2 style={{ color: '#2d3748', marginBottom: '20px' }}>A new inquiry has been submitted</h2>
-        
-        {/* Inquiry Details */}
         <div style={{ 
           background: 'white', 
           padding: '20px', 
@@ -167,11 +150,9 @@ export function ContactEmailTemplate({
             </div>
           </div>
         </div>
-
         <p style={{ color: '#4a5568', lineHeight: '1.6' }}>
           Please review this inquiry and respond to the client within 24 hours. You can contact them at {email} or {phone ? phone : 'the provided email'}.
         </p>
-
         <div style={{ 
           background: '#e6fffa', 
           padding: '15px', 
@@ -184,8 +165,6 @@ export function ContactEmailTemplate({
           </p>
         </div>
       </div>
-
-      {/* Footer */}
       <div style={{ 
         background: '#2d3748', 
         color: 'white', 

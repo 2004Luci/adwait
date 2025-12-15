@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { companyEmails } from '../../lib/constants';
 
 interface EmailTemplateProps {
   clientName?: string;
@@ -20,7 +20,6 @@ export function EmailTemplate({
   if (emailType === 'client') {
     return (
       <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-        {/* Header */}
         <div style={{ 
           background: 'linear-gradient(135deg, #4a5568 0%, #2d3748 100%)', 
           color: 'white', 
@@ -31,21 +30,16 @@ export function EmailTemplate({
           <h1 style={{ margin: '0', fontSize: '28px', fontWeight: 'bold' }}>Consultation Confirmed</h1>
           <p style={{ margin: '10px 0 0 0', fontSize: '16px', opacity: '0.9' }}>Adwait Artha LLP</p>
         </div>
-
-        {/* Content */}
         <div style={{ 
           background: '#f7fafc', 
           padding: '30px',
           border: '1px solid #e2e8f0',
           borderTop: 'none'
         }}>
-          <h2 style={{ color: '#2d3748', marginBottom: '20px' }}>Thank you for scheduling your consultation, {clientName}!</h2>
-          
+          <h2 style={{ color: '#2d3748', marginBottom: '20px' }}>Thank you for scheduling your consultation, {clientName}!</h2>      
           <p style={{ color: '#4a5568', lineHeight: '1.6', marginBottom: '20px' }}>
             We're excited to discuss your financial advisory needs and explore how we can support your business growth.
           </p>
-
-          {/* Consultation Details */}
           <div style={{ 
             background: 'white', 
             padding: '20px', 
@@ -62,8 +56,6 @@ export function EmailTemplate({
               <p style={{ margin: '5px 0' }}><strong>Type:</strong> Introductory Consultation Call</p>
             </div>
           </div>
-
-          {/* What to Expect */}
           <div style={{ 
             background: 'linear-gradient(135deg, #4a5568 0%, #2d3748 100%)', 
             color: 'white', 
@@ -76,8 +68,6 @@ export function EmailTemplate({
               During this call, we'll discuss your specific needs, explore potential solutions, and outline how our services can benefit your business.
             </p>
           </div>
-
-          {/* Important Notes */}
           <div style={{ margin: '20px 0' }}>
             <h4 style={{ color: '#2d3748', marginBottom: '10px' }}>Important Notes:</h4>
             <ul style={{ color: '#4a5568', lineHeight: '1.6', paddingLeft: '20px' }}>
@@ -87,13 +77,10 @@ export function EmailTemplate({
               <li>If you need to reschedule, please contact us at least 24 hours in advance</li>
             </ul>
           </div>
-
           <p style={{ color: '#4a5568', lineHeight: '1.6' }}>
             If you have any questions before the consultation, please don't hesitate to reach out to us.
           </p>
         </div>
-
-        {/* Footer */}
         <div style={{ 
           background: '#2d3748', 
           color: 'white', 
@@ -105,7 +92,7 @@ export function EmailTemplate({
           <p style={{ margin: '0 0 10px 0' }}><strong>Adwait Artha LLP</strong></p>
           <p style={{ margin: '0 0 5px 0' }}>Financial Advisory Services</p>
           <p style={{ margin: '0', opacity: '0.8' }}>
-            Contact: sandip@ssacs.in | prashant@ssacs.in
+            Contact: {companyEmails[1]} | {companyEmails[2]}
           </p>
         </div>
       </div>
@@ -115,7 +102,6 @@ export function EmailTemplate({
   // Team notification email
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-      {/* Header */}
       <div style={{ 
         background: 'linear-gradient(135deg, #4a5568 0%, #2d3748 100%)', 
         color: 'white', 
@@ -126,8 +112,6 @@ export function EmailTemplate({
         <h1 style={{ margin: '0', fontSize: '28px', fontWeight: 'bold' }}>New Consultation Booking</h1>
         <p style={{ margin: '10px 0 0 0', fontSize: '16px', opacity: '0.9' }}>Adwait Artha LLP</p>
       </div>
-
-      {/* Content */}
       <div style={{ 
         background: '#f7fafc', 
         padding: '30px',
@@ -135,8 +119,6 @@ export function EmailTemplate({
         borderTop: 'none'
       }}>
         <h2 style={{ color: '#2d3748', marginBottom: '20px' }}>A new consultation has been scheduled</h2>
-        
-        {/* Consultation Details */}
         <div style={{ 
           background: 'white', 
           padding: '20px', 
@@ -154,14 +136,11 @@ export function EmailTemplate({
             <p style={{ margin: '5px 0' }}><strong>Type:</strong> Introductory Consultation Call</p>
           </div>
         </div>
-
         <p style={{ color: '#4a5568', lineHeight: '1.6' }}>
           Please prepare for this consultation and ensure you have all necessary materials ready. 
           You can call the client at {clientPhone} for the consultation.
         </p>
       </div>
-
-      {/* Footer */}
       <div style={{ 
         background: '#2d3748', 
         color: 'white', 

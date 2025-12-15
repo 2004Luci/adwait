@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { EmailTemplate } from '@/app/components/email-template';
 import { Resend } from 'resend';
 import { arcjetConfig, getClientIP } from '../arcjet/route';
+import { companyEmails } from '@/lib/constants';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -16,7 +17,6 @@ interface ScheduleRequest {
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting check using Arcjet
     const clientIP = getClientIP(request);
     const decision = await arcjetConfig.protect(request, { 
       ip: clientIP,
@@ -83,9 +83,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send emails to the team
-    const companyEmails = ['contact@adwaitartha.com', 'sandip@adwaitartha.com', 'prashant@adwaitartha.com'];
-    
+    // Send emails to the team    
     for (const companyEmail of companyEmails) {
       try {
         const { data, error } = await resend.emails.send({

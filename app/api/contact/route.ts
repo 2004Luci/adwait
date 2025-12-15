@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ContactEmailTemplate } from '@/app/components/contact-email-template';
 import { Resend } from 'resend';
 import { arcjetConfig, getClientIP } from '../arcjet/route';
+import { companyEmails } from '@/lib/constants';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -16,7 +17,6 @@ interface ContactRequest {
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting check using Arcjet
     const clientIP = getClientIP(request);
     const decision = await arcjetConfig.protect(request, {
       ip: clientIP,
@@ -26,9 +26,9 @@ export async function POST(request: NextRequest) {
     if (decision.isDenied()) {
       return NextResponse.json(
         {
-          message: `Too many contact form submissions. Please try again later.`,
+          message: `Too many contact form submissions. Please try again tomorrow.`,
           reason: decision.reason,
-          remainingTime: 60 // Contact form rate limit is 60 seconds (allows ~3 submissions per minute)
+          remainingTime: 86400 // 1day
         },
         { status: 429 }
       );
@@ -63,8 +63,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email to the company
-    const companyEmails = ['contact@adwaitartha.com', 'sandip@adwaitartha.com', 'prashant@adwaitartha.com'];
-
     for (const companyEmail of companyEmails) {
       try {
         const { data, error } = await resend.emails.send({

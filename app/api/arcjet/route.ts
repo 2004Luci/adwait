@@ -1,32 +1,29 @@
 import arcjet, { tokenBucket } from "@arcjet/next";
 import { NextResponse } from "next/server";
 
-// Arcjet configuration for rate limiting
 export const arcjetConfig = arcjet({
-    key: process.env.ARCJET_KEY!, // Get your site key from https://app.arcjet.com
+    key: process.env.ARCJET_KEY!, 
     rules: [
         // Rate limiting for contact form submissions (4 emails per submission)
         tokenBucket({
-            mode: "LIVE", // will block requests. Use "DRY_RUN" to log only
-            characteristics: ["ip"], // track requests by IP address
-            refillRate: 12, // refill 12 tokens per interval (3 submissions × 4 emails)
-            interval: 60, // refill every 60 seconds (1 minute)
-            capacity: 12, // bucket maximum capacity of 12 tokens
+            mode: "LIVE", 
+            characteristics: ["ip"], 
+            refillRate: 12, // Refill 12 tokens per interval (3 submissions × 4 emails)
+            interval: 60, 
+            capacity: 12, 
         }),
         // Rate limiting for scheduling consultation (4 emails per submission)
         tokenBucket({
-            mode: "LIVE", // will block requests. Use "DRY_RUN" to log only
-            characteristics: ["ip"], // track requests by IP address
-            refillRate: 8, // refill 8 tokens per interval (2 submissions × 4 emails)
-            interval: 300, // refill every 300 seconds (5 minutes)
-            capacity: 8, // bucket maximum capacity of 8 tokens
+            mode: "LIVE", 
+            characteristics: ["ip"], 
+            refillRate: 8, // Refill 8 tokens per interval (2 submissions × 4 emails)
+            interval: 300, 
+            capacity: 8, 
         }),
     ],
 });
 
-// Helper function to get client IP from request
 export function getClientIP(request: Request): string {
-    // Try to get IP from various headers
     const forwarded = request.headers.get('x-forwarded-for');
     const realIP = request.headers.get('x-real-ip');
     const cfConnectingIP = request.headers.get('cf-connecting-ip');
@@ -43,7 +40,6 @@ export function getClientIP(request: Request): string {
         return cfConnectingIP;
     }
 
-    // Fallback to a default identifier
     return 'unknown';
 }
 
