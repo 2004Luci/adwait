@@ -120,8 +120,8 @@ export function ContactEmailTemplate({
             </ul>
           </div>
           <p style={{ color: "#4a5568", lineHeight: "1.6" }}>
-            If you have any urgent questions, please don't hesitate to contact us directly at +91
-            7940305119.
+            If you have any urgent questions, please don't hesitate to contact us directly at{" "}
+            {contactPhone}.
           </p>
         </div>
         <div
