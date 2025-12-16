@@ -13,9 +13,6 @@ out
 build
 dist
 
-# Production
-*.tsbuildinfo
-
 # Misc
 .DS_Store
 *.pem
