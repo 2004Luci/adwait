@@ -92,7 +92,7 @@ export function EmailTemplate({
           <p style={{ margin: '0 0 10px 0' }}><strong>Adwait Artha LLP</strong></p>
           <p style={{ margin: '0 0 5px 0' }}>Financial Advisory Services</p>
           <p style={{ margin: '0', opacity: '0.8' }}>
-            Contact: {companyEmails[1]} | {companyEmails[2]}
+            Contact: {companyEmails[1] ?? ''} | {companyEmails[2] ?? ''}
           </p>
         </div>
       </div>
