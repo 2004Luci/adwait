@@ -31,6 +31,7 @@ This is the official website for **Adwait Artha LLP**, a leading financial advis
 ## Getting Started
 
 1. **Install dependencies:**
+
    ```sh
    npm install
    # or
@@ -40,6 +41,7 @@ This is the official website for **Adwait Artha LLP**, a leading financial advis
    ```
 
 2. **Run the development server:**
+
    ```sh
    npm run dev
    # or

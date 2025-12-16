@@ -1,88 +1,59 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Clock, ArrowUp } from 'lucide-react';
-import { BackgroundElements } from './ui/BackgroundElements';
-import { AnimatedText } from './ui/AnimatedText';
-import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from './ui/social-icons';
+import { motion } from "motion/react";
+import { MapPin, ArrowUp } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { BackgroundElements } from "./ui/BackgroundElements";
+import { AnimatedText } from "./ui/AnimatedText";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./ui/social-icons";
+import { contactInfo } from "@/lib/constants";
 
 export function Footer() {
+  const router = useRouter();
+
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const footerLinks = {
     services: [
-      { name: 'IPO Advisory', href: '/services/ipo-sme-ipo-advisory' },
-      { name: 'Legal Drafting & Audit', href: '/services/legal-drafting-audit' },
-      { name: 'Corporate Law Services', href: '/services/corporate-law' },
-      { name: 'Loan Syndication', href: '/services/loan-syndication' },
-      { name: 'Financial Advisory', href: '/services/financial-advisory' },
-      { name: 'Regulatory Compliance', href: '/services/law-tribunals' }
+      { name: "IPO Advisory", href: "/services/ipo-sme-ipo-advisory" },
+      { name: "Legal Drafting & Audit", href: "/services/legal-drafting-audit" },
+      { name: "Corporate Law Services", href: "/services/corporate-law" },
+      { name: "Loan Syndication", href: "/services/loan-syndication" },
+      { name: "Financial Advisory", href: "/services/financial-advisory" },
+      { name: "Regulatory Compliance", href: "/services/law-tribunals" },
     ],
     company: [
-      { name: 'About Us', href: '#about' },
-      { name: 'Our Team', href: '#team' },
-      { name: 'Case Studies', href: '#case-studies' },
-      { name: 'Testimonials', href: '#testimonials' },
-      { name: 'Careers', href: '#careers' },
-      { name: 'Contact', href: '#contact' }
+      { name: "About Us", href: "#about" },
+      { name: "Our Team", href: "#team" },
+      { name: "Case Studies", href: "#case-studies" },
+      { name: "Testimonials", href: "#testimonials" },
+      { name: "Careers", href: "/careers" },
+      { name: "Contact", href: "#contact" },
     ],
-    resources: [
-      'Blog',
-      'Newsletter',
-      'Whitepapers',
-      'Webinars',
-      'FAQ',
-      'Support'
-    ],
+    resources: ["Blog", "Newsletter", "Whitepapers", "Webinars", "FAQ", "Support"],
     legal: [
-      'Privacy Policy',
-      'Terms of Service',
-      'Cookie Policy',
-      'Disclaimer',
-      'Compliance',
-      'GDPR'
-    ]
+      "Privacy Policy",
+      "Terms of Service",
+      "Cookie Policy",
+      "Disclaimer",
+      "Compliance",
+      "GDPR",
+    ],
   };
 
   const socialLinks = [
-    { icon: FacebookIcon, href: '#', label: 'Facebook' },
-    { icon: XIcon, href: '#', label: 'Twitter' },
-    { icon: LinkedinIcon, href: '#', label: 'LinkedIn' },
-    { icon: InstagramIcon, href: '#', label: 'Instagram' }
-  ];
-
-  const contactInfo = [
-    {
-      icon: MapPin,
-      text: '518, Anand Mangal - III, Opp. Core House, Rajnagar Club Lane, Ambawadi, Ahmedabad - 380006'
-    },
-    {
-      icon: Phone,
-      text: '+91-79-40305119'
-    },
-    {
-      icon: Mail,
-      text: 'contact@adwaitartha.com'
-    },
-    {
-      icon: Clock,
-      text: 'Mon - Fri: 9:00 AM - 6:00 PM'
-    }
+    { icon: FacebookIcon, href: "#", label: "Facebook" },
+    { icon: XIcon, href: "#", label: "Twitter" },
+    { icon: LinkedinIcon, href: "#", label: "LinkedIn" },
+    { icon: InstagramIcon, href: "#", label: "Instagram" },
   ];
 
   return (
     <footer className="relative bg-gradient-to-br from-sage-200 via-sage-300 to-sage-400 overflow-hidden">
-      {/* Background Elements */}
-      <BackgroundElements
-        showGrid={true}
-        showFloatingElements={false}
-        showCornerElements={false}
-      />
-
+      <BackgroundElements showGrid={true} showFloatingElements={false} showCornerElements={false} />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Main Footer Content */}
         <div className="py-16">
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 gap-8 md:gap-12">
             {/* Company Info */}
@@ -112,17 +83,27 @@ export function Footer() {
                   {contactInfo.map((info, index) => (
                     <div key={index} className="flex items-start gap-2 md:gap-3 text-sage-800">
                       <info.icon className="w-3 h-3 md:w-4 md:h-4 text-sage-700 mt-0.5 flex-shrink-0" />
-                      <span
-                        className={`text-xs md:text-sm ${info.icon === MapPin ? 'cursor-pointer hover:text-sage-900 transition-colors duration-300' : ''}`}
-                        onClick={info.icon === MapPin ? () => {
-                          const mapSection = document.querySelector('footer .py-12.border-t');
-                          if (mapSection) {
-                            mapSection.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        } : undefined}
-                      >
-                        {info.text}
-                      </span>
+                      <div className="flex flex-col">
+                        {info.details.map((detail, detailIndex) => (
+                          <span
+                            key={detailIndex}
+                            className={`text-xs md:text-sm ${info.clickable ? "cursor-pointer hover:text-sage-900 transition-colors duration-300" : ""}`}
+                            onClick={
+                              info.clickable
+                                ? () => {
+                                    const mapSection =
+                                      document.querySelector("footer .py-12.border-t");
+                                    if (mapSection) {
+                                      mapSection.scrollIntoView({ behavior: "smooth" });
+                                    }
+                                  }
+                                : undefined
+                            }
+                          >
+                            {detail}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -136,18 +117,17 @@ export function Footer() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-sm md:text-lg font-semibold text-sage-900 mb-3 md:mb-6">Our Services</h4>
+              <h4 className="text-sm md:text-lg font-semibold text-sage-900 mb-3 md:mb-6">
+                Our Services
+              </h4>
               <ul className="space-y-2 md:space-y-3">
                 {footerLinks.services.map((service, index) => (
-                  <li key={index}>
-                    <a
-                      href={service.href}
-                      className="text-sage-800 hover:text-sage-900 transition-colors duration-300 text-xs md:text-sm"
-                    >
-                      {service.name}
-                    </a>
-                  </li>
-                ))}
+                  <li
+                    key={index}
+                    className="cursor-pointer text-sage-800 hover:text-sage-900 transition-colors duration-300 text-xs md:text-sm"
+                    onClick={() => {
+                      router.push(service.href);
+                    }}>{service.name}</li>))}
               </ul>
             </motion.div>
 
@@ -158,7 +138,9 @@ export function Footer() {
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-sm md:text-lg font-semibold text-sage-900 mb-3 md:mb-6">Company</h4>
+              <h4 className="text-sm md:text-lg font-semibold text-sage-900 mb-3 md:mb-6">
+                Company
+              </h4>
               <ul className="space-y-2 md:space-y-3">
                 {footerLinks.company.map((item, index) => (
                   <li key={index}>
@@ -166,12 +148,15 @@ export function Footer() {
                       href={item.href}
                       className="text-sage-800 hover:text-sage-900 transition-colors duration-300 text-xs md:text-sm"
                       onClick={(e) => {
-                        if (item.href.startsWith('#')) {
+                        if (item.href.startsWith("#")) {
                           e.preventDefault();
                           const element = document.querySelector(item.href);
                           if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
+                            element.scrollIntoView({ behavior: "smooth" });
                           }
+                        } else if (item.href.startsWith("/")) {
+                          e.preventDefault();
+                          router.push(item.href);
                         }
                       }}
                     >
@@ -280,14 +265,15 @@ export function Footer() {
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-sage-900 mb-4">Visit Our Office</h3>
             <p className="text-sage-800 max-w-2xl mx-auto">
-              Located in the heart of Ahmedabad, our office is easily accessible and provides a professional environment for all your financial advisory needs.
+              Located in the heart of Ahmedabad, our office is easily accessible and provides a
+              professional environment for all your financial advisory needs.
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
             <div className="relative w-full h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl border-4 border-sage-200/50">
               <iframe
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=518+Anand+Mangal+III+Opp+Core+House+Rajnagar+Club+Lane+Ambawadi+Ahmedabad+380006+India"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=1030+10th+floor+Shaligram+Arcade+Nr+Vakil+Saheb+Bridge+Extension+Beside+Sharaswati+Hospital+Ambli+Junction+Nr+Satyamev+Elite+Ring+Road+South+Bopal+Ahmedabad+380058+India"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -305,9 +291,13 @@ export function Footer() {
                   <h4 className="font-semibold text-sage-100">Adwait Artha LLP</h4>
                 </div>
                 <p className="text-sm text-sage-200 leading-relaxed">
-                  518, Anand Mangal - III<br />
-                  Opp. Core House, Rajnagar Club Lane<br />
-                  Ambawadi, Ahmedabad - 380006
+                  1030, 10th floor, Shaligram Arcade
+                  <br />
+                  Nr Vakil Saheb Bridge Extension, Beside Sharaswati Hospital
+                  <br />
+                  Ambli Junction, Nr. Satyamev Elite Ring Road
+                  <br />
+                  South Bopal, Ahmedabad-380058
                 </p>
               </div>
             </div>
@@ -357,7 +347,7 @@ export function Footer() {
               whileTap={{ scale: 0.9 }}
               className="cursor-pointer w-10 h-10 bg-sage-700/20 backdrop-blur-sm rounded-full flex items-center justify-center text-sage-800 hover:bg-sage-700/30 hover:text-sage-900 transition-all duration-300"
               aria-label="Back to top"
-              title='Back to Top'
+              title="Back to Top"
             >
               <ArrowUp className="w-5 h-5" />
             </motion.button>

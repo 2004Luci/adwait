@@ -1,107 +1,21 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import { Footer } from '../components/Footer';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { BackgroundElements } from '../components/ui/BackgroundElements';
-import { AnimatedText } from '../components/ui/AnimatedText';
-import {
-  Briefcase,
-  Users,
-  GraduationCap,
-  MapPin,
-  Clock,
-  DollarSign,
-  ArrowRight,
-  Building2,
-  Target,
-  ArrowLeft
-} from 'lucide-react';
-import Link from 'next/link';
+import { motion } from "motion/react";
+import { Footer } from "../components/Footer";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { BackgroundElements } from "../components/ui/BackgroundElements";
+import { AnimatedText } from "../components/ui/AnimatedText";
+import { Briefcase, MapPin, Clock, DollarSign, ArrowRight, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { openPositions, benefits } from "../../lib/constants";
 
 export default function CareersPage() {
-  const openPositions = [
-    {
-      id: 1,
-      title: 'Senior Legal Associate',
-      department: 'Legal',
-      location: 'Mumbai, Maharashtra',
-      type: 'Full-time',
-      experience: '3-5 years',
-      salary: '₹8-12 LPA',
-      description: 'Join our dynamic legal team to handle complex corporate law matters, M&A transactions, and regulatory compliance.',
-      requirements: [
-        'LLB from a recognized university',
-        '3-5 years of experience in corporate law',
-        'Strong analytical and research skills',
-        'Excellent communication abilities'
-      ]
-    },
-    {
-      id: 2,
-      title: 'Financial Advisory Consultant',
-      department: 'Financial Advisory',
-      location: 'Delhi, NCR',
-      type: 'Full-time',
-      experience: '2-4 years',
-      salary: '₹6-10 LPA',
-      description: 'Provide strategic financial advisory services to clients, including investment planning and portfolio management.',
-      requirements: [
-        'MBA Finance or CA qualification',
-        '2-4 years in financial advisory',
-        'Strong client relationship skills',
-        'Knowledge of financial markets'
-      ]
-    },
-    {
-      id: 3,
-      title: 'IPO Advisory Specialist',
-      department: 'IPO Advisory',
-      location: 'Mumbai, Maharashtra',
-      type: 'Full-time',
-      experience: '4-6 years',
-      salary: '₹10-15 LPA',
-      description: 'Lead IPO advisory projects, manage client relationships, and ensure successful public offerings.',
-      requirements: [
-        'CA/CS/MBA with specialization',
-        '4-6 years in IPO advisory',
-        'Strong project management skills',
-        'Regulatory knowledge'
-      ]
-    }
-  ];
-
-  const benefits = [
-    {
-      icon: Building2,
-      title: 'Professional Growth',
-      description: 'Continuous learning opportunities and career advancement paths'
-    },
-    {
-      icon: Target,
-      title: 'Impactful Work',
-      description: 'Work on high-profile cases that shape the business landscape'
-    },
-    {
-      icon: Users,
-      title: 'Team Culture',
-      description: 'Collaborative environment with experienced professionals'
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
-      {/* Background Elements */}
-      <BackgroundElements
-        showGrid={true}
-        showFloatingElements={true}
-        showCornerElements={true}
-      />
-
+      <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
-        {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -119,8 +33,6 @@ export default function CareersPage() {
             </motion.button>
           </Link>
         </motion.div>
-
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -131,22 +43,19 @@ export default function CareersPage() {
             <Briefcase className="h-4 w-4 mr-2" />
             Career Opportunities
           </div>
-          
           <h1 className="text-4xl lg:text-6xl font-bold text-sage-50 mb-6">
-            <AnimatedText 
+            <AnimatedText
               text="Join Our Team"
               className="text-sage-50"
               delay={200}
               staggerDelay={0.1}
             />
           </h1>
-          
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
-            Build your career with Adwait Artha LLP and be part of a team that's shaping the future of legal and financial services in India.
+            Build your career with Adwait Artha LLP and be part of a team that's shaping the future
+            of legal and financial services in India.
           </p>
         </motion.div>
-
-        {/* Why Join Us Section */}
         <section className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -159,10 +68,10 @@ export default function CareersPage() {
               Why Join Adwait Artha LLP?
             </h2>
             <p className="text-lg text-sage-300 max-w-2xl mx-auto">
-              We offer more than just a job - we provide a platform for growth, learning, and making a real impact in the legal and financial world.
+              We offer more than just a job - we provide a platform for growth, learning, and making
+              a real impact in the legal and financial world.
             </p>
           </motion.div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
@@ -174,9 +83,7 @@ export default function CareersPage() {
                 whileHover={{ y: -10, transition: { duration: 0.3 } }}
               >
                 <Card className="h-full bg-sage-800/50 backdrop-blur-sm border-sage-700/30 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
-                  {/* Background gradient */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-sage-200/20 to-sage-300/20 opacity-5 rounded-full transform translate-x-8 -translate-y-8 transition-all duration-300 group-hover:scale-150" />
-
                   <CardHeader className="text-center relative z-10">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
@@ -196,8 +103,6 @@ export default function CareersPage() {
             ))}
           </div>
         </section>
-
-        {/* Open Positions Section */}
         <section className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -206,14 +111,12 @@ export default function CareersPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-sage-50 mb-4">
-              Open Positions
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-sage-50 mb-4">Open Positions</h2>
             <p className="text-lg text-sage-300 max-w-2xl mx-auto">
-              Explore our current openings and find the perfect role for your skills and aspirations.
+              Explore our current openings and find the perfect role for your skills and
+              aspirations.
             </p>
           </motion.div>
-
           <div className="space-y-6">
             {openPositions.map((position, index) => (
               <motion.div
@@ -225,9 +128,7 @@ export default function CareersPage() {
                 whileHover={{ y: -5, transition: { duration: 0.3 } }}
               >
                 <Card className="bg-sage-800/50 backdrop-blur-sm border-sage-700/30 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
-                  {/* Background gradient */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-sage-200/20 to-sage-300/20 opacity-5 rounded-full transform translate-x-8 -translate-y-8 transition-all duration-300 group-hover:scale-150" />
-
                   <CardHeader className="relative z-10">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                       <div>
@@ -235,7 +136,10 @@ export default function CareersPage() {
                           {position.title}
                         </CardTitle>
                         <div className="flex flex-wrap gap-2 mb-3">
-                          <Badge variant="secondary" className="bg-sage-200/20 text-sage-200 border-sage-300/30">
+                          <Badge
+                            variant="secondary"
+                            className="bg-sage-200/20 text-sage-200 border-sage-300/30"
+                          >
                             {position.department}
                           </Badge>
                           <Badge variant="outline" className="border-sage-300/50 text-sage-300">
@@ -282,8 +186,6 @@ export default function CareersPage() {
             ))}
           </div>
         </section>
-
-        {/* Contact Section */}
         <section className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -292,11 +194,10 @@ export default function CareersPage() {
             viewport={{ once: true }}
             className="text-center bg-sage-800/30 backdrop-blur-sm rounded-2xl p-12 border border-sage-700/30"
           >
-            <h2 className="text-3xl font-bold text-sage-50 mb-4">
-              Don't See the Right Fit?
-            </h2>
+            <h2 className="text-3xl font-bold text-sage-50 mb-4">Don't See the Right Fit?</h2>
             <p className="text-lg text-sage-300 mb-8">
-              We're always looking for talented professionals. Send us your resume and we'll keep you in mind for future opportunities.
+              We're always looking for talented professionals. Send us your resume and we'll keep
+              you in mind for future opportunities.
             </p>
             <div className="flex justify-center">
               <Button
@@ -310,7 +211,6 @@ export default function CareersPage() {
           </motion.div>
         </section>
       </div>
-
       <Footer />
     </div>
   );

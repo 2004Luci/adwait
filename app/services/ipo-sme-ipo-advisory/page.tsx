@@ -1,85 +1,87 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import Link from 'next/link';
-import { useState } from 'react';
-import { TrendingUp, Users, FileText, CheckCircle, ArrowLeft, Phone, Mail } from 'lucide-react';
-import { BackgroundElements } from '../../components/ui/BackgroundElements';
-import { AnimatedText } from '../../components/ui/AnimatedText';
-import { SchedulingModal } from '../../components/SchedulingModal';
+import { motion } from "motion/react";
+import Link from "next/link";
+import { useState } from "react";
+import { TrendingUp, Users, FileText, CheckCircle, ArrowLeft, Phone, Mail } from "lucide-react";
+import { BackgroundElements } from "../../components/ui/BackgroundElements";
+import { AnimatedText } from "../../components/ui/AnimatedText";
+import { SchedulingModal } from "../../components/SchedulingModal";
 
 export default function IPOSMEIPOAdvisoryPage() {
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
-  
+
   const features = [
-    'Strategic Fund Raising Planning',
-    'Pre-IPO Platform Development',
-    'Valuation Services & Analysis',
-    'Investor Relations Management',
-    'Regulatory Compliance & Filings',
-    'Due Diligence & Documentation',
-    'Market Research & Analysis',
-    'Roadshow & Investor Presentations'
+    "Strategic Fund Raising Planning",
+    "Pre-IPO Platform Development",
+    "Valuation Services & Analysis",
+    "Investor Relations Management",
+    "Regulatory Compliance & Filings",
+    "Due Diligence & Documentation",
+    "Market Research & Analysis",
+    "Roadshow & Investor Presentations",
   ];
 
   const processSteps = [
     {
-      step: '01',
-      title: 'Initial Assessment',
-      description: 'Comprehensive evaluation of your business model, financials, and growth potential to determine IPO readiness.',
-      icon: <FileText className="w-6 h-6" />
+      step: "01",
+      title: "Initial Assessment",
+      description:
+        "Comprehensive evaluation of your business model, financials, and growth potential to determine IPO readiness.",
+      icon: <FileText className="w-6 h-6" />,
     },
     {
-      step: '02',
-      title: 'Strategic Planning',
-      description: 'Develop a customized IPO strategy including timing, valuation, and optimal capital structure.',
-      icon: <TrendingUp className="w-6 h-6" />
+      step: "02",
+      title: "Strategic Planning",
+      description:
+        "Develop a customized IPO strategy including timing, valuation, and optimal capital structure.",
+      icon: <TrendingUp className="w-6 h-6" />,
     },
     {
-      step: '03',
-      title: 'Pre-IPO Preparation',
-      description: 'Prepare all necessary documentation, financial statements, and regulatory compliance requirements.',
-      icon: <CheckCircle className="w-6 h-6" />
+      step: "03",
+      title: "Pre-IPO Preparation",
+      description:
+        "Prepare all necessary documentation, financial statements, and regulatory compliance requirements.",
+      icon: <CheckCircle className="w-6 h-6" />,
     },
     {
-      step: '04',
-      title: 'Investor Relations',
-      description: 'Build relationships with potential investors, conduct roadshows, and manage investor communications.',
-      icon: <Users className="w-6 h-6" />
+      step: "04",
+      title: "Investor Relations",
+      description:
+        "Build relationships with potential investors, conduct roadshows, and manage investor communications.",
+      icon: <Users className="w-6 h-6" />,
     },
     {
-      step: '05',
-      title: 'Regulatory Filings',
-      description: 'Submit all required filings with SEBI, stock exchanges, and other regulatory bodies.',
-      icon: <FileText className="w-6 h-6" />
+      step: "05",
+      title: "Regulatory Filings",
+      description:
+        "Submit all required filings with SEBI, stock exchanges, and other regulatory bodies.",
+      icon: <FileText className="w-6 h-6" />,
     },
     {
-      step: '06',
-      title: 'Listing & Post-IPO',
-      description: 'Successfully list on the stock exchange and provide ongoing support for post-IPO compliance.',
-      icon: <TrendingUp className="w-6 h-6" />
-    }
+      step: "06",
+      title: "Listing & Post-IPO",
+      description:
+        "Successfully list on the stock exchange and provide ongoing support for post-IPO compliance.",
+      icon: <TrendingUp className="w-6 h-6" />,
+    },
   ];
 
   const benefits = [
-    'Access to Capital Markets',
-    'Enhanced Brand Visibility',
-    'Improved Corporate Governance',
-    'Liquidity for Shareholders',
-    'Employee Stock Options',
-    'Merger & Acquisition Currency',
-    'Regulatory Compliance',
-    'Professional Management'
+    "Access to Capital Markets",
+    "Enhanced Brand Visibility",
+    "Improved Corporate Governance",
+    "Liquidity for Shareholders",
+    "Employee Stock Options",
+    "Merger & Acquisition Currency",
+    "Regulatory Compliance",
+    "Professional Management",
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
       {/* Background Elements */}
-      <BackgroundElements 
-        showGrid={true}
-        showFloatingElements={true}
-        showCornerElements={true}
-      />
+      <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
         {/* Back Navigation */}
@@ -89,7 +91,10 @@ export default function IPOSMEIPOAdvisoryPage() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <Link href="/services" className="inline-flex items-center text-sage-300 hover:text-sage-200 transition-colors">
+          <Link
+            href="/services"
+            className="inline-flex items-center text-sage-300 hover:text-sage-200 transition-colors"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Services
           </Link>
@@ -106,19 +111,20 @@ export default function IPOSMEIPOAdvisoryPage() {
             <TrendingUp className="h-4 w-4 mr-2" />
             IPO & SME IPO Advisory
           </div>
-          
+
           <h1 className="text-4xl lg:text-6xl font-bold text-sage-50 mb-6">
-            <AnimatedText 
+            <AnimatedText
               text="IPO/SME IPO Advisory Services"
               className="text-sage-50"
               delay={200}
               staggerDelay={0.1}
             />
           </h1>
-          
+
           <p className="text-xl text-sage-300 max-w-4xl mx-auto">
-            Comprehensive IPO advisory services to help your company successfully navigate the complex process of going public. 
-            From initial planning to post-listing support, we provide end-to-end guidance for both main board and SME IPOs.
+            Comprehensive IPO advisory services to help your company successfully navigate the
+            complex process of going public. From initial planning to post-listing support, we
+            provide end-to-end guidance for both main board and SME IPOs.
           </p>
         </motion.div>
 
@@ -135,14 +141,17 @@ export default function IPOSMEIPOAdvisoryPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100 mb-6">Service Overview</h2>
               <p className="text-sage-300 leading-relaxed mb-6">
-                The firm deals with clients as strategic partner in structuring its fund raising requirement, planning, designing, 
-                finalising end use of fund raising along with inviting strategic partners, investors, funds in pre IPO platform, 
-                valuation and tie up with various agencies involved in IPO and put the company on right platform through IPO listing.
+                The firm deals with clients as strategic partner in structuring its fund raising
+                requirement, planning, designing, finalising end use of fund raising along with
+                inviting strategic partners, investors, funds in pre IPO platform, valuation and tie
+                up with various agencies involved in IPO and put the company on right platform
+                through IPO listing.
               </p>
               <p className="text-sage-300 leading-relaxed">
-                Our expertise spans both main board IPOs and SME IPOs, providing tailored solutions based on your company's size, 
-                growth stage, and market positioning. We work closely with SEBI, stock exchanges, and other regulatory bodies to 
-                ensure smooth and compliant listing processes.
+                Our expertise spans both main board IPOs and SME IPOs, providing tailored solutions
+                based on your company's size, growth stage, and market positioning. We work closely
+                with SEBI, stock exchanges, and other regulatory bodies to ensure smooth and
+                compliant listing processes.
               </p>
             </motion.div>
 
@@ -223,7 +232,9 @@ export default function IPOSMEIPOAdvisoryPage() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="bg-gradient-to-br from-sage-200/10 to-sage-300/10 backdrop-blur-sm rounded-2xl p-6 border border-sage-200/20"
             >
-              <h3 className="text-xl font-bold text-sage-100 mb-4">Ready to Start Your IPO Journey?</h3>
+              <h3 className="text-xl font-bold text-sage-100 mb-4">
+                Ready to Start Your IPO Journey?
+              </h3>
               <p className="text-sage-300 text-sm mb-6">
                 Contact our experts to discuss your IPO strategy and get personalized guidance.
               </p>
@@ -241,7 +252,7 @@ export default function IPOSMEIPOAdvisoryPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    window.location.href = '/#contact';
+                    window.location.href = "/#contact";
                   }}
                   className="cursor-pointer w-full border border-sage-200/30 text-sage-200 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
                 >
@@ -260,34 +271,37 @@ export default function IPOSMEIPOAdvisoryPage() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="bg-sage-800/30 backdrop-blur-sm rounded-2xl p-8 border border-sage-700/30"
         >
-          <h2 className="text-2xl font-bold text-sage-100 mb-6">Why Choose Adwait Artha LLP for Your IPO?</h2>
+          <h2 className="text-2xl font-bold text-sage-100 mb-6">
+            Why Choose Adwait Artha LLP for Your IPO?
+          </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">23+ Years of Experience</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Our extensive experience in the Indian capital markets and deep understanding of regulatory requirements 
-                ensures a smooth and successful IPO process for your company.
+                Our extensive experience in the Indian capital markets and deep understanding of
+                regulatory requirements ensures a smooth and successful IPO process for your
+                company.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Proven Track Record</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                We have successfully guided numerous companies through their IPO journey, from small SMEs to large 
-                corporations, with a high success rate and satisfied clients.
+                We have successfully guided numerous companies through their IPO journey, from small
+                SMEs to large corporations, with a high success rate and satisfied clients.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Comprehensive Support</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                From initial planning to post-listing compliance, we provide end-to-end support ensuring your 
-                company is well-prepared for the public markets.
+                From initial planning to post-listing compliance, we provide end-to-end support
+                ensuring your company is well-prepared for the public markets.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Regulatory Expertise</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Our strong relationships with SEBI, stock exchanges, and other regulatory bodies help expedite 
-                the approval process and ensure compliance at every step.
+                Our strong relationships with SEBI, stock exchanges, and other regulatory bodies
+                help expedite the approval process and ensure compliance at every step.
               </p>
             </div>
           </div>
@@ -295,10 +309,10 @@ export default function IPOSMEIPOAdvisoryPage() {
       </div>
 
       {/* Scheduling Modal */}
-      <SchedulingModal 
-        isOpen={isSchedulingModalOpen} 
-        onClose={() => setIsSchedulingModalOpen(false)} 
+      <SchedulingModal
+        isOpen={isSchedulingModalOpen}
+        onClose={() => setIsSchedulingModalOpen(false)}
       />
     </div>
   );
-} 
+}

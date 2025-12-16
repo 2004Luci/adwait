@@ -1,63 +1,86 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import Link from 'next/link';
-import { useState } from 'react';
-import { BarChart3, CheckCircle, ArrowLeft, Phone, Mail, TrendingUp, FileText, Shield } from 'lucide-react';
-import { BackgroundElements } from '../../components/ui/BackgroundElements';
-import { AnimatedText } from '../../components/ui/AnimatedText';
-import { SchedulingModal } from '../../components/SchedulingModal';
+import { motion } from "motion/react";
+import Link from "next/link";
+import { useState } from "react";
+import {
+  BarChart3,
+  CheckCircle,
+  ArrowLeft,
+  Phone,
+  Mail,
+  TrendingUp,
+  FileText,
+  Shield,
+} from "lucide-react";
+import { BackgroundElements } from "../../components/ui/BackgroundElements";
+import { AnimatedText } from "../../components/ui/AnimatedText";
+import { SchedulingModal } from "../../components/SchedulingModal";
 
 export default function FinancialAdvisoryPage() {
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
-  
+
   const services = [
-    'Financial Statement Advisory',
-    'Disclosure Requirements',
-    'Governance Compliance',
-    'Financial Restructuring',
-    'Strategic Planning',
-    'Performance Analysis',
-    'Risk Assessment',
-    'Compliance Reporting'
+    "Financial Statement Advisory",
+    "Disclosure Requirements",
+    "Governance Compliance",
+    "Financial Restructuring",
+    "Strategic Planning",
+    "Performance Analysis",
+    "Risk Assessment",
+    "Compliance Reporting",
   ];
 
   const advisoryAreas = [
     {
-      title: 'Financial Statement Advisory',
-      description: 'Expert guidance on presentation and preparation of financial statements in accordance with accounting standards.',
-      features: ['Accounting Standards Compliance', 'Financial Presentation', 'Disclosure Requirements', 'Audit Support']
+      title: "Financial Statement Advisory",
+      description:
+        "Expert guidance on presentation and preparation of financial statements in accordance with accounting standards.",
+      features: [
+        "Accounting Standards Compliance",
+        "Financial Presentation",
+        "Disclosure Requirements",
+        "Audit Support",
+      ],
     },
     {
-      title: 'Financial Restructuring',
-      description: 'Strategic restructuring of financial statements and capital structure to optimize business performance.',
-      features: ['Capital Structure Optimization', 'Debt Restructuring', 'Asset Reorganization', 'Financial Modeling']
+      title: "Financial Restructuring",
+      description:
+        "Strategic restructuring of financial statements and capital structure to optimize business performance.",
+      features: [
+        "Capital Structure Optimization",
+        "Debt Restructuring",
+        "Asset Reorganization",
+        "Financial Modeling",
+      ],
     },
     {
-      title: 'Governance Compliance',
-      description: 'Ensuring compliance with corporate governance norms and regulatory requirements for financial reporting.',
-      features: ['Corporate Governance', 'Regulatory Compliance', 'Board Reporting', 'Stakeholder Communication']
-    }
+      title: "Governance Compliance",
+      description:
+        "Ensuring compliance with corporate governance norms and regulatory requirements for financial reporting.",
+      features: [
+        "Corporate Governance",
+        "Regulatory Compliance",
+        "Board Reporting",
+        "Stakeholder Communication",
+      ],
+    },
   ];
 
   const benefits = [
-    'Improved Financial Transparency',
-    'Enhanced Investor Confidence',
-    'Better Decision Making',
-    'Regulatory Compliance',
-    'Optimized Capital Structure',
-    'Risk Mitigation',
-    'Performance Enhancement',
-    'Stakeholder Value Creation'
+    "Improved Financial Transparency",
+    "Enhanced Investor Confidence",
+    "Better Decision Making",
+    "Regulatory Compliance",
+    "Optimized Capital Structure",
+    "Risk Mitigation",
+    "Performance Enhancement",
+    "Stakeholder Value Creation",
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
-      <BackgroundElements 
-        showGrid={true}
-        showFloatingElements={true}
-        showCornerElements={true}
-      />
+      <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
         {/* Back Navigation */}
@@ -67,7 +90,10 @@ export default function FinancialAdvisoryPage() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <Link href="/services" className="inline-flex items-center text-sage-300 hover:text-sage-200 transition-colors">
+          <Link
+            href="/services"
+            className="inline-flex items-center text-sage-300 hover:text-sage-200 transition-colors"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Services
           </Link>
@@ -84,19 +110,20 @@ export default function FinancialAdvisoryPage() {
             <BarChart3 className="h-4 w-4 mr-2" />
             Financial Advisory & Restructuring
           </div>
-          
+
           <h1 className="text-4xl lg:text-6xl font-bold text-sage-50 mb-6">
-            <AnimatedText 
+            <AnimatedText
               text="Financial Statement Advisory/Structuring/Restructuring"
               className="text-sage-50"
               delay={200}
               staggerDelay={0.1}
             />
           </h1>
-          
+
           <p className="text-xl text-sage-300 max-w-4xl mx-auto">
-            Expert financial statement advisory, disclosure requirements, governance compliance, and strategic financial restructuring. 
-            We help businesses optimize their financial presentation and structure for better performance and compliance.
+            Expert financial statement advisory, disclosure requirements, governance compliance, and
+            strategic financial restructuring. We help businesses optimize their financial
+            presentation and structure for better performance and compliance.
           </p>
         </motion.div>
 
@@ -113,13 +140,16 @@ export default function FinancialAdvisoryPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100 mb-6">Service Overview</h2>
               <p className="text-sage-300 leading-relaxed mb-6">
-                The Firm's strength lies in its partner's ability to advise on presentation of financial statement, its advisory 
-                on how the financial of the client's shall be presented in annual statement, disclosure requirements, Governance compliance, 
-                transparency and assist and advising client on structuring and restructuring of financial on need based requirement.
+                The Firm's strength lies in its partner's ability to advise on presentation of
+                financial statement, its advisory on how the financial of the client's shall be
+                presented in annual statement, disclosure requirements, Governance compliance,
+                transparency and assist and advising client on structuring and restructuring of
+                financial on need based requirement.
               </p>
               <p className="text-sage-300 leading-relaxed">
-                Our comprehensive financial advisory services help businesses present their financial information effectively, 
-                comply with regulatory requirements, and optimize their financial structure for sustainable growth.
+                Our comprehensive financial advisory services help businesses present their
+                financial information effectively, comply with regulatory requirements, and optimize
+                their financial structure for sustainable growth.
               </p>
             </motion.div>
 
@@ -219,7 +249,7 @@ export default function FinancialAdvisoryPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    window.location.href = '/#contact';
+                    window.location.href = "/#contact";
                   }}
                   className="cursor-pointer w-full border border-sage-700/30 text-sage-700 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
                 >
@@ -238,34 +268,36 @@ export default function FinancialAdvisoryPage() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="bg-sage-800/30 backdrop-blur-sm rounded-2xl p-8 border border-sage-700/30"
         >
-          <h2 className="text-2xl font-bold text-sage-100 mb-6">Why Choose Adwait Artha LLP for Financial Advisory?</h2>
+          <h2 className="text-2xl font-bold text-sage-100 mb-6">
+            Why Choose Adwait Artha LLP for Financial Advisory?
+          </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Expert Financial Team</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Our team of qualified financial professionals with deep expertise in accounting standards, 
-                regulatory requirements, and financial restructuring.
+                Our team of qualified financial professionals with deep expertise in accounting
+                standards, regulatory requirements, and financial restructuring.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Comprehensive Approach</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Holistic financial advisory covering all aspects from statement preparation to restructuring 
-                and compliance management.
+                Holistic financial advisory covering all aspects from statement preparation to
+                restructuring and compliance management.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Regulatory Expertise</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Deep understanding of SEBI, RBI, and other regulatory requirements ensures your financial 
-                statements meet all compliance standards.
+                Deep understanding of SEBI, RBI, and other regulatory requirements ensures your
+                financial statements meet all compliance standards.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Proven Track Record</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Successfully advised numerous companies on financial restructuring and compliance matters 
-                with measurable improvements in performance.
+                Successfully advised numerous companies on financial restructuring and compliance
+                matters with measurable improvements in performance.
               </p>
             </div>
           </div>
@@ -273,10 +305,10 @@ export default function FinancialAdvisoryPage() {
       </div>
 
       {/* Scheduling Modal */}
-      <SchedulingModal 
-        isOpen={isSchedulingModalOpen} 
-        onClose={() => setIsSchedulingModalOpen(false)} 
+      <SchedulingModal
+        isOpen={isSchedulingModalOpen}
+        onClose={() => setIsSchedulingModalOpen(false)}
       />
     </div>
   );
-} 
+}
