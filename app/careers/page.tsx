@@ -1,32 +1,20 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import { Footer } from '../components/Footer';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { BackgroundElements } from '../components/ui/BackgroundElements';
-import { AnimatedText } from '../components/ui/AnimatedText';
-import {
-  Briefcase,
-  MapPin,
-  Clock,
-  DollarSign,
-  ArrowRight,
-  ArrowLeft
-} from 'lucide-react';
-import Link from 'next/link';
-import { openPositions, benefits } from '../../lib/constants';
+import { motion } from "motion/react";
+import { Footer } from "../components/Footer";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { BackgroundElements } from "../components/ui/BackgroundElements";
+import { AnimatedText } from "../components/ui/AnimatedText";
+import { Briefcase, MapPin, Clock, DollarSign, ArrowRight, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { openPositions, benefits } from "../../lib/constants";
 
 export default function CareersPage() {
- 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
-      <BackgroundElements
-        showGrid={true}
-        showFloatingElements={true}
-        showCornerElements={true}
-      />
+      <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -56,7 +44,7 @@ export default function CareersPage() {
             Career Opportunities
           </div>
           <h1 className="text-4xl lg:text-6xl font-bold text-sage-50 mb-6">
-            <AnimatedText 
+            <AnimatedText
               text="Join Our Team"
               className="text-sage-50"
               delay={200}
@@ -64,7 +52,8 @@ export default function CareersPage() {
             />
           </h1>
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
-            Build your career with Adwait Artha LLP and be part of a team that's shaping the future of legal and financial services in India.
+            Build your career with Adwait Artha LLP and be part of a team that's shaping the future
+            of legal and financial services in India.
           </p>
         </motion.div>
         <section className="mb-20">
@@ -79,7 +68,8 @@ export default function CareersPage() {
               Why Join Adwait Artha LLP?
             </h2>
             <p className="text-lg text-sage-300 max-w-2xl mx-auto">
-              We offer more than just a job - we provide a platform for growth, learning, and making a real impact in the legal and financial world.
+              We offer more than just a job - we provide a platform for growth, learning, and making
+              a real impact in the legal and financial world.
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -121,11 +111,10 @@ export default function CareersPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-sage-50 mb-4">
-              Open Positions
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-sage-50 mb-4">Open Positions</h2>
             <p className="text-lg text-sage-300 max-w-2xl mx-auto">
-              Explore our current openings and find the perfect role for your skills and aspirations.
+              Explore our current openings and find the perfect role for your skills and
+              aspirations.
             </p>
           </motion.div>
           <div className="space-y-6">
@@ -147,7 +136,10 @@ export default function CareersPage() {
                           {position.title}
                         </CardTitle>
                         <div className="flex flex-wrap gap-2 mb-3">
-                          <Badge variant="secondary" className="bg-sage-200/20 text-sage-200 border-sage-300/30">
+                          <Badge
+                            variant="secondary"
+                            className="bg-sage-200/20 text-sage-200 border-sage-300/30"
+                          >
                             {position.department}
                           </Badge>
                           <Badge variant="outline" className="border-sage-300/50 text-sage-300">
@@ -202,11 +194,10 @@ export default function CareersPage() {
             viewport={{ once: true }}
             className="text-center bg-sage-800/30 backdrop-blur-sm rounded-2xl p-12 border border-sage-700/30"
           >
-            <h2 className="text-3xl font-bold text-sage-50 mb-4">
-              Don't See the Right Fit?
-            </h2>
+            <h2 className="text-3xl font-bold text-sage-50 mb-4">Don't See the Right Fit?</h2>
             <p className="text-lg text-sage-300 mb-8">
-              We're always looking for talented professionals. Send us your resume and we'll keep you in mind for future opportunities.
+              We're always looking for talented professionals. Send us your resume and we'll keep
+              you in mind for future opportunities.
             </p>
             <div className="flex justify-center">
               <Button

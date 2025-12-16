@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Home, Briefcase, Award, Users, User, Phone, ArrowRight } from 'lucide-react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Menu, X, Home, Briefcase, Award, Users, User, Phone, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export function Navigation() {
-
   const router = useRouter();
 
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -19,13 +18,13 @@ export function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Check if at top of page
       setIsAtTop(currentScrollY <= 50);
-      
+
       // Determine if scrolled past threshold for static navbar
       setIsScrolled(currentScrollY > 50);
-      
+
       // Show/hide floating navbar based on scroll direction
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         // Scrolling down - hide floating navbar
@@ -34,26 +33,26 @@ export function Navigation() {
         // Scrolling up and not at top - show floating navbar
         setIsVisible(true);
       }
-      
+
       // Always hide floating navbar at the very top
       if (currentScrollY <= 50) {
         setIsVisible(false);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
   const navItems = [
-    { name: 'Home', href: '#home', icon: Home },
-    { name: 'Services', href: '/services', icon: Briefcase },
-    { name: 'Expertise', href: '#expertise', icon: Award },
-    { name: 'Careers', href: '/careers', icon: Users },
-    { name: 'About', href: '#about', icon: User },
-    { name: 'Contact', href: '#contact', icon: Phone }
+    { name: "Home", href: "#home", icon: Home },
+    { name: "Services", href: "/services", icon: Briefcase },
+    { name: "Expertise", href: "#expertise", icon: Award },
+    { name: "Careers", href: "/careers", icon: Users },
+    { name: "About", href: "#about", icon: User },
+    { name: "Contact", href: "#contact", icon: Phone },
   ];
 
   return (
@@ -71,18 +70,15 @@ export function Navigation() {
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
               <div className="flex items-center justify-between h-20">
                 {/* Logo */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex-shrink-0"
-                >
+                <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
                   <div className="rounded-lg flex items-center justify-center shadow-lg overflow-hidden bg-sage-800/50 backdrop-blur-sm border border-sage-700/30">
-                    <Image 
-                      src="/logo.jpg" 
-                      alt="Adwait Artha LLP Logo" 
+                    <Image
+                      src="/logo.jpg"
+                      alt="Adwait Artha LLP Logo"
                       className="w-auto object-contain cursor-pointer"
                       width={250}
                       height={100}
-                      onClick={()=>router.push('/')}
+                      onClick={() => router.push("/")}
                     />
                   </div>
                 </motion.div>
@@ -104,7 +100,7 @@ export function Navigation() {
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(200, 180, 160, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => {
-                      window.location.href = '/#contact';
+                      window.location.href = "/#contact";
                     }}
                     className="bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
                   >
@@ -126,7 +122,9 @@ export function Navigation() {
               {/* Mobile Navigation */}
               <motion.div
                 initial={false}
-                animate={isMobileMenuOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                animate={
+                  isMobileMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }
+                }
                 className="md:hidden overflow-hidden bg-sage-900/95 backdrop-blur-md rounded-xl mt-2 border border-sage-700/30 shadow-lg"
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">
@@ -146,7 +144,7 @@ export function Navigation() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => {
-                        window.location.href = '/#contact';
+                        window.location.href = "/#contact";
                       }}
                       className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2"
                     >
@@ -170,23 +168,20 @@ export function Navigation() {
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-sage-900/95 backdrop-blur-md shadow-2xl border-2 border-sage-200/30 rounded-2xl"
-            style={{ width: 'fit-content', minWidth: '320px', maxWidth: '95vw' }}
+            style={{ width: "fit-content", minWidth: "320px", maxWidth: "95vw" }}
           >
             <div className="px-4 py-2">
               <div className="flex items-center justify-between">
                 {/* Logo - smaller version for floating navbar */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex-shrink-0"
-                >
+                <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
                   <div className="rounded-lg flex items-center justify-center shadow-lg overflow-hidden bg-sage-800/50 backdrop-blur-sm border border-sage-700/30">
-                    <Image 
-                      src="/logo.jpg" 
-                      alt="Adwait Artha LLP Logo" 
+                    <Image
+                      src="/logo.jpg"
+                      alt="Adwait Artha LLP Logo"
                       className="w-auto object-contain cursor-pointer"
                       width={120}
                       height={60}
-                      onClick={()=>router.push('/')}
+                      onClick={() => router.push("/")}
                     />
                   </div>
                 </motion.div>
@@ -208,7 +203,7 @@ export function Navigation() {
                     whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(200, 180, 160, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => {
-                      window.location.href = '/#contact';
+                      window.location.href = "/#contact";
                     }}
                     className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm ml-2"
                   >
@@ -230,7 +225,9 @@ export function Navigation() {
               {/* Mobile Navigation for floating navbar */}
               <motion.div
                 initial={false}
-                animate={isMobileMenuOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                animate={
+                  isMobileMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }
+                }
                 className="lg:hidden overflow-hidden bg-sage-800/50 backdrop-blur-md rounded-xl mt-2 border border-sage-700/30 shadow-lg"
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">
@@ -250,7 +247,7 @@ export function Navigation() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => {
-                        window.location.href = '/#contact';
+                        window.location.href = "/#contact";
                       }}
                       className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 text-sm flex items-center justify-center gap-2"
                     >

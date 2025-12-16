@@ -3,7 +3,18 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { format, addDays, startOfDay } from "date-fns";
-import { X, Clock, Mail, Calendar as CalendarIcon, Check, User, Phone, Globe, ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  X,
+  Clock,
+  Mail,
+  Calendar as CalendarIcon,
+  Check,
+  User,
+  Phone,
+  Globe,
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -13,7 +24,12 @@ import { toast } from "sonner";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { cn } from "./ui/utils";
-import { PersonalDetails, ScheduleDetails, personalDetailsSchema, scheduleDetailsSchema } from "@/lib/schema";
+import {
+  PersonalDetails,
+  ScheduleDetails,
+  personalDetailsSchema,
+  scheduleDetailsSchema,
+} from "@/lib/schema";
 import { formatRemainingTime } from "@/lib/utils";
 
 interface SchedulingModalProps {
@@ -22,9 +38,18 @@ interface SchedulingModalProps {
 }
 
 const timeSlots = [
-  "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
-  "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM",
-  "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM"
+  "11:00 AM",
+  "11:30 AM",
+  "12:00 PM",
+  "12:30 PM",
+  "02:00 PM",
+  "02:30 PM",
+  "03:00 PM",
+  "03:30 PM",
+  "04:00 PM",
+  "04:30 PM",
+  "05:00 PM",
+  "05:30 PM",
 ];
 
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
@@ -40,7 +65,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   // Disable current day, next 2 days, and weekends
   const disabledDays = [
     { before: addDays(startOfDay(new Date()), 4) }, // Disable current day and next 3 days (current + 3 = 4)
-    { dayOfWeek: [0, 6] } // Disable weekends (Sunday = 0, Saturday = 6)
+    { dayOfWeek: [0, 6] }, // Disable weekends (Sunday = 0, Saturday = 6)
   ];
 
   const handleDateSelect = (date: Date | undefined) => {
@@ -55,7 +80,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   const handleNext = () => {
     const personalDetails = { name, phone, email };
     const result = personalDetailsSchema.safeParse(personalDetails);
-    
+
     if (result.success) {
       setErrors({});
       setStep(2);
@@ -68,7 +93,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
       });
       setErrors(newErrors);
       const errorCount = Object.keys(newErrors).length;
-      toast.error(`Please fix ${errorCount} error${errorCount > 1 ? 's' : ''} in the form`, {
+      toast.error(`Please fix ${errorCount} error${errorCount > 1 ? "s" : ""} in the form`, {
         description: "Please review the highlighted fields and correct the errors.",
         duration: 4000,
       });
@@ -80,13 +105,13 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   };
 
   const handleScheduleSubmit = async () => {
-    const scheduleDetails = { 
-      date: selectedDate, 
-      time: selectedTime 
+    const scheduleDetails = {
+      date: selectedDate,
+      time: selectedTime,
     };
-    
+
     const scheduleResult = scheduleDetailsSchema.safeParse(scheduleDetails);
-    
+
     if (!scheduleResult.success) {
       toast.error("Please select a date and time", {
         description: "Please choose both a consultation date and time to proceed.",
@@ -135,14 +160,17 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
           });
         } else {
           toast.error("Failed to schedule consultation", {
-            description: error.message || "Please check your internet connection and try again. If the problem persists, please contact us directly.",
+            description:
+              error.message ||
+              "Please check your internet connection and try again. If the problem persists, please contact us directly.",
             duration: 6000,
           });
         }
       }
     } catch (error) {
       toast.error("Failed to schedule consultation", {
-        description: "Please check your internet connection and try again. If the problem persists, please contact us directly.",
+        description:
+          "Please check your internet connection and try again. If the problem persists, please contact us directly.",
         duration: 6000,
       });
     } finally {
@@ -202,15 +230,23 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
             {/* Progress Indicator */}
             <div className="flex items-center justify-center mb-6">
               <div className="flex items-center space-x-4">
-                <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
-                  step >= 1 ? 'bg-sage-600 border-sage-400 text-sage-50' : 'bg-sage-800 border-sage-600 text-sage-400'
-                }`}>
+                <div
+                  className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
+                    step >= 1
+                      ? "bg-sage-600 border-sage-400 text-sage-50"
+                      : "bg-sage-800 border-sage-600 text-sage-400"
+                  }`}
+                >
                   <User className="w-4 h-4" />
                 </div>
-                <div className={`w-12 h-0.5 ${step >= 2 ? 'bg-sage-600' : 'bg-sage-700'}`}></div>
-                <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
-                  step >= 2 ? 'bg-sage-600 border-sage-400 text-sage-50' : 'bg-sage-800 border-sage-600 text-sage-400'
-                }`}>
+                <div className={`w-12 h-0.5 ${step >= 2 ? "bg-sage-600" : "bg-sage-700"}`}></div>
+                <div
+                  className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
+                    step >= 2
+                      ? "bg-sage-600 border-sage-400 text-sage-50"
+                      : "bg-sage-800 border-sage-600 text-sage-400"
+                  }`}
+                >
                   <CalendarIcon className="w-4 h-4" />
                 </div>
               </div>
@@ -227,7 +263,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   className="space-y-6"
                 >
                   <h3 className="text-lg font-semibold text-sage-100 mb-4">Personal Information</h3>
-                  
+
                   {/* Name Field */}
                   <div>
                     <Label htmlFor="name" className="text-sage-200 mb-2 block">
@@ -245,13 +281,11 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           if (errors.name) setErrors({ ...errors, name: undefined });
                         }}
                         className={`pl-10 bg-sage-800 border-sage-700 text-sage-100 placeholder:text-sage-400 ${
-                          errors.name ? 'border-red-500' : ''
+                          errors.name ? "border-red-500" : ""
                         }`}
                       />
                     </div>
-                    {errors.name && (
-                      <p className="text-red-400 text-xs mt-1">{errors.name}</p>
-                    )}
+                    {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
                   </div>
 
                   {/* Phone Field */}
@@ -270,12 +304,10 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           setPhone(value || "");
                           if (errors.phone) setErrors({ ...errors, phone: undefined });
                         }}
-                        className={`PhoneInput ${errors.phone ? 'error' : ''}`}
+                        className={`PhoneInput ${errors.phone ? "error" : ""}`}
                       />
                     </div>
-                    {errors.phone && (
-                      <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
-                    )}
+                    {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
                     <p className="text-xs text-sage-400 mt-2">
                       We'll call you at this number for the consultation
                     </p>
@@ -298,13 +330,11 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           if (errors.email) setErrors({ ...errors, email: undefined });
                         }}
                         className={`pl-10 bg-sage-800 border-sage-700 text-sage-100 placeholder:text-sage-400 ${
-                          errors.email ? 'border-red-500' : ''
+                          errors.email ? "border-red-500" : ""
                         }`}
                       />
                     </div>
-                    {errors.email && (
-                      <p className="text-red-400 text-xs mt-1">{errors.email}</p>
-                    )}
+                    {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
                     <p className="text-xs text-sage-400 mt-2">
                       We'll send confirmation details to this email address
                     </p>
@@ -320,7 +350,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   className="space-y-6"
                 >
                   <h3 className="text-lg font-semibold text-sage-100 mb-4">Schedule Details</h3>
-                  
+
                   {/* Date Selection */}
                   <div>
                     <Label className="text-sage-200 mb-3 block">Select Date *</Label>
@@ -335,10 +365,17 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           )}
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
-                          {selectedDate ? format(selectedDate, "EEEE, MMMM do, yyyy") : <span>Pick a date</span>}
+                          {selectedDate ? (
+                            format(selectedDate, "EEEE, MMMM do, yyyy")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
                         </Button>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0 bg-sage-800 border-sage-700" align="start">
+                      <PopoverContent
+                        className="w-auto p-0 bg-sage-800 border-sage-700"
+                        align="start"
+                      >
                         <Calendar
                           mode="single"
                           selected={selectedDate}
@@ -352,20 +389,27 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                             caption: "flex justify-between items-center h-12 mb-4",
                             caption_label: "text-lg font-semibold text-sage-200",
                             nav: "flex items-center space-x-2",
-                            nav_button: "h-9 w-9 bg-sage-700 hover:bg-sage-600 p-0 rounded-lg transition-all duration-200 flex items-center justify-center border border-sage-600 hover:border-sage-500 text-sage-300",
+                            nav_button:
+                              "h-9 w-9 bg-sage-700 hover:bg-sage-600 p-0 rounded-lg transition-all duration-200 flex items-center justify-center border border-sage-600 hover:border-sage-500 text-sage-300",
                             nav_button_previous: "",
                             nav_button_next: "",
                             table: "w-full border-collapse",
                             head_row: "flex mb-3",
-                            head_cell: "text-sage-400 rounded-md w-10 font-medium text-[0.8rem] uppercase tracking-wider text-center",
+                            head_cell:
+                              "text-sage-400 rounded-md w-10 font-medium text-[0.8rem] uppercase tracking-wider text-center",
                             row: "flex w-full mb-1",
                             cell: "relative p-0 text-center text-sm focus-within:relative focus-within:z-20",
                             day: "h-10 w-10 p-0 font-normal aria-selected:opacity-100 hover:bg-sage-700 hover:text-sage-100 rounded-lg transition-all duration-200 focus:bg-sage-700 focus:text-sage-100 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:ring-offset-2 focus:ring-offset-sage-800 relative bg-transparent border-none text-sage-200",
-                            day_selected: "bg-gradient-to-r from-sage-600 to-sage-500 text-sage-50 hover:from-sage-500 hover:to-sage-400 focus:from-sage-500 focus:to-sage-400 shadow-lg border-2 border-sage-400 font-semibold ring-2 ring-sage-300 ring-offset-2 ring-offset-sage-800",
-                            day_today: "bg-sage-700/50 text-sage-200 font-semibold ring-2 ring-sage-500",
-                            day_outside: "text-sage-500 opacity-30 hover:bg-sage-700/30 hover:text-sage-300",
-                            day_disabled: "text-sage-500 opacity-20 cursor-not-allowed hover:bg-transparent hover:text-sage-500 line-through bg-sage-800/30 border border-sage-600/30",
-                            day_range_middle: "aria-selected:bg-sage-700 aria-selected:text-sage-200",
+                            day_selected:
+                              "bg-gradient-to-r from-sage-600 to-sage-500 text-sage-50 hover:from-sage-500 hover:to-sage-400 focus:from-sage-500 focus:to-sage-400 shadow-lg border-2 border-sage-400 font-semibold ring-2 ring-sage-300 ring-offset-2 ring-offset-sage-800",
+                            day_today:
+                              "bg-sage-700/50 text-sage-200 font-semibold ring-2 ring-sage-500",
+                            day_outside:
+                              "text-sage-500 opacity-30 hover:bg-sage-700/30 hover:text-sage-300",
+                            day_disabled:
+                              "text-sage-500 opacity-20 cursor-not-allowed hover:bg-transparent hover:text-sage-500 line-through bg-sage-800/30 border border-sage-600/30",
+                            day_range_middle:
+                              "aria-selected:bg-sage-700 aria-selected:text-sage-200",
                             day_hidden: "invisible",
                           }}
                         />
@@ -488,4 +532,4 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
       )}
     </AnimatePresence>
   );
-} 
+}

@@ -1,27 +1,20 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import { useState } from 'react';
-import { Mail, Send, CheckCircle } from 'lucide-react';
-import { BackgroundElements } from './ui/BackgroundElements';
-import { AnimatedText } from './ui/AnimatedText';
-import { toast } from 'sonner';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from './ui/form';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { contactInfo, services } from '@/lib/constants';
-import { contactFormSchema, type ContactFormData } from '@/lib/schema';
-import { formatRemainingTime } from '@/lib/utils';
+import { motion } from "motion/react";
+import { useState } from "react";
+import { Mail, Send, CheckCircle } from "lucide-react";
+import { BackgroundElements } from "./ui/BackgroundElements";
+import { AnimatedText } from "./ui/AnimatedText";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { contactInfo, services } from "@/lib/constants";
+import { contactFormSchema, type ContactFormData } from "@/lib/schema";
+import { formatRemainingTime } from "@/lib/utils";
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -30,24 +23,24 @@ export function ContactSection() {
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      service: '',
-      message: ''
+      name: "",
+      email: "",
+      company: "",
+      phone: "",
+      service: "",
+      message: "",
     },
-    mode: 'onSubmit',
+    mode: "onSubmit",
   });
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -57,10 +50,12 @@ export function ContactSection() {
         if (response.status === 429) {
           const remainingTime = errorData.remainingTime || 86400;
           const formattedTime = formatRemainingTime(remainingTime);
-          const message = errorData.message ?? `Too many contact form submissions. Please try again in ${formattedTime}.`;
+          const message =
+            errorData.message ??
+            `Too many contact form submissions. Please try again in ${formattedTime}.`;
           throw new Error(message);
         }
-        throw new Error(errorData.message || 'Failed to send message');
+        throw new Error(errorData.message || "Failed to send message");
       }
 
       setIsSubmitting(false);
@@ -77,9 +72,12 @@ export function ContactSection() {
       }, 3000);
     } catch (error) {
       setIsSubmitting(false);
-      console.error('Form submission error:', error);
+      console.error("Form submission error:", error);
       toast.error("Failed to send message", {
-        description: error instanceof Error ? error.message : "Please check your internet connection and try again. If the problem persists, please contact us directly.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Please check your internet connection and try again. If the problem persists, please contact us directly.",
         duration: 6000,
       });
     }
@@ -87,19 +85,18 @@ export function ContactSection() {
 
   const onError = (errors: any) => {
     const errorCount = Object.keys(errors).length;
-    toast.error(`Please fix ${errorCount} error${errorCount > 1 ? 's' : ''} in the form`, {
+    toast.error(`Please fix ${errorCount} error${errorCount > 1 ? "s" : ""} in the form`, {
       description: "Please review the highlighted fields and correct the errors.",
       duration: 4000,
     });
   };
 
   return (
-    <section id="contact" className="relative py-24 bg-gradient-to-br from-sage-300 via-sage-400 to-sage-500 overflow-hidden">
-      <BackgroundElements
-        showGrid={true}
-        showFloatingElements={true}
-        showCornerElements={false}
-      />
+    <section
+      id="contact"
+      className="relative py-24 bg-gradient-to-br from-sage-300 via-sage-400 to-sage-500 overflow-hidden"
+    >
+      <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={false} />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -121,8 +118,8 @@ export function ContactSection() {
             />
           </h2>
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
-            Ready to take your business to the next level? Contact our expert team
-            for personalized financial advisory services tailored to your needs.
+            Ready to take your business to the next level? Contact our expert team for personalized
+            financial advisory services tailored to your needs.
           </p>
         </motion.div>
         <div className="grid lg:grid-cols-2 gap-16">
@@ -142,7 +139,9 @@ export function ContactSection() {
               >
                 <CheckCircle className="w-16 h-16 text-sage-200 mx-auto mb-4" />
                 <h4 className="text-xl font-semibold text-sage-100 mb-2">Message Sent!</h4>
-                <p className="text-sage-300">Thank you for contacting us. We'll get back to you soon.</p>
+                <p className="text-sage-300">
+                  Thank you for contacting us. We'll get back to you soon.
+                </p>
               </motion.div>
             ) : (
               <Form {...form}>
@@ -245,7 +244,11 @@ export function ContactSection() {
                           </FormControl>
                           <SelectContent className="bg-sage-700 text-sage-100 border-sage-600">
                             {services.map((service, index) => (
-                              <SelectItem key={index} value={service} className="cursor-pointer hover:bg-sage-600">
+                              <SelectItem
+                                key={index}
+                                value={service}
+                                className="cursor-pointer hover:bg-sage-600"
+                              >
                                 {service}
                               </SelectItem>
                             ))}
@@ -322,7 +325,9 @@ export function ContactSection() {
                   viewport={{ once: true }}
                   className="flex items-start space-x-4"
                 >
-                  <div className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center flex-shrink-0`}>
+                  <div
+                    className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center flex-shrink-0`}
+                  >
                     <info.icon className="w-6 h-6 text-sage-900" />
                   </div>
                   <div>
@@ -330,13 +335,17 @@ export function ContactSection() {
                     {info.details.map((detail, detailIndex) => (
                       <p
                         key={detailIndex}
-                        className={`text-sage-300 ${info.clickable ? 'cursor-pointer hover:text-sage-200 transition-colors duration-300' : ''}`}
-                        onClick={info.clickable ? () => {
-                          const footer = document.querySelector('footer');
-                          if (footer) {
-                            footer.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        } : undefined}
+                        className={`text-sage-300 ${info.clickable ? "cursor-pointer hover:text-sage-200 transition-colors duration-300" : ""}`}
+                        onClick={
+                          info.clickable
+                            ? () => {
+                                const footer = document.querySelector("footer");
+                                if (footer) {
+                                  footer.scrollIntoView({ behavior: "smooth" });
+                                }
+                              }
+                            : undefined
+                        }
                       >
                         {detail}
                       </p>

@@ -275,7 +275,8 @@ html {
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.1;
     transform: scale(1);
   }
@@ -286,7 +287,8 @@ html {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
     opacity: 0.2;
   }
@@ -348,7 +350,7 @@ html {
 }
 
 .corner-element::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 8px;
   height: 8px;
@@ -361,7 +363,7 @@ html {
 }
 
 .text-decoration::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -384,7 +386,7 @@ html {
 
 /* Grid background pattern */
 .grid-pattern {
-  background-image: 
+  background-image:
     linear-gradient(rgba(200, 180, 160, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(200, 180, 160, 0.08) 1px, transparent 1px);
   background-size: 60px 60px;

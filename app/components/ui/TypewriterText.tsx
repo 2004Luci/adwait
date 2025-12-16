@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface TypewriterTextProps {
   phrases: string[];
@@ -11,20 +11,20 @@ interface TypewriterTextProps {
   pauseTime?: number;
 }
 
-export function TypewriterText({ 
-  phrases, 
-  className = "", 
-  typingSpeed = 100, 
-  deletingSpeed = 50, 
-  pauseTime = 2000 
+export function TypewriterText({
+  phrases,
+  className = "",
+  typingSpeed = 100,
+  deletingSpeed = 50,
+  pauseTime = 2000,
 }: TypewriterTextProps) {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
+  const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const currentPhrase = phrases[currentPhraseIndex];
-    
+
     if (!isDeleting) {
       // Typing
       if (currentText.length < currentPhrase.length) {
@@ -64,4 +64,4 @@ export function TypewriterText({
       />
     </div>
   );
-} 
+}

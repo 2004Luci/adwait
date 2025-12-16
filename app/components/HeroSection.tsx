@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { ImageWithFallback } from './ui/ImageWithFallback';
-import { BackgroundElements } from './ui/BackgroundElements';
-import { AnimatedText } from './ui/AnimatedText';
-import { TypewriterText } from './ui/TypewriterText';
-import { SchedulingModal } from './SchedulingModal';
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { ImageWithFallback } from "./ui/ImageWithFallback";
+import { BackgroundElements } from "./ui/BackgroundElements";
+import { AnimatedText } from "./ui/AnimatedText";
+import { TypewriterText } from "./ui/TypewriterText";
+import { SchedulingModal } from "./SchedulingModal";
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,13 +18,21 @@ export function HeroSection() {
   }, []);
 
   const stats = [
-    { number: 23, suffix: '+', label: 'Years of Experience' },
-    { number: 22, suffix: '+', label: 'Valued Clients' },
-    { number: 6, suffix: '', label: 'Core Services' },
-    { number: 100, suffix: '%', label: 'Client Satisfaction' }
+    { number: 23, suffix: "+", label: "Years of Experience" },
+    { number: 22, suffix: "+", label: "Valued Clients" },
+    { number: 6, suffix: "", label: "Core Services" },
+    { number: 100, suffix: "%", label: "Client Satisfaction" },
   ];
 
-  const AnimatedCounter = ({ number, suffix, label }: { number: number; suffix: string; label: string }) => {
+  const AnimatedCounter = ({
+    number,
+    suffix,
+    label,
+  }: {
+    number: number;
+    suffix: string;
+    label: string;
+  }) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
@@ -32,7 +40,7 @@ export function HeroSection() {
         const timer = setTimeout(() => {
           const increment = number / 50;
           const interval = setInterval(() => {
-            setCount(prev => {
+            setCount((prev) => {
               if (prev >= number) {
                 clearInterval(interval);
                 return number;
@@ -54,7 +62,8 @@ export function HeroSection() {
         className="text-center"
       >
         <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-sage-200 to-sage-300 bg-clip-text text-transparent mb-2">
-          {Math.floor(count)}{suffix}
+          {Math.floor(count)}
+          {suffix}
         </div>
         <div className="text-sage-300">{label}</div>
       </motion.div>
@@ -62,13 +71,12 @@ export function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-sage-900 via-black to-sage-800">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-sage-900 via-black to-sage-800"
+    >
       {/* Background Elements */}
-      <BackgroundElements 
-        showGrid={true}
-        showFloatingElements={true}
-        showCornerElements={true}
-      />
+      <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
 
       {/* Additional floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden">
@@ -76,12 +84,12 @@ export function HeroSection() {
           animate={{
             x: [0, 100, 0],
             y: [0, -100, 0],
-            rotate: [0, 180, 360]
+            rotate: [0, 180, 360],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
           className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-full"
         />
@@ -89,12 +97,12 @@ export function HeroSection() {
           animate={{
             x: [0, -150, 0],
             y: [0, 100, 0],
-            rotate: [0, -180, -360]
+            rotate: [0, -180, -360],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
           className="absolute bottom-40 left-20 w-24 h-24 bg-gradient-to-br from-sage-100/20 to-sage-200/20 rotate-45"
         />
@@ -111,16 +119,18 @@ export function HeroSection() {
             className="text-center"
           >
             <div className="mb-4 flex flex-col items-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sage-50">Expert Financial Solutions in: </span>
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sage-50">
+                Expert Financial Solutions in:{" "}
+              </span>
               <span className="text-2xl sm:text-3xl md:text-4xl bg-gradient-to-r from-sage-200 to-sage-300 bg-clip-text text-transparent">
-                <TypewriterText 
+                <TypewriterText
                   phrases={[
                     "IPO & SME IPO Advisory",
                     "Legal Drafting & Audit",
-                    "Law Tribunal Representation", 
+                    "Law Tribunal Representation",
                     "Corporate Law Services",
                     "Loan Syndication & Finance",
-                    "Financial Statement Advisory"
+                    "Financial Statement Advisory",
                   ]}
                   typingSpeed={120}
                   deletingSpeed={60}
@@ -145,7 +155,7 @@ export function HeroSection() {
               >
                 {/* Glow effect behind the image */}
                 <div className="absolute inset-0 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-2xl blur-xl scale-110"></div>
-                
+
                 {/* Image container with border and shadow */}
                 <div className="relative bg-gradient-to-br from-sage-800/50 to-sage-900/50 backdrop-blur-sm border border-sage-700/30 rounded-2xl p-4 shadow-2xl">
                   <Image
@@ -157,29 +167,29 @@ export function HeroSection() {
                     priority
                   />
                 </div>
-                
+
                 {/* Floating elements around the image */}
                 <motion.div
                   animate={{
                     y: [0, -10, 0],
-                    rotate: [0, 5, 0]
+                    rotate: [0, 5, 0],
                   }}
                   transition={{
                     duration: 4,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                   className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br from-sage-200 to-sage-300 rounded-full opacity-60"
                 />
                 <motion.div
                   animate={{
                     y: [0, 10, 0],
-                    rotate: [0, -5, 0]
+                    rotate: [0, -5, 0],
                   }}
                   transition={{
                     duration: 3,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                   className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-br from-sage-100 to-sage-200 rounded-full opacity-40"
                 />
@@ -195,7 +205,11 @@ export function HeroSection() {
             className="space-y-6 text-center"
           >
             <p className="text-lg text-sage-300 max-w-2xl mx-auto">
-              The Firm "Adwait Artha LLP" is in the field of fund raising, equity capital market (IPO's) primary market or secondary market, debt syndication, corporate law, finance, management audit, budgeting, legal drafting and other related areas. With 23+ years of experience and a team of dedicated professionals, we provide niche solutions to our valued clients.
+              The Firm "Adwait Artha LLP" is in the field of fund raising, equity capital market
+              (IPO's) primary market or secondary market, debt syndication, corporate law, finance,
+              management audit, budgeting, legal drafting and other related areas. With 23+ years of
+              experience and a team of dedicated professionals, we provide niche solutions to our
+              valued clients.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -211,9 +225,9 @@ export function HeroSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  const servicesSection = document.getElementById('services');
+                  const servicesSection = document.getElementById("services");
                   if (servicesSection) {
-                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                    servicesSection.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
                 className="cursor-pointer border border-sage-200/30 text-sage-200 px-8 py-4 rounded-xl hover:bg-sage-200/10 transition-all duration-300"
@@ -243,16 +257,18 @@ export function HeroSection() {
                   className="text-5xl lg:text-7xl font-bold text-sage-50 leading-tight"
                 >
                   <div className="mb-4 flex flex-col items-start">
-                    <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-sage-50">Expert Financial Solutions in: </span>
+                    <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-sage-50">
+                      Expert Financial Solutions in:{" "}
+                    </span>
                     <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-sage-200 to-sage-300 bg-clip-text text-transparent">
-                      <TypewriterText 
+                      <TypewriterText
                         phrases={[
                           "IPO & SME IPO Advisory",
                           "Legal Drafting & Audit",
-                          "Law Tribunal Representation", 
+                          "Law Tribunal Representation",
                           "Corporate Law Services",
                           "Loan Syndication & Finance",
-                          "Financial Statement Advisory"
+                          "Financial Statement Advisory",
                         ]}
                         typingSpeed={120}
                         deletingSpeed={60}
@@ -270,7 +286,11 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-lg text-sage-300 max-w-2xl"
               >
-                The Firm "Adwait Artha LLP" is in the field of fund raising, equity capital market (IPO's) primary market or secondary market, debt syndication, corporate law, finance, management audit, budgeting, legal drafting and other related areas. With 23+ years of experience and a team of dedicated professionals, we provide niche solutions to our valued clients.
+                The Firm "Adwait Artha LLP" is in the field of fund raising, equity capital market
+                (IPO's) primary market or secondary market, debt syndication, corporate law,
+                finance, management audit, budgeting, legal drafting and other related areas. With
+                23+ years of experience and a team of dedicated professionals, we provide niche
+                solutions to our valued clients.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -292,9 +312,9 @@ export function HeroSection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    const servicesSection = document.getElementById('services');
+                    const servicesSection = document.getElementById("services");
                     if (servicesSection) {
-                      servicesSection.scrollIntoView({ behavior: 'smooth' });
+                      servicesSection.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
                   className="cursor-pointer border border-sage-200/30 text-sage-200 px-8 py-4 rounded-xl hover:bg-sage-200/10 transition-all duration-300"
@@ -320,7 +340,7 @@ export function HeroSection() {
               >
                 {/* Glow effect behind the image */}
                 <div className="absolute inset-0 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-2xl blur-xl scale-110"></div>
-                
+
                 {/* Image container with border and shadow */}
                 <div className="relative bg-gradient-to-br from-sage-800/50 to-sage-900/50 backdrop-blur-sm border border-sage-700/30 rounded-2xl p-4 shadow-2xl">
                   <Image
@@ -332,29 +352,29 @@ export function HeroSection() {
                     priority
                   />
                 </div>
-                
+
                 {/* Floating elements around the image */}
                 <motion.div
                   animate={{
                     y: [0, -10, 0],
-                    rotate: [0, 5, 0]
+                    rotate: [0, 5, 0],
                   }}
                   transition={{
                     duration: 4,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                   className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br from-sage-200 to-sage-300 rounded-full opacity-60"
                 />
                 <motion.div
                   animate={{
                     y: [0, 10, 0],
-                    rotate: [0, -5, 0]
+                    rotate: [0, -5, 0],
                   }}
                   transition={{
                     duration: 3,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                   className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-br from-sage-100 to-sage-200 rounded-full opacity-40"
                 />
@@ -384,17 +404,19 @@ export function HeroSection() {
         >
           <div className="mb-4 w-16 h-px bg-gradient-to-r from-transparent via-sage-200 to-transparent opacity-30" />
           <h2 className="text-xs md:text-sm font-mono font-light text-sage-200 uppercase tracking-[0.2em] opacity-80">
-            <AnimatedText 
+            <AnimatedText
               text="Building financial futures with integrity and expertise"
               className="text-sage-200"
               delay={3500}
               staggerDelay={0.15}
             />
           </h2>
-          
+
           {/* Additional details */}
-          <div className="mt-6 flex justify-center space-x-4 opacity-0" 
-               style={{ animation: 'word-appear 1s ease-out forwards', animationDelay: '4.5s' }}>
+          <div
+            className="mt-6 flex justify-center space-x-4 opacity-0"
+            style={{ animation: "word-appear 1s ease-out forwards", animationDelay: "4.5s" }}
+          >
             <div className="w-1 h-1 bg-sage-200 rounded-full opacity-40" />
             <div className="w-1 h-1 bg-sage-200 rounded-full opacity-60" />
             <div className="w-1 h-1 bg-sage-200 rounded-full opacity-40" />
@@ -403,9 +425,9 @@ export function HeroSection() {
       </div>
 
       {/* Scheduling Modal */}
-      <SchedulingModal 
-        isOpen={isSchedulingModalOpen} 
-        onClose={() => setIsSchedulingModalOpen(false)} 
+      <SchedulingModal
+        isOpen={isSchedulingModalOpen}
+        onClose={() => setIsSchedulingModalOpen(false)}
       />
     </section>
   );

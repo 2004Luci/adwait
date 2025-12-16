@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Adwait Artha LLP",
-  description: "Adwait Artha LLP is a financial advisory firm that provides services to businesses and individuals.",
+  description:
+    "Adwait Artha LLP is a financial advisory firm that provides services to businesses and individuals.",
 };
 
 export default function RootLayout({
@@ -24,11 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   );
 }

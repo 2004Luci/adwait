@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -12,19 +12,19 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function formatRemainingTime(seconds: number): string {
   if (seconds < 60) {
-    return `${seconds} second${seconds !== 1 ? 's' : ''}`;
+    return `${seconds} second${seconds !== 1 ? "s" : ""}`;
   }
-  
+
   const minutes = Math.floor(seconds / 60);
   if (minutes < 60) {
-    return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+    return `${minutes} minute${minutes !== 1 ? "s" : ""}`;
   }
-  
+
   const hours = Math.floor(seconds / 3600);
   if (hours < 24) {
-    return `${hours} hour${hours !== 1 ? 's' : ''}`;
+    return `${hours} hour${hours !== 1 ? "s" : ""}`;
   }
-  
+
   const days = Math.floor(seconds / 86400);
-  return `${days} day${days !== 1 ? 's' : ''}`;
+  return `${days} day${days !== 1 ? "s" : ""}`;
 }
