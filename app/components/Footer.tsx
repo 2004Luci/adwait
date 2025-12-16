@@ -2,12 +2,15 @@
 
 import { motion } from "motion/react";
 import { MapPin, ArrowUp } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./ui/social-icons";
 import { contactInfo } from "@/lib/constants";
 
 export function Footer() {
+  const router = useRouter();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -26,7 +29,7 @@ export function Footer() {
       { name: "Our Team", href: "#team" },
       { name: "Case Studies", href: "#case-studies" },
       { name: "Testimonials", href: "#testimonials" },
-      { name: "Careers", href: "#careers" },
+      { name: "Careers", href: "/careers" },
       { name: "Contact", href: "#contact" },
     ],
     resources: ["Blog", "Newsletter", "Whitepapers", "Webinars", "FAQ", "Support"],
@@ -46,7 +49,6 @@ export function Footer() {
     { icon: LinkedinIcon, href: "#", label: "LinkedIn" },
     { icon: InstagramIcon, href: "#", label: "Instagram" },
   ];
-
 
   return (
     <footer className="relative bg-gradient-to-br from-sage-200 via-sage-300 to-sage-400 overflow-hidden">
@@ -89,7 +91,8 @@ export function Footer() {
                             onClick={
                               info.clickable
                                 ? () => {
-                                    const mapSection = document.querySelector("footer .py-12.border-t");
+                                    const mapSection =
+                                      document.querySelector("footer .py-12.border-t");
                                     if (mapSection) {
                                       mapSection.scrollIntoView({ behavior: "smooth" });
                                     }
@@ -119,15 +122,12 @@ export function Footer() {
               </h4>
               <ul className="space-y-2 md:space-y-3">
                 {footerLinks.services.map((service, index) => (
-                  <li key={index}>
-                    <a
-                      href={service.href}
-                      className="text-sage-800 hover:text-sage-900 transition-colors duration-300 text-xs md:text-sm"
-                    >
-                      {service.name}
-                    </a>
-                  </li>
-                ))}
+                  <li
+                    key={index}
+                    className="cursor-pointer text-sage-800 hover:text-sage-900 transition-colors duration-300 text-xs md:text-sm"
+                    onClick={() => {
+                      router.push(service.href);
+                    }}>{service.name}</li>))}
               </ul>
             </motion.div>
 
@@ -154,6 +154,9 @@ export function Footer() {
                           if (element) {
                             element.scrollIntoView({ behavior: "smooth" });
                           }
+                        } else if (item.href.startsWith("/")) {
+                          e.preventDefault();
+                          router.push(item.href);
                         }
                       }}
                     >
