@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { MapPin, ArrowUp } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./ui/social-icons";
@@ -122,12 +123,15 @@ export function Footer() {
               </h4>
               <ul className="space-y-2 md:space-y-3">
                 {footerLinks.services.map((service, index) => (
-                  <li
-                    key={index}
-                    className="cursor-pointer text-sage-800 hover:text-sage-900 transition-colors duration-300 text-xs md:text-sm"
-                    onClick={() => {
-                      router.push(service.href);
-                    }}>{service.name}</li>))}
+                  <li key={index}>
+                    <Link
+                      href={service.href}
+                      className="cursor-pointer text-sage-800 hover:text-sage-900 transition-colors duration-300 text-xs md:text-sm text-left block"
+                    >
+                      {service.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </motion.div>
 
