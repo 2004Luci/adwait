@@ -4,3 +4,27 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/**
+ * Converts seconds to a human-readable time format
+ * @param seconds - The number of seconds to convert
+ * @returns A human-readable string (e.g., "1 day", "2 hours", "5 minutes", "30 seconds")
+ */
+export function formatRemainingTime(seconds: number): string {
+  if (seconds < 60) {
+    return `${seconds} second${seconds !== 1 ? 's' : ''}`;
+  }
+  
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) {
+    return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+  }
+  
+  const hours = Math.floor(seconds / 3600);
+  if (hours < 24) {
+    return `${hours} hour${hours !== 1 ? 's' : ''}`;
+  }
+  
+  const days = Math.floor(seconds / 86400);
+  return `${days} day${days !== 1 ? 's' : ''}`;
+}

@@ -14,6 +14,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { cn } from "./ui/utils";
 import { PersonalDetails, ScheduleDetails, personalDetailsSchema, scheduleDetailsSchema } from "@/lib/schema";
+import { formatRemainingTime } from "@/lib/utils";
 
 interface SchedulingModalProps {
   isOpen: boolean;
@@ -127,8 +128,9 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
         const error = await response.json();
         if (response.status === 429) {
           const remainingTime = error.remainingTime || 300;
+          const formattedTime = formatRemainingTime(remainingTime);
           toast.error("Too many scheduling attempts", {
-            description: `Please wait ${remainingTime} seconds before trying again.`,
+            description: error.message ?? `Please try again in ${formattedTime}.`,
             duration: 6000,
           });
         } else {

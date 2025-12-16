@@ -21,6 +21,7 @@ import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { contactInfo, services } from '@/lib/constants';
 import { contactFormSchema, type ContactFormData } from '@/lib/schema';
+import { formatRemainingTime } from '@/lib/utils';
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -54,8 +55,10 @@ export function ContactSection() {
       if (!response.ok) {
         const errorData = await response.json();
         if (response.status === 429) {
-          const remainingTime = errorData.remainingTime || 60;
-          throw new Error(`Too many contact form submissions. Please wait ${remainingTime} seconds before trying again.`);
+          const remainingTime = errorData.remainingTime || 86400;
+          const formattedTime = formatRemainingTime(remainingTime);
+          const message = errorData.message ?? `Too many contact form submissions. Please try again in ${formattedTime}.`;
+          throw new Error(message);
         }
         throw new Error(errorData.message || 'Failed to send message');
       }
