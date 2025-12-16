@@ -16,7 +16,8 @@ const companyEmails = [
 const contactEmail = "contact@adwaitartha.com";
 const contactPhone = "+91 7940305119";
 const contactAddress =
-  "518, Anand Mangal - III, Opp. Core House, Rajnagar Club Lane, Ambawadi, Ahmedabad - 380006";
+  "1030, 10th floor, Shaligram Arcade, Nr Vakil Saheb Bridge Extension, Beside Sharaswati Hospital, Ambli Junction, Nr. Satyamev Elite Ring Road, South Bopal, Ahmedabad-380058";
+
 const contactBusinessHours = "Mon - Fri: 10:00 AM - 6:00 PM, Sat: 10:00 AM - 4:00 PM";
 
 const openPositions = [
@@ -108,8 +109,9 @@ const contactInfo: ContactInfo[] = [
     icon: MapPin,
     title: "Office",
     details: [
-      "518, Anand Mangal - III, Opp. Core House",
-      "Rajnagar Club Lane, Ambawadi, Ahmedabad - 380006",
+      "1030, 10th floor, Shaligram Arcade",
+      "Nr Vakil Saheb Bridge Extension, Beside Sharaswati Hospital",
+      "Ambli Junction, Nr. Satyamev Elite Ring Road, South Bopal, Ahmedabad-380058",
     ],
     color: "from-sage-400 to-sage-500",
     clickable: true,
