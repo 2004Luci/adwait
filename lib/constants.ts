@@ -95,13 +95,13 @@ const contactInfo: ContactInfo[] = [
   {
     icon: Mail,
     title: "Email",
-    details: ["contact@adwaitartha.com"],
+    details: [contactEmail],
     color: "from-sage-200 to-sage-300",
   },
   {
     icon: Phone,
     title: "Phone",
-    details: ["+91 7940305119"],
+    details: [contactPhone],
     color: "from-sage-300 to-sage-400",
   },
   {
@@ -117,7 +117,7 @@ const contactInfo: ContactInfo[] = [
   {
     icon: Clock,
     title: "Business Hours",
-    details: ["Mon - Fri: 10:00 AM - 6:00 PM", "Sat: 10:00 AM - 4:00 PM"],
+    details: contactBusinessHours.split(", "),
     color: "from-sage-500 to-sage-600",
   },
 ];
