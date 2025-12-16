@@ -27,7 +27,7 @@ const timeSlots = [
 ];
 
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState<number>(1);
   const [selectedDate, setSelectedDate] = useState<ScheduleDetails["date"] | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<ScheduleDetails["time"]>("");
   const [name, setName] = useState<PersonalDetails["name"]>("");
@@ -66,7 +66,6 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
         }
       });
       setErrors(newErrors);
-      // Show a toast with the number of errors
       const errorCount = Object.keys(newErrors).length;
       toast.error(`Please fix ${errorCount} error${errorCount > 1 ? 's' : ''} in the form`, {
         description: "Please review the highlighted fields and correct the errors.",
@@ -127,7 +126,6 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
       } else {
         const error = await response.json();
         if (response.status === 429) {
-          // Rate limiting error
           const remainingTime = error.remainingTime || 300;
           toast.error("Too many scheduling attempts", {
             description: `Please wait ${remainingTime} seconds before trying again.`,
