@@ -8,6 +8,7 @@ import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { TypewriterText } from "./ui/TypewriterText";
 import { SchedulingModal } from "./SchedulingModal";
+import { heroStats, heroTypewriterPhrases } from "@/lib/constants";
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,13 +17,6 @@ export function HeroSection() {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
-  const stats = [
-    { number: 23, suffix: "+", label: "Years of Experience" },
-    { number: 22, suffix: "+", label: "Valued Clients" },
-    { number: 6, suffix: "", label: "Core Services" },
-    { number: 100, suffix: "%", label: "Client Satisfaction" },
-  ];
 
   const AnimatedCounter = ({
     number,
@@ -124,14 +118,7 @@ export function HeroSection() {
               </span>
               <span className="text-2xl sm:text-3xl md:text-4xl bg-gradient-to-r from-sage-200 to-sage-300 bg-clip-text text-transparent">
                 <TypewriterText
-                  phrases={[
-                    "IPO & SME IPO Advisory",
-                    "Legal Drafting & Audit",
-                    "Law Tribunal Representation",
-                    "Corporate Law Services",
-                    "Loan Syndication & Finance",
-                    "Financial Statement Advisory",
-                  ]}
+                  phrases={heroTypewriterPhrases}
                   typingSpeed={120}
                   deletingSpeed={60}
                   pauseTime={3000}
@@ -262,14 +249,7 @@ export function HeroSection() {
                     </span>
                     <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-sage-200 to-sage-300 bg-clip-text text-transparent">
                       <TypewriterText
-                        phrases={[
-                          "IPO & SME IPO Advisory",
-                          "Legal Drafting & Audit",
-                          "Law Tribunal Representation",
-                          "Corporate Law Services",
-                          "Loan Syndication & Finance",
-                          "Financial Statement Advisory",
-                        ]}
+                        phrases={heroTypewriterPhrases}
                         typingSpeed={120}
                         deletingSpeed={60}
                         pauseTime={3000}
@@ -390,7 +370,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
-          {stats.map((stat, index) => (
+          {heroStats.map((stat, index) => (
             <AnimatedCounter key={index} {...stat} />
           ))}
         </motion.div>

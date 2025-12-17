@@ -16,67 +16,14 @@ import {
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
 import { SchedulingModal } from "../../components/SchedulingModal";
+import {
+  financialAdvisoryServices,
+  financialAdvisoryAreas,
+  financialAdvisoryBenefits,
+} from "@/lib/constants";
 
 export default function FinancialAdvisoryPage() {
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
-
-  const services = [
-    "Financial Statement Advisory",
-    "Disclosure Requirements",
-    "Governance Compliance",
-    "Financial Restructuring",
-    "Strategic Planning",
-    "Performance Analysis",
-    "Risk Assessment",
-    "Compliance Reporting",
-  ];
-
-  const advisoryAreas = [
-    {
-      title: "Financial Statement Advisory",
-      description:
-        "Expert guidance on presentation and preparation of financial statements in accordance with accounting standards.",
-      features: [
-        "Accounting Standards Compliance",
-        "Financial Presentation",
-        "Disclosure Requirements",
-        "Audit Support",
-      ],
-    },
-    {
-      title: "Financial Restructuring",
-      description:
-        "Strategic restructuring of financial statements and capital structure to optimize business performance.",
-      features: [
-        "Capital Structure Optimization",
-        "Debt Restructuring",
-        "Asset Reorganization",
-        "Financial Modeling",
-      ],
-    },
-    {
-      title: "Governance Compliance",
-      description:
-        "Ensuring compliance with corporate governance norms and regulatory requirements for financial reporting.",
-      features: [
-        "Corporate Governance",
-        "Regulatory Compliance",
-        "Board Reporting",
-        "Stakeholder Communication",
-      ],
-    },
-  ];
-
-  const benefits = [
-    "Improved Financial Transparency",
-    "Enhanced Investor Confidence",
-    "Better Decision Making",
-    "Regulatory Compliance",
-    "Optimized Capital Structure",
-    "Risk Mitigation",
-    "Performance Enhancement",
-    "Stakeholder Value Creation",
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
@@ -162,7 +109,7 @@ export default function FinancialAdvisoryPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100">Our Advisory Areas</h2>
               <div className="space-y-6">
-                {advisoryAreas.map((area, index) => (
+                {financialAdvisoryAreas.map((area, index) => (
                   <motion.div
                     key={area.title}
                     initial={{ opacity: 0, y: 20 }}
@@ -197,7 +144,7 @@ export default function FinancialAdvisoryPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Our Services</h3>
               <ul className="space-y-3">
-                {services.map((service, index) => (
+                {financialAdvisoryServices.map((service, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <div className="w-2 h-2 bg-gradient-to-r from-sage-700 to-sage-800 rounded-full mr-3"></div>
                     {service}
@@ -215,7 +162,7 @@ export default function FinancialAdvisoryPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Key Benefits</h3>
               <ul className="space-y-3">
-                {benefits.map((benefit, index) => (
+                {financialAdvisoryBenefits.map((benefit, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <TrendingUp className="w-4 h-4 text-sage-700 mr-3 flex-shrink-0" />
                     {benefit}

@@ -31,26 +31,12 @@ import {
   scheduleDetailsSchema,
 } from "@/lib/schema";
 import { formatRemainingTime } from "@/lib/utils";
+import { timeSlots } from "@/lib/constants";
 
 interface SchedulingModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-const timeSlots = [
-  "11:00 AM",
-  "11:30 AM",
-  "12:00 PM",
-  "12:30 PM",
-  "02:00 PM",
-  "02:30 PM",
-  "03:00 PM",
-  "03:30 PM",
-  "04:00 PM",
-  "04:30 PM",
-  "05:00 PM",
-  "05:30 PM",
-];
 
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   const [step, setStep] = useState<number>(1);
