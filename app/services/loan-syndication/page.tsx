@@ -1,62 +1,85 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import { useState } from 'react';
-import Link from 'next/link';
-import { Banknote, CheckCircle, ArrowLeft, Phone, Mail, TrendingUp, Building, Globe } from 'lucide-react';
-import { SchedulingModal } from '../../components/SchedulingModal';
-import { BackgroundElements } from '../../components/ui/BackgroundElements';
-import { AnimatedText } from '../../components/ui/AnimatedText';
+import { motion } from "motion/react";
+import { useState } from "react";
+import Link from "next/link";
+import {
+  Banknote,
+  CheckCircle,
+  ArrowLeft,
+  Phone,
+  Mail,
+  TrendingUp,
+  Building,
+  Globe,
+} from "lucide-react";
+import { SchedulingModal } from "../../components/SchedulingModal";
+import { BackgroundElements } from "../../components/ui/BackgroundElements";
+import { AnimatedText } from "../../components/ui/AnimatedText";
 
 export default function LoanSyndicationPage() {
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
   const services = [
-    'Term Loan & Working Capital',
-    'Foreign Currency Funding',
-    'Project Finance',
-    'Financial Structuring',
-    'Lender Coordination',
-    'Debt Restructuring',
-    'Syndication Services',
-    'Financial Advisory'
+    "Term Loan & Working Capital",
+    "Foreign Currency Funding",
+    "Project Finance",
+    "Financial Structuring",
+    "Lender Coordination",
+    "Debt Restructuring",
+    "Syndication Services",
+    "Financial Advisory",
   ];
 
   const financeTypes = [
     {
-      title: 'Term Loans',
-      description: 'Long-term financing solutions for capital expenditure, expansion, and major investments.',
-      features: ['Capital Expenditure', 'Business Expansion', 'Equipment Financing', 'Infrastructure Projects']
+      title: "Term Loans",
+      description:
+        "Long-term financing solutions for capital expenditure, expansion, and major investments.",
+      features: [
+        "Capital Expenditure",
+        "Business Expansion",
+        "Equipment Financing",
+        "Infrastructure Projects",
+      ],
     },
     {
-      title: 'Working Capital Finance',
-      description: 'Short-term financing to meet day-to-day operational requirements and cash flow needs.',
-      features: ['Cash Flow Management', 'Inventory Financing', 'Trade Finance', 'Operational Expenses']
+      title: "Working Capital Finance",
+      description:
+        "Short-term financing to meet day-to-day operational requirements and cash flow needs.",
+      features: [
+        "Cash Flow Management",
+        "Inventory Financing",
+        "Trade Finance",
+        "Operational Expenses",
+      ],
     },
     {
-      title: 'Foreign Currency Funding',
-      description: 'International financing solutions including ECBs, trade finance, and cross-border transactions.',
-      features: ['External Commercial Borrowings', 'Trade Finance', 'Cross-border Transactions', 'Currency Hedging']
-    }
+      title: "Foreign Currency Funding",
+      description:
+        "International financing solutions including ECBs, trade finance, and cross-border transactions.",
+      features: [
+        "External Commercial Borrowings",
+        "Trade Finance",
+        "Cross-border Transactions",
+        "Currency Hedging",
+      ],
+    },
   ];
 
   const projectTypes = [
-    'Infrastructure Projects',
-    'Manufacturing Units',
-    'Real Estate Development',
-    'Power Projects',
-    'Telecommunications',
-    'Healthcare Facilities',
-    'Educational Institutions',
-    'Technology Projects'
+    "Infrastructure Projects",
+    "Manufacturing Units",
+    "Real Estate Development",
+    "Power Projects",
+    "Telecommunications",
+    "Healthcare Facilities",
+    "Educational Institutions",
+    "Technology Projects",
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
-      <BackgroundElements 
-        showGrid={true}
-        showFloatingElements={true}
-        showCornerElements={true}
-      />
+      <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
         {/* Back Navigation */}
@@ -66,7 +89,10 @@ export default function LoanSyndicationPage() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <Link href="/services" className="inline-flex items-center text-sage-300 hover:text-sage-200 transition-colors">
+          <Link
+            href="/services"
+            className="inline-flex items-center text-sage-300 hover:text-sage-200 transition-colors"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Services
           </Link>
@@ -83,19 +109,20 @@ export default function LoanSyndicationPage() {
             <Banknote className="h-4 w-4 mr-2" />
             Loan Syndication & Project Finance
           </div>
-          
+
           <h1 className="text-4xl lg:text-6xl font-bold text-sage-50 mb-6">
-            <AnimatedText 
+            <AnimatedText
               text="Loan Syndication, Restructuring & Project Finance"
               className="text-sage-50"
               delay={200}
               staggerDelay={0.1}
             />
           </h1>
-          
+
           <p className="text-xl text-sage-300 max-w-4xl mx-auto">
-            Comprehensive financial solutions including term loans, working capital, foreign currency funding, and project finance. 
-            We help businesses secure optimal financing structures for growth and expansion.
+            Comprehensive financial solutions including term loans, working capital, foreign
+            currency funding, and project finance. We help businesses secure optimal financing
+            structures for growth and expansion.
           </p>
         </motion.div>
 
@@ -112,13 +139,16 @@ export default function LoanSyndicationPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100 mb-6">Service Overview</h2>
               <p className="text-sage-300 leading-relaxed mb-6">
-                In the field of Finance, the firm's scope of work would be to assist various corporates in organizing Term Loan 
-                and Working Capital Finance and other structured loan facilities (fund based and non fund based) including funding 
-                in Foreign currency from Institution/ Banks for proposed project/ going concern on a best effort basis.
+                In the field of Finance, the firm's scope of work would be to assist various
+                corporates in organizing Term Loan and Working Capital Finance and other structured
+                loan facilities (fund based and non fund based) including funding in Foreign
+                currency from Institution/ Banks for proposed project/ going concern on a best
+                effort basis.
               </p>
               <p className="text-sage-300 leading-relaxed">
-                Our expertise in loan syndication and project finance helps businesses secure the right financing mix, 
-                optimize capital structure, and achieve their growth objectives through strategic financial planning.
+                Our expertise in loan syndication and project finance helps businesses secure the
+                right financing mix, optimize capital structure, and achieve their growth objectives
+                through strategic financial planning.
               </p>
             </motion.div>
 
@@ -202,14 +232,16 @@ export default function LoanSyndicationPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Need Financing Support?</h3>
               <p className="text-sage-300 text-sm mb-6">
-                Contact our financial experts for comprehensive loan syndication and project finance services.
+                Contact our financial experts for comprehensive loan syndication and project finance
+                services.
               </p>
               <div className="space-y-3">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="cursor-pointer w-full bg-gradient-to-r from-sage-600 to-sage-700 text-sage-900 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
-                 onClick={() => setIsSchedulingModalOpen(true)}>
+                  onClick={() => setIsSchedulingModalOpen(true)}
+                >
                   <Phone className="w-4 h-4 mr-2" />
                   Schedule Consultation
                 </motion.button>
@@ -217,7 +249,7 @@ export default function LoanSyndicationPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    window.location.href = '/#contact';
+                    window.location.href = "/#contact";
                   }}
                   className="cursor-pointer w-full border border-sage-600/30 text-sage-600 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
                 >
@@ -236,45 +268,47 @@ export default function LoanSyndicationPage() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="bg-sage-800/30 backdrop-blur-sm rounded-2xl p-8 border border-sage-700/30"
         >
-          <h2 className="text-2xl font-bold text-sage-100 mb-6">Why Choose Adwait Artha LLP for Financial Services?</h2>
+          <h2 className="text-2xl font-bold text-sage-100 mb-6">
+            Why Choose Adwait Artha LLP for Financial Services?
+          </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Extensive Network</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Strong relationships with banks, financial institutions, and lenders across India and internationally, 
-                ensuring access to the best financing options.
+                Strong relationships with banks, financial institutions, and lenders across India
+                and internationally, ensuring access to the best financing options.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Expert Financial Team</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Our team of financial experts with deep understanding of various financing structures, 
-                regulatory requirements, and market conditions.
+                Our team of financial experts with deep understanding of various financing
+                structures, regulatory requirements, and market conditions.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">Customized Solutions</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Tailored financial solutions based on your business requirements, risk profile, and growth objectives, 
-                ensuring optimal capital structure.
+                Tailored financial solutions based on your business requirements, risk profile, and
+                growth objectives, ensuring optimal capital structure.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-sage-100 mb-3">End-to-End Support</h3>
               <p className="text-sage-300 text-sm leading-relaxed">
-                Complete support from initial assessment to loan disbursement and ongoing relationship management 
-                with lenders and financial institutions.
+                Complete support from initial assessment to loan disbursement and ongoing
+                relationship management with lenders and financial institutions.
               </p>
             </div>
           </div>
         </motion.div>
 
         {/* Scheduling Modal */}
-        <SchedulingModal 
-          isOpen={isSchedulingModalOpen} 
-          onClose={() => setIsSchedulingModalOpen(false)} 
+        <SchedulingModal
+          isOpen={isSchedulingModalOpen}
+          onClose={() => setIsSchedulingModalOpen(false)}
         />
       </div>
     </div>
   );
-} 
+}
