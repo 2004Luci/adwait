@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Home, Briefcase, Award, Users, User, Phone, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { navItems } from "@/lib/constants";
 
 export function Navigation() {
   const router = useRouter();
@@ -46,15 +47,6 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const navItems = [
-    { name: "Home", href: "#home", icon: Home },
-    { name: "Services", href: "/services", icon: Briefcase },
-    { name: "Expertise", href: "#expertise", icon: Award },
-    { name: "Careers", href: "/careers", icon: Users },
-    { name: "About", href: "#about", icon: User },
-    { name: "Contact", href: "#contact", icon: Phone },
-  ];
-
   return (
     <>
       {/* Static navbar at top - always visible when at top */}
@@ -85,17 +77,20 @@ export function Navigation() {
 
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex items-center space-x-8">
-                  {navItems.map((item) => (
-                    <motion.a
-                      key={item.name}
-                      href={item.href}
-                      whileHover={{ y: -2 }}
-                      className="text-sage-100 hover:text-sage-200 px-3 py-2 font-medium transition-colors relative group"
-                    >
-                      {item.name}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300"></span>
-                    </motion.a>
-                  ))}
+                  {navItems.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
+                      <motion.a
+                        key={item.name}
+                        href={item.href}
+                        whileHover={{ y: -2 }}
+                        className="text-sage-100 hover:text-sage-200 px-3 py-2 font-medium transition-colors relative group"
+                      >
+                        {item.name}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300"></span>
+                      </motion.a>
+                    );
+                  })}
                   <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(200, 180, 160, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
@@ -128,17 +123,20 @@ export function Navigation() {
                 className="md:hidden overflow-hidden bg-sage-900/95 backdrop-blur-md rounded-xl mt-2 border border-sage-700/30 shadow-lg"
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">
-                  {navItems.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center gap-3 px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-800/50 rounded-lg transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <item.icon className="w-4 h-4" />
-                      {item.name}
-                    </a>
-                  ))}
+                  {navItems.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="flex items-center gap-3 px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-800/50 rounded-lg transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <IconComponent className="w-4 h-4" />
+                        {item.name}
+                      </a>
+                    );
+                  })}
                   <div className="pt-2 border-t border-sage-700/30 mt-2">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
@@ -188,17 +186,20 @@ export function Navigation() {
 
                 {/* Desktop Navigation - compact spacing */}
                 <div className="hidden md:flex items-center space-x-4 ml-4">
-                  {navItems.map((item) => (
-                    <motion.a
-                      key={item.name}
-                      href={item.href}
-                      whileHover={{ y: -1 }}
-                      className="text-sage-100 hover:text-sage-200 px-2 py-1 text-sm font-medium transition-colors relative group"
-                    >
-                      {item.name}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300"></span>
-                    </motion.a>
-                  ))}
+                  {navItems.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
+                      <motion.a
+                        key={item.name}
+                        href={item.href}
+                        whileHover={{ y: -1 }}
+                        className="text-sage-100 hover:text-sage-200 px-2 py-1 text-sm font-medium transition-colors relative group"
+                      >
+                        {item.name}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300"></span>
+                      </motion.a>
+                    );
+                  })}
                   <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(200, 180, 160, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
@@ -231,17 +232,20 @@ export function Navigation() {
                 className="lg:hidden overflow-hidden bg-sage-800/50 backdrop-blur-md rounded-xl mt-2 border border-sage-700/30 shadow-lg"
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">
-                  {navItems.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center gap-3 px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-700/50 rounded-lg transition-colors text-sm"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <item.icon className="w-4 h-4" />
-                      {item.name}
-                    </a>
-                  ))}
+                  {navItems.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="flex items-center gap-3 px-3 py-2 text-sage-100 hover:text-sage-200 hover:bg-sage-700/50 rounded-lg transition-colors text-sm"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <IconComponent className="w-4 h-4" />
+                        {item.name}
+                      </a>
+                    );
+                  })}
                   <div className="pt-2 border-t border-sage-700/30 mt-2">
                     <motion.button
                       whileHover={{ scale: 1.02 }}

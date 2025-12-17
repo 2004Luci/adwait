@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { contactInfo, services } from "@/lib/constants";
+import { contactInfo, serviceList } from "@/lib/constants";
 import { contactFormSchema, type ContactFormData } from "@/lib/schema";
 import { formatRemainingTime } from "@/lib/utils";
 
@@ -243,7 +243,7 @@ export function ContactSection() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="bg-sage-700 text-sage-100 border-sage-600">
-                            {services.map((service, index) => (
+                            {serviceList.map((service, index) => (
                               <SelectItem
                                 key={index}
                                 value={service}
