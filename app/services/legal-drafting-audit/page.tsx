@@ -7,66 +7,14 @@ import { FileText, CheckCircle, Shield, ArrowLeft, Phone, Mail, Search, Users } 
 import { SchedulingModal } from "../../components/SchedulingModal";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
+import {
+  legalDraftingServices,
+  legalDraftingDocumentTypes,
+  legalDraftingAuditServices,
+} from "@/lib/constants";
 
 export default function LegalDraftingAuditPage() {
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
-  const services = [
-    "Legal Document Drafting",
-    "Due Diligence Services",
-    "Secretarial Audit",
-    "Corporate Governance Advisory",
-    "CSR Advisory & Compliance",
-    "Regulatory Compliance",
-    "Legal Opinion & Vetting",
-    "Contract Management",
-  ];
-
-  const documentTypes = [
-    "Shareholders Agreements",
-    "Joint Venture Agreements",
-    "LLP Agreements",
-    "Government Company Documents",
-    "JV Company Documents",
-    "Merger & Acquisition Documents",
-    "Investment Agreements",
-    "Commercial Contracts",
-  ];
-
-  const auditServices = [
-    {
-      title: "Secretarial Audit",
-      description:
-        "Comprehensive audit of compliance with Companies Act, SEBI regulations, and other corporate laws.",
-      features: [
-        "Board Meeting Compliance",
-        "AGM Compliance",
-        "Filing Requirements",
-        "Regulatory Reporting",
-      ],
-    },
-    {
-      title: "Legal Due Diligence",
-      description:
-        "Thorough examination of legal documents, contracts, and compliance status for transactions.",
-      features: [
-        "Document Review",
-        "Compliance Assessment",
-        "Risk Identification",
-        "Legal Opinion",
-      ],
-    },
-    {
-      title: "Financial Due Diligence",
-      description:
-        "Analysis of financial statements, accounting practices, and financial health assessment.",
-      features: [
-        "Financial Analysis",
-        "Accounting Review",
-        "Tax Compliance",
-        "Financial Projections",
-      ],
-    },
-  ];
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
@@ -152,7 +100,7 @@ export default function LegalDraftingAuditPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100">Our Audit & Assurance Services</h2>
               <div className="space-y-6">
-                {auditServices.map((service, index) => (
+                {legalDraftingAuditServices.map((service, index) => (
                   <motion.div
                     key={service.title}
                     initial={{ opacity: 0, y: 20 }}
@@ -189,7 +137,7 @@ export default function LegalDraftingAuditPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Our Services</h3>
               <ul className="space-y-3">
-                {services.map((service, index) => (
+                {legalDraftingServices.map((service, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <div className="w-2 h-2 bg-gradient-to-r from-sage-300 to-sage-400 rounded-full mr-3"></div>
                     {service}
@@ -207,7 +155,7 @@ export default function LegalDraftingAuditPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Document Types We Draft</h3>
               <ul className="space-y-3">
-                {documentTypes.map((docType, index) => (
+                {legalDraftingDocumentTypes.map((docType, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <FileText className="w-4 h-4 text-sage-300 mr-3 flex-shrink-0" />
                     {docType}

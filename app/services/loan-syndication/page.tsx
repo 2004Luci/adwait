@@ -16,66 +16,14 @@ import {
 import { SchedulingModal } from "../../components/SchedulingModal";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
+import {
+  loanSyndicationServices,
+  loanSyndicationFinanceTypes,
+  loanSyndicationProjectTypes,
+} from "@/lib/constants";
 
 export default function LoanSyndicationPage() {
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
-  const services = [
-    "Term Loan & Working Capital",
-    "Foreign Currency Funding",
-    "Project Finance",
-    "Financial Structuring",
-    "Lender Coordination",
-    "Debt Restructuring",
-    "Syndication Services",
-    "Financial Advisory",
-  ];
-
-  const financeTypes = [
-    {
-      title: "Term Loans",
-      description:
-        "Long-term financing solutions for capital expenditure, expansion, and major investments.",
-      features: [
-        "Capital Expenditure",
-        "Business Expansion",
-        "Equipment Financing",
-        "Infrastructure Projects",
-      ],
-    },
-    {
-      title: "Working Capital Finance",
-      description:
-        "Short-term financing to meet day-to-day operational requirements and cash flow needs.",
-      features: [
-        "Cash Flow Management",
-        "Inventory Financing",
-        "Trade Finance",
-        "Operational Expenses",
-      ],
-    },
-    {
-      title: "Foreign Currency Funding",
-      description:
-        "International financing solutions including ECBs, trade finance, and cross-border transactions.",
-      features: [
-        "External Commercial Borrowings",
-        "Trade Finance",
-        "Cross-border Transactions",
-        "Currency Hedging",
-      ],
-    },
-  ];
-
-  const projectTypes = [
-    "Infrastructure Projects",
-    "Manufacturing Units",
-    "Real Estate Development",
-    "Power Projects",
-    "Telecommunications",
-    "Healthcare Facilities",
-    "Educational Institutions",
-    "Technology Projects",
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
@@ -161,7 +109,7 @@ export default function LoanSyndicationPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100">Types of Financing We Arrange</h2>
               <div className="space-y-6">
-                {financeTypes.map((type, index) => (
+                {loanSyndicationFinanceTypes.map((type, index) => (
                   <motion.div
                     key={type.title}
                     initial={{ opacity: 0, y: 20 }}
@@ -196,7 +144,7 @@ export default function LoanSyndicationPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Our Services</h3>
               <ul className="space-y-3">
-                {services.map((service, index) => (
+                {loanSyndicationServices.map((service, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <div className="w-2 h-2 bg-gradient-to-r from-sage-600 to-sage-700 rounded-full mr-3"></div>
                     {service}
@@ -214,7 +162,7 @@ export default function LoanSyndicationPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Project Types We Finance</h3>
               <ul className="space-y-3">
-                {projectTypes.map((project, index) => (
+                {loanSyndicationProjectTypes.map((project, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <Building className="w-4 h-4 text-sage-600 mr-3 flex-shrink-0" />
                     {project}

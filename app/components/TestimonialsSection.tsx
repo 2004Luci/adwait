@@ -6,73 +6,10 @@ import { useState } from "react";
 import { ImageWithFallback } from "./ui/ImageWithFallback";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
+import { testimonials, caseStudies } from "@/lib/constants";
 
 export function TestimonialsSection() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  const testimonials = [
-    {
-      name: "Rajesh Kumar",
-      position: "CEO, Stovec Industries",
-      company: "Stovec Industries (MNC)",
-      rating: 5,
-      content:
-        "Adwait Artha LLP guided us through our IPO process with exceptional expertise. Their understanding of regulatory requirements and market dynamics was instrumental in our successful listing.",
-      image:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
-    },
-    {
-      name: "Priya Sharma",
-      position: "CFO, Accent Microcell",
-      company: "Accent Microcell (NSE Emerge)",
-      rating: 5,
-      content:
-        "The team at Adwait Artha provided comprehensive support for our SME listing. Their attention to detail and strategic approach made the entire process seamless and efficient.",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
-    },
-    {
-      name: "Arjun Patel",
-      position: "Managing Director, Diamines & Chemicals",
-      company: "Diamines & Chemicals (NSE/BSE)",
-      rating: 5,
-      content:
-        "Outstanding corporate law services and regulatory compliance support. Their expertise in SEBI matters and corporate governance has been invaluable for our dual listing.",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    },
-  ];
-
-  const caseStudies = [
-    {
-      title: "Successful IPO Launch",
-      company: "Technology Sector Client",
-      challenge: "First-time public offering with complex regulatory requirements",
-      solution:
-        "End-to-end IPO advisory including due diligence, compliance, and investor relations",
-      result: "Successfully raised ₹250 Crores with 150% subscription",
-      metrics: ["₹250 Cr Raised", "150% Subscription", "6 Month Timeline"],
-      color: "from-sage-200 to-sage-300",
-    },
-    {
-      title: "Corporate Restructuring",
-      company: "Manufacturing Conglomerate",
-      challenge: "Complex group restructuring for operational efficiency",
-      solution: "Strategic restructuring plan with regulatory approvals and tax optimization",
-      result: "Achieved 30% cost reduction and improved governance structure",
-      metrics: ["30% Cost Reduction", "5 Entity Consolidation", "100% Compliance"],
-      color: "from-sage-300 to-sage-400",
-    },
-    {
-      title: "Debt Syndication Success",
-      company: "Infrastructure Project",
-      challenge: "Large-scale project financing requirements",
-      solution: "Multi-tier debt syndication with consortium of lenders",
-      result: "Secured ₹500 Crores financing at competitive rates",
-      metrics: ["₹500 Cr Financing", "8.5% Interest Rate", "12 Lender Consortium"],
-      color: "from-sage-400 to-sage-500",
-    },
-  ];
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);

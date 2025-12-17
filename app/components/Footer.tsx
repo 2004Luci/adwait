@@ -7,41 +7,13 @@ import Link from "next/link";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./ui/social-icons";
-import { contactInfo } from "@/lib/constants";
+import { contactInfo, footerLinks } from "@/lib/constants";
 
 export function Footer() {
   const router = useRouter();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const footerLinks = {
-    services: [
-      { name: "IPO Advisory", href: "/services/ipo-sme-ipo-advisory" },
-      { name: "Legal Drafting & Audit", href: "/services/legal-drafting-audit" },
-      { name: "Corporate Law Services", href: "/services/corporate-law" },
-      { name: "Loan Syndication", href: "/services/loan-syndication" },
-      { name: "Financial Advisory", href: "/services/financial-advisory" },
-      { name: "Regulatory Compliance", href: "/services/law-tribunals" },
-    ],
-    company: [
-      { name: "About Us", href: "#about" },
-      { name: "Our Team", href: "#team" },
-      { name: "Case Studies", href: "#case-studies" },
-      { name: "Testimonials", href: "#testimonials" },
-      { name: "Careers", href: "/careers" },
-      { name: "Contact", href: "#contact" },
-    ],
-    resources: ["Blog", "Newsletter", "Whitepapers", "Webinars", "FAQ", "Support"],
-    legal: [
-      "Privacy Policy",
-      "Terms of Service",
-      "Cookie Policy",
-      "Disclaimer",
-      "Compliance",
-      "GDPR",
-    ],
   };
 
   const socialLinks = [

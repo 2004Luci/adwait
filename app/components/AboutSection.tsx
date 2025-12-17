@@ -1,88 +1,13 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Award, Users, Globe, Shield } from "lucide-react";
+import { Award } from "lucide-react";
 import { ImageWithFallback } from "./ui/ImageWithFallback";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
+import { partners, achievements, clientLogos } from "@/lib/constants";
 
 export function AboutSection() {
-  const partners = [
-    {
-      name: "Sandip Sheth",
-      role: "FCS, LLb (Sp) - Founder Promoter",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-      expertise: ["Fund Raising", "Corporate Laws", "Legal Drafting", "Banking & Finance"],
-      experience: "23 years of experience",
-      description:
-        "He is founder promoter and having 23 years of experience in fund raising, planning, valuation, Corporate Laws, Secretarial, Legal, Drafting, accounts, banking and finance. He has been instrumental in helping many corporate in preparation of MIS, cost reduction & cost control and cost system set up.",
-    },
-    {
-      name: "Prashant Prajapati",
-      role: "ACS - Partner",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-      expertise: ["Company Law", "FEMA", "SEBI", "Corporate Laws"],
-      experience: "14 years of experience",
-      description:
-        "He is having 14 years of experience in Company Law, FEMA, SEBI and other Corporate Laws. He is having in depth knowledge and expertise in eXtensible Business Reporting Language, drafting and vetting of various agreements, letters, and contracts.",
-    },
-  ];
-
-  const achievements = [
-    {
-      icon: Award,
-      title: "Industry Recognition",
-      description:
-        "23+ years of excellence in financial advisory services with proven track record and multi-disciplinary expertise.",
-      color: "from-sage-200 to-sage-300",
-    },
-    {
-      icon: Users,
-      title: "Diverse Client Base",
-      description:
-        "22+ valued clients including listed companies from Pharmaceuticals, IT, Chemical, Infrastructure, and other sectors.",
-      color: "from-sage-300 to-sage-400",
-    },
-    {
-      icon: Globe,
-      title: "Global Reach",
-      description:
-        "Serving clients across Gujarat, Maharashtra, and international markets including USA, Netherlands, and Singapore.",
-      color: "from-sage-400 to-sage-500",
-    },
-    {
-      icon: Shield,
-      title: "Regulatory Expertise",
-      description:
-        "Expert representation before ROC, Regional Directors, NCLT, SEBI and other regulatory bodies with unique ability to perform within given time frames.",
-      color: "from-sage-500 to-sage-600",
-    },
-  ];
-
-  const clientLogos = [
-    "Stovec Industries Limited",
-    "Accent Microcell Limited",
-    "Bosch Rexroth (India)",
-    "Diamines & Chemicals Limited",
-    "Silver Touch Technologies",
-    "Royal Arc Electrodes",
-    "Maahi Milk Producer",
-    "Mahavir Inducto-melt",
-    "Sheetal Motors",
-    "Brand Aid Pvt. Ltd.",
-    "Advatech Group",
-    "Aneta Pharmaceuticals",
-    "JB Group of Hotels",
-    "Rajkamal Builders",
-    "Polo plus Pipes",
-    "Pan-Asia Petroleum",
-    "Pellucid Lifesciences",
-    "Swarnim Gujarat Fluorspar",
-    "Mangalmurti Polymers",
-    "DACL Finechem Limited",
-  ];
 
   return (
     <section
@@ -289,24 +214,27 @@ export function AboutSection() {
             />
           </motion.h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {achievements.map((achievement, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center group"
-              >
-                <div
-                  className={`w-16 h-16 bg-gradient-to-br ${achievement.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}
+            {achievements.map((achievement, index) => {
+              const IconComponent = achievement.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-center group"
                 >
-                  <achievement.icon className="w-8 h-8 text-sage-900" />
-                </div>
-                <h4 className="text-lg font-semibold text-sage-100 mb-2">{achievement.title}</h4>
-                <p className="text-sage-300 text-sm leading-relaxed">{achievement.description}</p>
-              </motion.div>
-            ))}
+                  <div
+                    className={`w-16 h-16 bg-gradient-to-br ${achievement.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}
+                  >
+                    <IconComponent className="w-8 h-8 text-sage-900" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-sage-100 mb-2">{achievement.title}</h4>
+                  <p className="text-sage-300 text-sm leading-relaxed">{achievement.description}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
         <div>

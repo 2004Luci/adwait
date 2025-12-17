@@ -4,9 +4,10 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Target, Lightbulb, FileCheck, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingUp } from "lucide-react";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
+import { expertiseProcessSteps, expertiseAreas } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,87 +72,6 @@ export function ExpertiseSection() {
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-
-  const processSteps = [
-    {
-      icon: Target,
-      title: "Initial Consultation",
-      description:
-        "Comprehensive assessment of your financial requirements and business objectives.",
-      details: ["Business Analysis", "Goal Setting", "Risk Assessment", "Strategy Planning"],
-      color: "from-sage-200 to-sage-300",
-    },
-    {
-      icon: Lightbulb,
-      title: "Strategic Planning",
-      description:
-        "Development of customized financial strategies aligned with your business goals.",
-      details: ["Market Research", "Financial Modeling", "Regulatory Review", "Timeline Planning"],
-      color: "from-sage-300 to-sage-400",
-    },
-    {
-      icon: FileCheck,
-      title: "Implementation",
-      description:
-        "Execution of financial strategies with meticulous attention to regulatory compliance.",
-      details: [
-        "Documentation",
-        "Compliance Check",
-        "Stakeholder Coordination",
-        "Process Monitoring",
-      ],
-      color: "from-sage-400 to-sage-500",
-    },
-    {
-      icon: TrendingUp,
-      title: "Ongoing Support",
-      description: "Continuous monitoring and support to ensure sustained financial success.",
-      details: [
-        "Performance Review",
-        "Regular Updates",
-        "Advisory Support",
-        "Strategic Adjustments",
-      ],
-      color: "from-sage-500 to-sage-600",
-    },
-  ];
-
-  const expertiseAreas = [
-    {
-      category: "Capital Markets",
-      skills: ["IPO Advisory", "SME Listings", "Equity Fund Raising", "Market Strategy"],
-      percentage: 95,
-      color: "from-sage-200 to-sage-300",
-    },
-    {
-      category: "Corporate Law",
-      skills: [
-        "Legal Compliance",
-        "Corporate Governance",
-        "Secretarial Services",
-        "Board Advisory",
-      ],
-      percentage: 92,
-      color: "from-sage-300 to-sage-400",
-    },
-    {
-      category: "Financial Advisory",
-      skills: [
-        "Strategic Planning",
-        "Financial Restructuring",
-        "Valuation Services",
-        "Risk Management",
-      ],
-      percentage: 98,
-      color: "from-sage-400 to-sage-500",
-    },
-    {
-      category: "Regulatory Affairs",
-      skills: ["SEBI Compliance", "ROC Matters", "NCLT Representation", "Regulatory Strategy"],
-      percentage: 88,
-      color: "from-sage-500 to-sage-600",
-    },
-  ];
 
   useEffect(() => {
     if (!titleRef.current) return;

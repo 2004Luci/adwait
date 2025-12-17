@@ -4,12 +4,12 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { TrendingUp, FileText, Scale, Building, Banknote, BarChart3 } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 import Link from "next/link";
-import { cn } from "./ui/utils";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { SchedulingModal } from "./SchedulingModal";
+import { services } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,25 +33,18 @@ function ServiceCard({ icon, title, description, features, color, index, slug }:
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
       className="group relative bg-sage-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-sage-700/30 h-full overflow-hidden"
     >
-      {/* Background gradient */}
       <div
         className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${color} opacity-5 rounded-full transform translate-x-8 -translate-y-8 transition-all duration-300 group-hover:scale-150`}
       />
-
       <div className="relative z-10">
-        {/* Icon */}
         <motion.div
           whileHover={{ scale: 1.1, rotate: 5 }}
           className={`w-16 h-16 bg-gradient-to-br ${color} rounded-xl flex items-center justify-center mb-6 shadow-lg`}
         >
           {icon}
         </motion.div>
-
-        {/* Content */}
         <h3 className="text-xl font-semibold text-sage-100 mb-4">{title}</h3>
         <p className="text-sage-300 mb-6 leading-relaxed">{description}</p>
-
-        {/* Features */}
         <ul className="space-y-2">
           {features.map((feature, featureIndex) => (
             <li key={featureIndex} className="flex items-center text-sage-300">
@@ -60,8 +53,6 @@ function ServiceCard({ icon, title, description, features, color, index, slug }:
             </li>
           ))}
         </ul>
-
-        {/* CTA */}
         <Link href={`/services/${slug}`}>
           <motion.button
             whileHover={{ scale: 1.05, x: 5 }}
@@ -79,9 +70,9 @@ function ServiceCard({ icon, title, description, features, color, index, slug }:
 }
 
 export function ServicesSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -90,98 +81,11 @@ export function ServicesSection() {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
-  const services = [
-    {
-      icon: <TrendingUp className="w-8 h-8 text-sage-900" />,
-      title: "IPO/SME IPO Advisory",
-      description:
-        "Strategic fund raising, pre-IPO platform, valuation services, and investor relations for successful public offerings.",
-      features: [
-        "Strategic Fund Raising",
-        "Pre-IPO Platform",
-        "Valuation Services",
-        "Investor Relations",
-        "Regulatory Compliance",
-      ],
-      color: "from-sage-200 to-sage-300",
-      slug: "ipo-sme-ipo-advisory",
-    },
-    {
-      icon: <FileText className="w-8 h-8 text-sage-900" />,
-      title: "Legal Drafting, Audit & Assurance",
-      description:
-        "Comprehensive legal document drafting, due diligence, secretarial audit, and corporate governance advisory.",
-      features: [
-        "Legal Document Drafting",
-        "Due Diligence",
-        "Secretarial Audit",
-        "Corporate Governance",
-        "CSR Advisory",
-      ],
-      color: "from-sage-300 to-sage-400",
-      slug: "legal-drafting-audit",
-    },
-    {
-      icon: <Scale className="w-8 h-8 text-sage-900" />,
-      title: "Appearance Before Law Tribunals/Forums",
-      description:
-        "Expert representation before NCLT, ROC, Regional Directors office, and other statutory forums.",
-      features: [
-        "NCLT Representation",
-        "ROC Compliance",
-        "Regional Director Office",
-        "Official Liquidator",
-        "Legal Advocacy",
-      ],
-      color: "from-sage-400 to-sage-500",
-      slug: "law-tribunals",
-    },
-    {
-      icon: <Building className="w-8 h-8 text-sage-900" />,
-      title: "Corporate Law/Secretarial Services",
-      description:
-        "Complete corporate law compliance, board meetings, AGMs, and secretarial services for all company types.",
-      features: [
-        "Board Meetings",
-        "Annual General Meetings",
-        "E-Voting Services",
-        "Postal Ballot",
-        "Statutory Compliance",
-      ],
-      color: "from-sage-500 to-sage-600",
-      slug: "corporate-law",
-    },
-    {
-      icon: <Banknote className="w-8 h-8 text-sage-900" />,
-      title: "Loan Syndication, Restructuring & Project Finance",
-      description:
-        "Comprehensive financial solutions including term loans, working capital, foreign currency funding, and project finance.",
-      features: [
-        "Term Loan & Working Capital",
-        "Foreign Currency Funding",
-        "Project Finance",
-        "Financial Structuring",
-        "Lender Coordination",
-      ],
-      color: "from-sage-600 to-sage-700",
-      slug: "loan-syndication",
-    },
-    {
-      icon: <BarChart3 className="w-8 h-8 text-sage-900" />,
-      title: "Financial Statement Advisory/Structuring/Restructuring",
-      description:
-        "Expert financial statement advisory, disclosure requirements, governance compliance, and strategic financial planning.",
-      features: [
-        "Financial Statement Advisory",
-        "Disclosure Requirements",
-        "Governance Compliance",
-        "Financial Restructuring",
-        "Strategic Planning",
-      ],
-      color: "from-sage-700 to-sage-800",
-      slug: "financial-advisory",
-    },
-  ];
+  // Map services to include React icons
+  const servicesWithIcons = services.map((service) => ({
+    ...service,
+    icon: <service.icon className="w-8 h-8 text-sage-900" />,
+  }));
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -214,12 +118,8 @@ export function ServicesSection() {
         <div className="absolute top-40 left-10 w-64 h-64 rounded-full bg-sage-200/10 blur-3xl" />
         <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-sage-300/10 blur-3xl" />
       </motion.div>
-
-      {/* Background Elements */}
       <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={false} />
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -231,7 +131,6 @@ export function ServicesSection() {
             <TrendingUp className="h-4 w-4 mr-2" />
             Our Expertise
           </div>
-
           <h2 ref={titleRef} className="text-4xl lg:text-5xl font-bold text-sage-50 mb-6">
             <AnimatedText
               text="Our Core Services"
@@ -240,18 +139,15 @@ export function ServicesSection() {
               staggerDelay={0.1}
             />
           </h2>
-
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
             Comprehensive financial and legal advisory services designed to accelerate your business
             growth and ensure regulatory compliance.
           </p>
         </motion.div>
-
-        {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {servicesWithIcons.map((service, index) => (
             <ServiceCard
-              key={index}
+              key={service.id}
               icon={service.icon}
               title={service.title}
               description={service.description}
@@ -262,8 +158,6 @@ export function ServicesSection() {
             />
           ))}
         </div>
-
-        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -281,8 +175,6 @@ export function ServicesSection() {
           </motion.button>
         </motion.div>
       </div>
-
-      {/* Scheduling Modal */}
       <SchedulingModal
         isOpen={isSchedulingModalOpen}
         onClose={() => setIsSchedulingModalOpen(false)}

@@ -7,68 +7,10 @@ import { Scale, CheckCircle, ArrowLeft, Phone, Mail, Shield } from "lucide-react
 import { SchedulingModal } from "../../components/SchedulingModal";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
+import { lawTribunalsServices, lawTribunals, lawTribunalsExpertise } from "@/lib/constants";
 
 export default function LawTribunalsPage() {
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
-  const services = [
-    "NCLT Representation",
-    "ROC Compliance & Filings",
-    "Regional Director Office",
-    "Official Liquidator",
-    "Legal Advocacy",
-    "Regulatory Liaison",
-    "Compliance Advisory",
-    "Legal Documentation",
-  ];
-
-  const tribunals = [
-    {
-      name: "National Company Law Tribunal (NCLT)",
-      description:
-        "Representation in company law matters, mergers, acquisitions, and insolvency proceedings.",
-      cases: [
-        "Merger & Acquisition",
-        "Insolvency Proceedings",
-        "Corporate Disputes",
-        "Compliance Matters",
-      ],
-    },
-    {
-      name: "Registrar of Companies (ROC)",
-      description:
-        "Liaison and compliance with ROC requirements, filings, and regulatory submissions.",
-      cases: ["Annual Filings", "Compliance Reports", "Regulatory Submissions", "Documentation"],
-    },
-    {
-      name: "Regional Director Office",
-      description: "Representation before Regional Directors for various corporate law matters.",
-      cases: [
-        "Approval Applications",
-        "Compliance Matters",
-        "Regulatory Filings",
-        "Legal Advocacy",
-      ],
-    },
-    {
-      name: "Official Liquidator",
-      description: "Assistance in liquidation proceedings and related legal matters.",
-      cases: [
-        "Liquidation Proceedings",
-        "Asset Management",
-        "Creditor Coordination",
-        "Legal Compliance",
-      ],
-    },
-  ];
-
-  const expertise = [
-    "23+ Years of Experience",
-    "Deep Regulatory Knowledge",
-    "Proven Track Record",
-    "Timely Resolution",
-    "Cost-Effective Solutions",
-    "Comprehensive Support",
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
@@ -148,7 +90,7 @@ export default function LawTribunalsPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100">Tribunals & Forums We Represent</h2>
               <div className="space-y-6">
-                {tribunals.map((tribunal, index) => (
+                {lawTribunals.map((tribunal, index) => (
                   <motion.div
                     key={tribunal.name}
                     initial={{ opacity: 0, y: 20 }}
@@ -182,7 +124,7 @@ export default function LawTribunalsPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Our Services</h3>
               <ul className="space-y-3">
-                {services.map((service, index) => (
+                {lawTribunalsServices.map((service, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <div className="w-2 h-2 bg-gradient-to-r from-sage-400 to-sage-500 rounded-full mr-3"></div>
                     {service}
@@ -198,7 +140,7 @@ export default function LawTribunalsPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Our Expertise</h3>
               <ul className="space-y-3">
-                {expertise.map((item, index) => (
+                {lawTribunalsExpertise.map((item, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <Shield className="w-4 h-4 text-sage-400 mr-3 flex-shrink-0" />
                     {item}
