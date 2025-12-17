@@ -4,9 +4,10 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { LampDesk, Lightbulb, Recycle, Rocket, Microscope, Handshake } from "lucide-react";
+import { Rocket } from "lucide-react";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
+import { processSteps } from "@/lib/constants";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -60,48 +61,6 @@ export function ProcessSection() {
     });
   }, []);
 
-  const steps = [
-    {
-      icon: <LampDesk className="h-7 w-7" />,
-      number: "01",
-      title: "Initial Consultation",
-      description:
-        "We assess your company's readiness for an IPO and identify key areas for preparation.",
-    },
-    {
-      icon: <Microscope className="h-7 w-7" />,
-      number: "02",
-      title: "Due Diligence",
-      description:
-        "Comprehensive analysis of financial statements, operations, and corporate structure.",
-    },
-    {
-      icon: <Lightbulb className="h-7 w-7" />,
-      number: "03",
-      title: "Strategy Development",
-      description: "Creating a customized roadmap for your IPO journey with clear milestones.",
-    },
-    {
-      icon: <Recycle className="h-7 w-7" />,
-      number: "04",
-      title: "Restructuring",
-      description: "Optimizing corporate structure and financials to maximize valuation.",
-    },
-    {
-      icon: <Rocket className="h-7 w-7" />,
-      number: "05",
-      title: "IPO Execution",
-      description: "Managing the IPO process from regulatory filings to investor presentations.",
-    },
-    {
-      icon: <Handshake className="h-7 w-7" />,
-      number: "06",
-      title: "Post-IPO Support",
-      description:
-        "Ongoing advisory to navigate public company requirements and investor relations.",
-    },
-  ];
-
   return (
     <section
       id="process"
@@ -149,7 +108,7 @@ export function ProcessSection() {
           />
 
           <div className="space-y-16">
-            {steps.map((step, index) => (
+            {processSteps.map((step, index) => (
               <motion.div
                 key={index}
                 className={`process-step relative ${
@@ -179,7 +138,7 @@ export function ProcessSection() {
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     className="w-16 h-16 bg-gradient-to-br from-sage-200 to-sage-300 rounded-full flex items-center justify-center shadow-lg"
                   >
-                    <div className="text-sage-900">{step.icon}</div>
+                    <step.icon className="h-7 w-7 text-sage-900" />
                   </motion.div>
                 </div>
 

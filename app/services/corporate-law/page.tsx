@@ -3,87 +3,23 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  Building,
-  CheckCircle,
-  ArrowLeft,
-  Phone,
-  Mail,
-  Users,
-  FileText,
-  Calendar,
-  Shield,
-} from "lucide-react";
+import { Building, CheckCircle, ArrowLeft, Phone, Mail, Shield } from "lucide-react";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
 import { SchedulingModal } from "../../components/SchedulingModal";
+import {
+  corporateLawServices,
+  corporateLawMeetingServices,
+  corporateLawComplianceAreas,
+} from "@/lib/constants";
 
 export default function CorporateLawPage() {
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
-
-  const services = [
-    "Board Meeting Management",
-    "Annual General Meetings",
-    "E-Voting Services",
-    "Postal Ballot",
-    "Statutory Compliance",
-    "Corporate Governance",
-    "Secretarial Services",
-    "Regulatory Filings",
-  ];
-
-  const meetingServices = [
-    {
-      title: "Board Meetings",
-      description:
-        "Comprehensive support for board meetings including agenda preparation, documentation, and compliance.",
-      features: [
-        "Agenda Preparation",
-        "Notice Circulation",
-        "Minutes Drafting",
-        "Compliance Reporting",
-      ],
-    },
-    {
-      title: "Annual General Meetings",
-      description: "End-to-end AGM management including physical and virtual meeting arrangements.",
-      features: [
-        "Meeting Arrangements",
-        "Proxy Management",
-        "Voting Systems",
-        "Regulatory Compliance",
-      ],
-    },
-    {
-      title: "E-Voting Services",
-      description:
-        "Modern electronic voting solutions for shareholder meetings and corporate decisions.",
-      features: [
-        "Online Voting Platform",
-        "Secure Authentication",
-        "Real-time Results",
-        "Audit Trail",
-      ],
-    },
-  ];
-
-  const complianceAreas = [
-    "Companies Act Compliance",
-    "SEBI Regulations",
-    "Stock Exchange Requirements",
-    "Corporate Governance Norms",
-    "FEMA Compliance",
-    "Tax Regulations",
-    "Labour Laws",
-    "Environmental Laws",
-  ];
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
       <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
-
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
-        {/* Back Navigation */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -98,8 +34,6 @@ export default function CorporateLawPage() {
             Back to Services
           </Link>
         </motion.div>
-
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -119,19 +53,14 @@ export default function CorporateLawPage() {
               staggerDelay={0.1}
             />
           </h1>
-
           <p className="text-xl text-sage-300 max-w-4xl mx-auto">
             Complete corporate law compliance and secretarial services for all types of companies.
             From board meetings to AGMs, we ensure your business operates in full compliance with
             regulatory requirements.
           </p>
         </motion.div>
-
-        {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-12 mb-16">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
-            {/* Overview */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -152,8 +81,6 @@ export default function CorporateLawPage() {
                 focus on your core business operations.
               </p>
             </motion.div>
-
-            {/* Meeting Services */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -162,7 +89,7 @@ export default function CorporateLawPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100">Meeting Management Services</h2>
               <div className="space-y-6">
-                {meetingServices.map((service, index) => (
+                {corporateLawMeetingServices.map((service, index) => (
                   <motion.div
                     key={service.title}
                     initial={{ opacity: 0, y: 20 }}
@@ -187,10 +114,7 @@ export default function CorporateLawPage() {
               </div>
             </motion.div>
           </div>
-
-          {/* Sidebar */}
           <div className="space-y-8">
-            {/* Services */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -199,7 +123,7 @@ export default function CorporateLawPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Our Services</h3>
               <ul className="space-y-3">
-                {services.map((service, index) => (
+                {corporateLawServices.map((service, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <div className="w-2 h-2 bg-gradient-to-r from-sage-500 to-sage-600 rounded-full mr-3"></div>
                     {service}
@@ -207,8 +131,6 @@ export default function CorporateLawPage() {
                 ))}
               </ul>
             </motion.div>
-
-            {/* Compliance Areas */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -217,7 +139,7 @@ export default function CorporateLawPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Compliance Areas</h3>
               <ul className="space-y-3">
-                {complianceAreas.map((area, index) => (
+                {corporateLawComplianceAreas.map((area, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <Shield className="w-4 h-4 text-sage-500 mr-3 flex-shrink-0" />
                     {area}
@@ -225,8 +147,6 @@ export default function CorporateLawPage() {
                 ))}
               </ul>
             </motion.div>
-
-            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -262,8 +182,6 @@ export default function CorporateLawPage() {
             </motion.div>
           </div>
         </div>
-
-        {/* Why Choose Us */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -305,8 +223,6 @@ export default function CorporateLawPage() {
           </div>
         </motion.div>
       </div>
-
-      {/* Scheduling Modal */}
       <SchedulingModal
         isOpen={isSchedulingModalOpen}
         onClose={() => setIsSchedulingModalOpen(false)}

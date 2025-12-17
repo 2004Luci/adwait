@@ -7,76 +7,10 @@ import { TrendingUp, Users, FileText, CheckCircle, ArrowLeft, Phone, Mail } from
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
 import { SchedulingModal } from "../../components/SchedulingModal";
+import { ipoFeatures, ipoProcessSteps, ipoBenefits } from "@/lib/constants";
 
 export default function IPOSMEIPOAdvisoryPage() {
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
-
-  const features = [
-    "Strategic Fund Raising Planning",
-    "Pre-IPO Platform Development",
-    "Valuation Services & Analysis",
-    "Investor Relations Management",
-    "Regulatory Compliance & Filings",
-    "Due Diligence & Documentation",
-    "Market Research & Analysis",
-    "Roadshow & Investor Presentations",
-  ];
-
-  const processSteps = [
-    {
-      step: "01",
-      title: "Initial Assessment",
-      description:
-        "Comprehensive evaluation of your business model, financials, and growth potential to determine IPO readiness.",
-      icon: <FileText className="w-6 h-6" />,
-    },
-    {
-      step: "02",
-      title: "Strategic Planning",
-      description:
-        "Develop a customized IPO strategy including timing, valuation, and optimal capital structure.",
-      icon: <TrendingUp className="w-6 h-6" />,
-    },
-    {
-      step: "03",
-      title: "Pre-IPO Preparation",
-      description:
-        "Prepare all necessary documentation, financial statements, and regulatory compliance requirements.",
-      icon: <CheckCircle className="w-6 h-6" />,
-    },
-    {
-      step: "04",
-      title: "Investor Relations",
-      description:
-        "Build relationships with potential investors, conduct roadshows, and manage investor communications.",
-      icon: <Users className="w-6 h-6" />,
-    },
-    {
-      step: "05",
-      title: "Regulatory Filings",
-      description:
-        "Submit all required filings with SEBI, stock exchanges, and other regulatory bodies.",
-      icon: <FileText className="w-6 h-6" />,
-    },
-    {
-      step: "06",
-      title: "Listing & Post-IPO",
-      description:
-        "Successfully list on the stock exchange and provide ongoing support for post-IPO compliance.",
-      icon: <TrendingUp className="w-6 h-6" />,
-    },
-  ];
-
-  const benefits = [
-    "Access to Capital Markets",
-    "Enhanced Brand Visibility",
-    "Improved Corporate Governance",
-    "Liquidity for Shareholders",
-    "Employee Stock Options",
-    "Merger & Acquisition Currency",
-    "Regulatory Compliance",
-    "Professional Management",
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
@@ -164,25 +98,30 @@ export default function IPOSMEIPOAdvisoryPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100">Our 6-Step IPO Process</h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {processSteps.map((step, index) => (
-                  <motion.div
-                    key={step.step}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-sage-800/30 backdrop-blur-sm rounded-xl p-6 border border-sage-700/20"
-                  >
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-sage-200 to-sage-300 rounded-lg flex items-center justify-center text-sage-900 font-bold text-sm">
-                        {step.step}
+                {ipoProcessSteps.map((step, index) => {
+                  const IconComponent = step.icon;
+                  return (
+                    <motion.div
+                      key={step.step}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="bg-sage-800/30 backdrop-blur-sm rounded-xl p-6 border border-sage-700/20"
+                    >
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-sage-200 to-sage-300 rounded-lg flex items-center justify-center text-sage-900 font-bold text-sm">
+                          {step.step}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-sage-100 mb-2">{step.title}</h3>
+                          <p className="text-sage-300 text-sm leading-relaxed">
+                            {step.description}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-sage-100 mb-2">{step.title}</h3>
-                        <p className="text-sage-300 text-sm leading-relaxed">{step.description}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>
@@ -198,7 +137,7 @@ export default function IPOSMEIPOAdvisoryPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Key Features</h3>
               <ul className="space-y-3">
-                {features.map((feature, index) => (
+                {ipoFeatures.map((feature, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <div className="w-2 h-2 bg-gradient-to-r from-sage-200 to-sage-300 rounded-full mr-3"></div>
                     {feature}
@@ -216,7 +155,7 @@ export default function IPOSMEIPOAdvisoryPage() {
             >
               <h3 className="text-xl font-bold text-sage-100 mb-4">Benefits of Going Public</h3>
               <ul className="space-y-3">
-                {benefits.map((benefit, index) => (
+                {ipoBenefits.map((benefit, index) => (
                   <li key={index} className="flex items-center text-sage-300">
                     <CheckCircle className="w-4 h-4 text-sage-200 mr-3 flex-shrink-0" />
                     {benefit}
