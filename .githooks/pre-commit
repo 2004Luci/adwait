@@ -1,21 +1,32 @@
 #!/usr/bin/env node
 // Cross-platform pre-commit hook using Node.js
-const { execSync } = require('child_process');
+const { execSync } = require("child_process");
 
 try {
-  const localBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf-8' }).trim();
+  const localBranch = execSync("git rev-parse --abbrev-ref HEAD", { encoding: "utf-8" }).trim();
   const validBranchRegex = /^(feature|bugfix|update|release)\/[a-z0-9._-]+$/;
-  
-  console.log('RUNNING PRE-COMMIT SCRIPT');
-  
-  if (validBranchRegex.test(localBranch)) {
+
+  // Allow standard branches and detached HEAD state (for rebase support)
+  // Note: main/master are excluded to prevent direct commits - use pull requests instead
+  // HEAD is kept to support rebase operations
+  const standardBranches = ["develop", "HEAD"];
+
+  console.log("RUNNING PRE-COMMIT SCRIPT");
+
+  // Allow commits on standard branches or branches matching the pattern
+  if (standardBranches.includes(localBranch) || validBranchRegex.test(localBranch)) {
     process.exit(0);
   } else {
-    console.error('There is something wrong with your branch name. Branch names in this project must adhere to this contract: ^(feature|bugfix|update|release)/[a-z0-9._-]+$');
-    console.error('Your commit will be rejected. You should rename your branch to a valid name and try again.');
+    console.error(
+      "There is something wrong with your branch name. Branch names in this project must adhere to this contract: ^(feature|bugfix|update|release)/[a-z0-9._-]+$"
+    );
+    console.error(
+      "Your commit will be rejected. You should rename your branch to a valid name and try again."
+    );
+    console.error(`Current branch: ${localBranch}`);
     process.exit(1);
   }
 } catch (error) {
-  console.error('Error running pre-commit hook:', error.message);
+  console.error("Error running pre-commit hook:", error.message);
   process.exit(1);
 }
