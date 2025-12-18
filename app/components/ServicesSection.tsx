@@ -69,7 +69,7 @@ function ServiceCard({ icon, title, description, features, color, index, slug }:
   );
 }
 
-export function ServicesSection() {
+const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
@@ -181,4 +181,6 @@ export function ServicesSection() {
       />
     </section>
   );
-}
+};
+
+export default ServicesSection;

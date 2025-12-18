@@ -9,7 +9,7 @@ import { AnimatedText } from "./ui/AnimatedText";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./ui/social-icons";
 import { contactInfo, footerLinks } from "@/lib/constants";
 
-export function Footer() {
+const Footer = () => {
   const router = useRouter();
 
   const scrollToTop = () => {
@@ -332,4 +332,6 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

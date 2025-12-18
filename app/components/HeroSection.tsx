@@ -9,7 +9,7 @@ import { TypewriterText } from "./ui/TypewriterText";
 import { SchedulingModal } from "./SchedulingModal";
 import { heroStats, heroTypewriterPhrases } from "@/lib/constants";
 
-export function HeroSection() {
+const HeroSection = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
@@ -400,4 +400,6 @@ export function HeroSection() {
       />
     </section>
   );
-}
+};
+
+export default HeroSection;
