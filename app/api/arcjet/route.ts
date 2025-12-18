@@ -44,6 +44,11 @@ export function getClientIP(request: Request): string {
 }
 
 export async function GET(req: Request) {
+  // Block direct browser access - require custom header
+  if (req.headers.get("x-requested-with") !== "XMLHttpRequest") {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   const clientIP = getClientIP(req);
   const decision = await arcjetConfig.protect(req, { ip: clientIP, requested: 1 });
   console.log("Arcjet decision", decision);
@@ -55,5 +60,5 @@ export async function GET(req: Request) {
     );
   }
 
-  return NextResponse.json({ message: "Hello world" });
+  return NextResponse.json({ message: "Arcjet API | Status: OK" });
 }
