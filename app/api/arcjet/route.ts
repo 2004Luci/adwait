@@ -59,7 +59,7 @@ export async function GET(req: Request) {
 
   if (decision.isDenied()) {
     // Handle bot detection or rate limiting
-    if (decision.reason.isBot?.()) {
+    if (decision.reason.isBot()) {
       return NextResponse.json({ error: "Bot detected" }, { status: 403 });
     }
     return NextResponse.json(
