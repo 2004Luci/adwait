@@ -283,7 +283,7 @@ const ContactSection = () => {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 py-4 rounded-lg font-semibold hover:from-sage-100 hover:to-sage-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="cursor-pointer w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 py-4 rounded-lg font-semibold hover:from-sage-100 hover:to-sage-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
