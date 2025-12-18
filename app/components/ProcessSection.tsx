@@ -12,7 +12,7 @@ import { processSteps } from "@/lib/constants";
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-export function ProcessSection() {
+const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const processLineRef = useRef<HTMLDivElement>(null);
 
@@ -177,4 +177,6 @@ export function ProcessSection() {
       </div>
     </section>
   );
-}
+};
+
+export default ProcessSection;

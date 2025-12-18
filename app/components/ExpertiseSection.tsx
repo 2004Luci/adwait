@@ -19,7 +19,7 @@ interface ExpertiseCardProps {
   index: number;
 }
 
-function ExpertiseCard({ category, skills, percentage, color, index }: ExpertiseCardProps) {
+const ExpertiseCard = ({ category, skills, percentage, color, index }: ExpertiseCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -60,9 +60,9 @@ function ExpertiseCard({ category, skills, percentage, color, index }: Expertise
       </div>
     </motion.div>
   );
-}
+};
 
-export function ExpertiseSection() {
+const ExpertiseSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
 
@@ -155,4 +155,6 @@ export function ExpertiseSection() {
       </div>
     </section>
   );
-}
+};
+
+export default ExpertiseSection;

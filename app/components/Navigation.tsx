@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { navItems } from "@/lib/constants";
 
-export function Navigation() {
+const Navigation = () => {
   const router = useRouter();
 
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -61,7 +61,6 @@ export function Navigation() {
           >
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
               <div className="flex items-center justify-between h-20">
-                {/* Logo */}
                 <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
                   <div className="rounded-lg flex items-center justify-center shadow-lg overflow-hidden bg-sage-800/50 backdrop-blur-sm border border-sage-700/30">
                     <Image
@@ -71,6 +70,7 @@ export function Navigation() {
                       width={250}
                       height={100}
                       onClick={() => router.push("/")}
+                      priority
                     />
                   </div>
                 </motion.div>
@@ -78,7 +78,6 @@ export function Navigation() {
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex items-center space-x-8">
                   {navItems.map((item) => {
-                    const IconComponent = item.icon;
                     return (
                       <motion.a
                         key={item.name}
@@ -87,7 +86,7 @@ export function Navigation() {
                         className="text-sage-100 hover:text-sage-200 px-3 py-2 font-medium transition-colors relative group"
                       >
                         {item.name}
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300"></span>
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300" />
                       </motion.a>
                     );
                   })}
@@ -187,7 +186,6 @@ export function Navigation() {
                 {/* Desktop Navigation - compact spacing */}
                 <div className="hidden md:flex items-center space-x-4 ml-4">
                   {navItems.map((item) => {
-                    const IconComponent = item.icon;
                     return (
                       <motion.a
                         key={item.name}
@@ -196,7 +194,7 @@ export function Navigation() {
                         className="text-sage-100 hover:text-sage-200 px-2 py-1 text-sm font-medium transition-colors relative group"
                       >
                         {item.name}
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300"></span>
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300" />
                       </motion.a>
                     );
                   })}
@@ -267,4 +265,6 @@ export function Navigation() {
       </AnimatePresence>
     </>
   );
-}
+};
+
+export default Navigation;

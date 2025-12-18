@@ -7,8 +7,7 @@ import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { partners, achievements, clientLogos } from "@/lib/constants";
 
-export function AboutSection() {
-
+const AboutSection = () => {
   return (
     <section
       id="about"
@@ -270,4 +269,6 @@ export function AboutSection() {
       </div>
     </section>
   );
-}
+};
+
+export default AboutSection;

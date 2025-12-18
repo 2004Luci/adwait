@@ -16,7 +16,7 @@ import { contactInfo, serviceList } from "@/lib/constants";
 import { contactFormSchema, type ContactFormData } from "@/lib/schema";
 import { formatRemainingTime } from "@/lib/utils";
 
-export function ContactSection() {
+const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -380,4 +380,6 @@ export function ContactSection() {
       </div>
     </section>
   );
-}
+};
+
+export default ContactSection;
