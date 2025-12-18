@@ -7,7 +7,7 @@ import Link from "next/link";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./ui/social-icons";
-import { contactInfo, footerLinks } from "@/lib/constants";
+import { contactInfo, footerLinks, OFFICE_MAPS_URL } from "@/lib/constants";
 
 const Footer = () => {
   const router = useRouter();
@@ -262,14 +262,17 @@ const Footer = () => {
 
               {/* Map Overlay with Office Info */}
               <div
+                role="button"
+                tabIndex={0}
+                aria-label="Open office location in Google Maps"
                 className="cursor-pointer absolute top-4 left-4 bg-sage-900/90 backdrop-blur-sm rounded-xl p-4 text-sage-100 shadow-lg border border-sage-200/20"
-                onClick={() =>
-                  window.open(
-                    "https://www.google.com/maps/place/Shaligram+Arcade/@23.0245345,72.4757491,18z/data=!4m10!1m2!2m1!1sAdwait+Artha+LLP+1030,+10th+floor,+Shaligram+Arcade+Nr+Vakil+Saheb+Bridge+Extension,+Beside+Sharaswati+Hospital+Ambli+Junction,+Nr.+Satyamev+Elite+Ring+Road+South+Bopal,+Ahmedabad-380058!3m6!1s0x395e9bb8d93c7c33:0x32d38f1be63609ea!8m2!3d23.0242437!4d72.4767437!15sCroBQWR3YWl0IEFydGhhIExMUCAxMDMwLCAxMHRoIGZsb29yLCBTaGFsaWdyYW0gQXJjYWRlIE5yIFZha2lsIFNhaGViIEJyaWRnZSBFeHRlbnNpb24sIEJlc2lkZSBTaGFyYXN3YXRpIEhvc3BpdGFsIEFtYmxpIEp1bmN0aW9uLCBOci4gU2F0eWFtZXYgRWxpdGUgUmluZyBSb2FkIFNvdXRoIEJvcGFsLCBBaG1lZGFiYWQtMzgwMDU4WrcBIrQBYWR3YWl0IGFydGhhIGxscCAxMDMwIDEwdGggZmxvb3Igc2hhbGlncmFtIGFyY2FkZSBuciB2YWtpbCBzYWhlYiBicmlkZ2UgZXh0ZW5zaW9uIGJlc2lkZSBzaGFyYXN3YXRpIGhvc3BpdGFsIGFtYmxpIGp1bmN0aW9uIG5yIHNhdHlhbWV2IGVsaXRlIHJpbmcgcm9hZCBzb3V0aCBib3BhbCBhaG1lZGFiYWQgMzgwMDU4kgEPYnVzaW5lc3NfY2VudGVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDI1T2FscHFiRmhPUjJoMVZWWlZNVk5xU210Vk0wWjVWa2RTUzJSc1JSQULgAQD6AQQIABAl!16s%2Fg%2F11q2k_84pm?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D",
-                    "_blank",
-                    "noopener,noreferrer"
-                  )
-                }
+                onClick={() => window.open(OFFICE_MAPS_URL, "_blank", "noopener,noreferrer")}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    window.open(OFFICE_MAPS_URL, "_blank", "noopener,noreferrer");
+                  }
+                }}
               >
                 <div className="flex items-center gap-3 mb-2">
                   <MapPin className="w-5 h-5 text-sage-200" />
