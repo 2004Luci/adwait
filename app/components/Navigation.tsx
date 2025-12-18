@@ -96,14 +96,14 @@ const Navigation = () => {
                     onClick={() => {
                       window.location.href = "/#contact";
                     }}
-                    className="bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
+                    className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
                   >
                     Get Started
                   </motion.button>
                 </div>
 
                 {/* Mobile menu button */}
-                <div className="md:hidden">
+                <div className="md:hidden flex items-center">
                   <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="text-sage-100 hover:text-sage-200 transition-colors p-2 rounded-lg hover:bg-sage-800/50"
@@ -164,8 +164,8 @@ const Navigation = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-sage-900/95 backdrop-blur-md shadow-2xl border-2 border-sage-200/30 rounded-2xl"
-            style={{ width: "fit-content", minWidth: "320px", maxWidth: "95vw" }}
+            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-sage-900/95 backdrop-blur-md shadow-2xl border-2 border-sage-200/30 rounded-2xl overflow-hidden"
+            style={{ minWidth: "320px", maxWidth: "95vw" }}
           >
             <div className="px-4 py-2">
               <div className="flex items-center justify-between">
@@ -184,14 +184,14 @@ const Navigation = () => {
                 </motion.div>
 
                 {/* Desktop Navigation - compact spacing */}
-                <div className="hidden md:flex items-center space-x-4 ml-4">
+                <div className="hidden lg:flex items-center space-x-4 ml-4 flex-shrink-0">
                   {navItems.map((item) => {
                     return (
                       <motion.a
                         key={item.name}
                         href={item.href}
                         whileHover={{ y: -1 }}
-                        className="text-sage-100 hover:text-sage-200 px-2 py-1 text-sm font-medium transition-colors relative group"
+                        className="text-sage-100 hover:text-sage-200 px-2 py-1 text-sm font-medium transition-colors relative group whitespace-nowrap"
                       >
                         {item.name}
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300" />
@@ -204,14 +204,14 @@ const Navigation = () => {
                     onClick={() => {
                       window.location.href = "/#contact";
                     }}
-                    className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm ml-2"
+                    className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm ml-2 whitespace-nowrap"
                   >
                     Get Started
                   </motion.button>
                 </div>
 
                 {/* Mobile menu button - smaller for floating navbar */}
-                <div className="md:hidden ml-4">
+                <div className="lg:hidden ml-4 flex items-center">
                   <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="text-sage-100 hover:text-sage-200 transition-colors p-1.5 rounded-lg hover:bg-sage-800/50"
@@ -248,9 +248,7 @@ const Navigation = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        window.location.href = "/#contact";
-                      }}
+                      onClick={() => (window.location.href = "/#contact")}
                       className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-lg font-medium transition-all duration-300 text-sm flex items-center justify-center gap-2"
                     >
                       Get Started
