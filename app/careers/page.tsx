@@ -11,7 +11,7 @@ import { Briefcase, MapPin, Clock, DollarSign, ArrowRight, ArrowLeft } from "luc
 import Link from "next/link";
 import { openPositions, benefits } from "../../lib/constants";
 
-export default function CareersPage() {
+const CareersPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
       <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
@@ -214,4 +214,6 @@ export default function CareersPage() {
       <Footer />
     </div>
   );
-}
+};
+
+export default CareersPage;
