@@ -265,7 +265,7 @@ const Footer = () => {
                 role="button"
                 tabIndex={0}
                 aria-label="Open office location in Google Maps"
-                className="cursor-pointer absolute top-4 left-4 bg-sage-900/90 backdrop-blur-sm rounded-xl p-4 text-sage-100 shadow-lg border border-sage-200/20"
+                className="cursor-pointer hidden sm:block absolute top-4 left-4 bg-sage-900/90 backdrop-blur-sm rounded-xl p-4 text-sage-100 shadow-lg border border-sage-200/20"
                 onClick={() => window.open(OFFICE_MAPS_URL, "_blank", "noopener,noreferrer")}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -281,11 +281,13 @@ const Footer = () => {
                 <p className="text-sm text-sage-200 leading-relaxed">
                   1030, 10th floor, Shaligram Arcade
                   <br />
-                  Nr Vakil Saheb Bridge Extension, Beside Sharaswati Hospital
+                  Nr Vakil Saheb Bridge Extension,
                   <br />
-                  Ambli Junction, Nr. Satyamev Elite Ring Road
+                  Beside Saraswati Multispeciality Hospital & Trauma Center,
                   <br />
-                  South Bopal, Ahmedabad-380058
+                  Ambli Junction, Nr. Satyamev Elite Ring Road,
+                  <br />
+                  South Bopal, Ahmedabad-380058.
                 </p>
               </div>
             </div>
