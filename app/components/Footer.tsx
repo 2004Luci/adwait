@@ -7,9 +7,9 @@ import Link from "next/link";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon } from "./ui/social-icons";
-import { contactInfo, footerLinks } from "@/lib/constants";
+import { contactInfo, footerLinks, OFFICE_MAPS_URL } from "@/lib/constants";
 
-export function Footer() {
+const Footer = () => {
   const router = useRouter();
 
   const scrollToTop = () => {
@@ -261,7 +261,19 @@ export function Footer() {
               />
 
               {/* Map Overlay with Office Info */}
-              <div className="absolute top-4 left-4 bg-sage-900/90 backdrop-blur-sm rounded-xl p-4 text-sage-100 shadow-lg border border-sage-200/20">
+              <div
+                role="button"
+                tabIndex={0}
+                aria-label="Open office location in Google Maps"
+                className="cursor-pointer hidden sm:block absolute top-4 left-4 bg-sage-900/90 backdrop-blur-sm rounded-xl p-4 text-sage-100 shadow-lg border border-sage-200/20"
+                onClick={() => window.open(OFFICE_MAPS_URL, "_blank", "noopener,noreferrer")}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    window.open(OFFICE_MAPS_URL, "_blank", "noopener,noreferrer");
+                  }
+                }}
+              >
                 <div className="flex items-center gap-3 mb-2">
                   <MapPin className="w-5 h-5 text-sage-200" />
                   <h4 className="font-semibold text-sage-100">Adwait Artha LLP</h4>
@@ -269,11 +281,13 @@ export function Footer() {
                 <p className="text-sm text-sage-200 leading-relaxed">
                   1030, 10th floor, Shaligram Arcade
                   <br />
-                  Nr Vakil Saheb Bridge Extension, Beside Sharaswati Hospital
+                  Nr Vakil Saheb Bridge Extension,
                   <br />
-                  Ambli Junction, Nr. Satyamev Elite Ring Road
+                  Beside Saraswati Multispeciality Hospital & Trauma Center,
                   <br />
-                  South Bopal, Ahmedabad-380058
+                  Ambli Junction, Nr. Satyamev Elite Ring Road,
+                  <br />
+                  South Bopal, Ahmedabad-380058.
                 </p>
               </div>
             </div>
@@ -332,4 +346,6 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

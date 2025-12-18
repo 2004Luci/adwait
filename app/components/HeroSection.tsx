@@ -3,16 +3,15 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ImageWithFallback } from "./ui/ImageWithFallback";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { TypewriterText } from "./ui/TypewriterText";
 import { SchedulingModal } from "./SchedulingModal";
 import { heroStats, heroTypewriterPhrases } from "@/lib/constants";
 
-export function HeroSection() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
+const HeroSection = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -69,10 +68,7 @@ export function HeroSection() {
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-sage-900 via-black to-sage-800"
     >
-      {/* Background Elements */}
       <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
-
-      {/* Additional floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
@@ -140,10 +136,7 @@ export function HeroSection() {
                 transition={{ duration: 0.3 }}
                 className="relative"
               >
-                {/* Glow effect behind the image */}
-                <div className="absolute inset-0 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-2xl blur-xl scale-110"></div>
-
-                {/* Image container with border and shadow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-sage-200/20 to-sage-300/20 rounded-2xl blur-xl scale-110" />
                 <div className="relative bg-gradient-to-br from-sage-800/50 to-sage-900/50 backdrop-blur-sm border border-sage-700/30 rounded-2xl p-4 shadow-2xl">
                   <Image
                     src="/hero.png"
@@ -154,8 +147,6 @@ export function HeroSection() {
                     priority
                   />
                 </div>
-
-                {/* Floating elements around the image */}
                 <motion.div
                   animate={{
                     y: [0, -10, 0],
@@ -403,12 +394,12 @@ export function HeroSection() {
           </div>
         </motion.div>
       </div>
-
-      {/* Scheduling Modal */}
       <SchedulingModal
         isOpen={isSchedulingModalOpen}
         onClose={() => setIsSchedulingModalOpen(false)}
       />
     </section>
   );
-}
+};
+
+export default HeroSection;

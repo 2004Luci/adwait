@@ -83,6 +83,9 @@ const contactInfo: ContactInfo[] = [
   },
 ];
 
+const OFFICE_MAPS_URL =
+  "https://www.google.com/maps/place/Shaligram+Arcade/@23.0245345,72.4757491,18z/data=!4m10!1m2!2m1!1sAdwait+Artha+LLP+1030,+10th+floor,+Shaligram+Arcade+Nr+Vakil+Saheb+Bridge+Extension,+Beside+Sharaswati+Hospital+Ambli+Junction,+Nr.+Satyamev+Elite+Ring+Road+South+Bopal,+Ahmedabad-380058!3m6!1s0x395e9bb8d93c7c33:0x32d38f1be63609ea!8m2!3d23.0242437!4d72.4767437!15sCroBQWR3YWl0IEFydGhhIExMUCAxMDMwLCAxMHRoIGZsb29yLCBTaGFsaWdyYW0gQXJjYWRlIE5yIFZha2lsIFNhaGViIEJyaWRnZSBFeHRlbnNpb24sIEJlc2lkZSBTaGFyYXN3YXRpIEhvc3BpdGFsIEFtYmxpIEp1bmN0aW9uLCBOci4gU2F0eWFtZXYgRWxpdGUgUmluZyBSb2FkIFNvdXRoIEJvcGFsLCBBaG1lZGFiYWQtMzgwMDU4WrcBIrQBYWR3YWl0IGFydGhhIGxscCAxMDMwIDEwdGggZmxvb3Igc2hhbGlncmFtIGFyY2FkZSBuciB2YWtpbCBzYWhlYiBicmlkZ2UgZXh0ZW5zaW9uIGJlc2lkZSBzaGFyYXN3YXRpIGhvc3BpdGFsIGFtYmxpIGp1bmN0aW9uIG5yIHNhdHlhbWV2IGVsaXRlIHJpbmcgcm9hZCBzb3V0aCBib3BhbCBhaG1lZGFiYWQgMzgwMDU4kgEPYnVzaW5lc3NfY2VudGVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDI1T2FscHFiRmhPUjJoMVZWWlZNVk5xU210Vk0wWjVWa2RTUzJSc1JSQULgAQD6AQQIABAl!16s%2Fg%2F11q2k_84pm?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D";
+
 // ==================== NAVIGATION ====================
 interface NavItem {
   name: string;
@@ -1085,6 +1088,7 @@ export {
   contactAddress,
   contactBusinessHours,
   contactInfo,
+  OFFICE_MAPS_URL,
   // Navigation
   navItems,
   // Hero

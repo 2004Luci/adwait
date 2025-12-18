@@ -8,8 +8,8 @@ import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
 import { testimonials, caseStudies } from "@/lib/constants";
 
-export function TestimonialsSection() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+const TestimonialsSection = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -24,11 +24,8 @@ export function TestimonialsSection() {
       id="testimonials"
       className="relative py-24 bg-gradient-to-br from-sage-400 via-sage-500 to-sage-600 overflow-hidden"
     >
-      {/* Background Elements */}
       <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={false} />
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -199,4 +196,6 @@ export function TestimonialsSection() {
       </div>
     </section>
   );
-}
+};
+
+export default TestimonialsSection;
