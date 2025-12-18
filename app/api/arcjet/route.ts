@@ -1,9 +1,18 @@
-import arcjet, { tokenBucket } from "@arcjet/next";
+import arcjet, { tokenBucket, detectBot } from "@arcjet/next";
 import { NextResponse } from "next/server";
 
 export const arcjetConfig = arcjet({
   key: process.env.ARCJET_KEY!,
   rules: [
+    // Bot detection - Block automated clients
+    detectBot({
+      mode: "LIVE",
+      allow: [
+        "CATEGORY:SEARCH_ENGINE", // Google, Bing, Yahoo, etc.
+        "CATEGORY:PREVIEW", // Link previews (Slack, Discord, etc.)
+        "CATEGORY:MONITOR", // Uptime monitors
+      ],
+    }),
     // Rate limiting for contact form submissions (4 emails per submission)
     tokenBucket({
       mode: "LIVE",
@@ -44,16 +53,15 @@ export function getClientIP(request: Request): string {
 }
 
 export async function GET(req: Request) {
-  // Block direct browser access - require custom header
-  if (req.headers.get("x-requested-with") !== "XMLHttpRequest") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
   const clientIP = getClientIP(req);
   const decision = await arcjetConfig.protect(req, { ip: clientIP, requested: 1 });
   console.log("Arcjet decision", decision);
 
   if (decision.isDenied()) {
+    // Handle bot detection or rate limiting
+    if (decision.reason.isBot?.()) {
+      return NextResponse.json({ error: "Bot detected" }, { status: 403 });
+    }
     return NextResponse.json(
       { error: "Too Many Requests", reason: decision.reason },
       { status: 429 }
