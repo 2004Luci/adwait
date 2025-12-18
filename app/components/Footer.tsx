@@ -57,25 +57,35 @@ const Footer = () => {
                     <div key={index} className="flex items-start gap-2 md:gap-3 text-sage-800">
                       <info.icon className="w-3 h-3 md:w-4 md:h-4 text-sage-700 mt-0.5 flex-shrink-0" />
                       <div className="flex flex-col">
-                        {info.details.map((detail, detailIndex) => (
-                          <span
-                            key={detailIndex}
-                            className={`text-xs md:text-sm ${info.clickable ? "cursor-pointer hover:text-sage-900 transition-colors duration-300" : ""}`}
-                            onClick={
-                              info.clickable
-                                ? () => {
-                                    const mapSection =
-                                      document.querySelector("footer .py-12.border-t");
-                                    if (mapSection) {
-                                      mapSection.scrollIntoView({ behavior: "smooth" });
+                        {info.details.map((detail, detailIndex) =>
+                          detail.includes("@") ? (
+                            <Link
+                              key={detailIndex}
+                              href={`mailto:${detail}`}
+                              className="text-xs md:text-sm text-sage-800 hover:text-sage-900 transition-colors duration-300"
+                            >
+                              {detail}
+                            </Link>
+                          ) : (
+                            <span
+                              key={detailIndex}
+                              className={`text-xs md:text-sm ${info.clickable ? "cursor-pointer hover:text-sage-900 transition-colors duration-300" : ""}`}
+                              onClick={
+                                info.clickable
+                                  ? () => {
+                                      const mapSection =
+                                        document.querySelector("footer .py-12.border-t");
+                                      if (mapSection) {
+                                        mapSection.scrollIntoView({ behavior: "smooth" });
+                                      }
                                     }
-                                  }
-                                : undefined
-                            }
-                          >
-                            {detail}
-                          </span>
-                        ))}
+                                  : undefined
+                              }
+                            >
+                              {detail}
+                            </span>
+                          )
+                        )}
                       </div>
                     </div>
                   ))}
