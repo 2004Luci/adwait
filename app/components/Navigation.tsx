@@ -70,6 +70,7 @@ const Navigation = () => {
                       width={250}
                       height={100}
                       onClick={() => router.push("/")}
+                      priority
                     />
                   </div>
                 </motion.div>
