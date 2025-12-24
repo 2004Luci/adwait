@@ -77,4 +77,4 @@ This project is proprietary and intended for Adwait Artha LLP.
 
 ---
 
-For questions or support, contact [sandip@ssacs.in](mailto:sandip@ssacs.in) or [prashant@ssacs.in](mailto:prashant@ssacs.in)
+For questions or support, contact [mit4s.dev@gmail.com](mailto:mit4s.dev@gmail.com)
