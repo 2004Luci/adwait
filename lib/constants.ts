@@ -16,10 +16,6 @@ import {
   Building,
   Banknote,
   BarChart3,
-  ArrowRight,
-  ArrowLeft,
-  Star,
-  Quote,
   LampDesk,
   Lightbulb,
   Recycle,
@@ -45,7 +41,7 @@ const companyEmails = [
   "prashant@adwaitartha.com",
 ];
 const contactEmail = "contact@adwaitartha.com";
-const contactPhone = "+91 7940305119";
+const contactPhone = "+91 02717406485";
 const contactAddress =
   "1030, 10th floor, Shaligram Arcade, Nr Vakil Saheb Bridge Extension, Beside Sharaswati Hospital, Ambli Junction, Nr. Satyamev Elite Ring Road, South Bopal, Ahmedabad-380058";
 

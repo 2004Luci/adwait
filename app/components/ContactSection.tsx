@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { contactInfo, serviceList } from "@/lib/constants";
 import { contactFormSchema, type ContactFormData } from "@/lib/schema";
 import { formatRemainingTime } from "@/lib/utils";
+import Link from "next/link";
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -283,7 +284,7 @@ const ContactSection = () => {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 py-4 rounded-lg font-semibold hover:from-sage-100 hover:to-sage-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="cursor-pointer w-full bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 py-4 rounded-lg font-semibold hover:from-sage-100 hover:to-sage-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -332,24 +333,34 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-sage-100 mb-2">{info.title}</h4>
-                    {info.details.map((detail, detailIndex) => (
-                      <p
-                        key={detailIndex}
-                        className={`text-sage-300 ${info.clickable ? "cursor-pointer hover:text-sage-200 transition-colors duration-300" : ""}`}
-                        onClick={
-                          info.clickable
-                            ? () => {
-                                const footer = document.querySelector("footer");
-                                if (footer) {
-                                  footer.scrollIntoView({ behavior: "smooth" });
+                    {info.details.map((detail, detailIndex) =>
+                      detail.includes("@") ? (
+                        <Link
+                          key={detailIndex}
+                          href={`mailto:${detail}`}
+                          className="text-sage-300 hover:text-sage-200 transition-colors duration-300"
+                        >
+                          {detail}
+                        </Link>
+                      ) : (
+                        <p
+                          key={detailIndex}
+                          className={`text-sage-300 ${info.clickable ? "cursor-pointer hover:text-sage-200 transition-colors duration-300" : ""}`}
+                          onClick={
+                            info.clickable
+                              ? () => {
+                                  const footer = document.querySelector("footer");
+                                  if (footer) {
+                                    footer.scrollIntoView({ behavior: "smooth" });
+                                  }
                                 }
-                              }
-                            : undefined
-                        }
-                      >
-                        {detail}
-                      </p>
-                    ))}
+                              : undefined
+                          }
+                        >
+                          {detail}
+                        </p>
+                      )
+                    )}
                   </div>
                 </motion.div>
               ))}
