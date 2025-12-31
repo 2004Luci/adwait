@@ -26,15 +26,28 @@ import {
   Shield,
 } from "lucide-react";
 
-// ==================== CONTACT INFORMATION ====================
-interface ContactInfo {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  details: string[];
-  color: string;
-  clickable?: boolean;
-}
+import type {
+  ContactInfo,
+  NavItem,
+  HeroStat,
+  Service,
+  Partner,
+  Achievement,
+  ProcessStep,
+  ExpertiseArea,
+  ProcessStepItem,
+  Testimonial,
+  CaseStudy,
+  FooterLinks,
+  MeetingService,
+  IPOProcessStep,
+  AuditService,
+  Tribunal,
+  FinanceType,
+  AdvisoryArea,
+} from "./constants.types";
 
+// ==================== CONTACT INFORMATION ====================
 const companyEmails = [
   "contact@adwaitartha.com",
   "sandip@adwaitartha.com",
@@ -83,12 +96,6 @@ const OFFICE_MAPS_URL =
   "https://www.google.com/maps/place/Shaligram+Arcade/@23.0245345,72.4757491,18z/data=!4m10!1m2!2m1!1sAdwait+Artha+LLP+1030,+10th+floor,+Shaligram+Arcade+Nr+Vakil+Saheb+Bridge+Extension,+Beside+Sharaswati+Hospital+Ambli+Junction,+Nr.+Satyamev+Elite+Ring+Road+South+Bopal,+Ahmedabad-380058!3m6!1s0x395e9bb8d93c7c33:0x32d38f1be63609ea!8m2!3d23.0242437!4d72.4767437!15sCroBQWR3YWl0IEFydGhhIExMUCAxMDMwLCAxMHRoIGZsb29yLCBTaGFsaWdyYW0gQXJjYWRlIE5yIFZha2lsIFNhaGViIEJyaWRnZSBFeHRlbnNpb24sIEJlc2lkZSBTaGFyYXN3YXRpIEhvc3BpdGFsIEFtYmxpIEp1bmN0aW9uLCBOci4gU2F0eWFtZXYgRWxpdGUgUmluZyBSb2FkIFNvdXRoIEJvcGFsLCBBaG1lZGFiYWQtMzgwMDU4WrcBIrQBYWR3YWl0IGFydGhhIGxscCAxMDMwIDEwdGggZmxvb3Igc2hhbGlncmFtIGFyY2FkZSBuciB2YWtpbCBzYWhlYiBicmlkZ2UgZXh0ZW5zaW9uIGJlc2lkZSBzaGFyYXN3YXRpIGhvc3BpdGFsIGFtYmxpIGp1bmN0aW9uIG5yIHNhdHlhbWV2IGVsaXRlIHJpbmcgcm9hZCBzb3V0aCBib3BhbCBhaG1lZGFiYWQgMzgwMDU4kgEPYnVzaW5lc3NfY2VudGVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDI1T2FscHFiRmhPUjJoMVZWWlZNVk5xU210Vk0wWjVWa2RTUzJSc1JSQULgAQD6AQQIABAl!16s%2Fg%2F11q2k_84pm?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D";
 
 // ==================== NAVIGATION ====================
-interface NavItem {
-  name: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
 const navItems: NavItem[] = [
   { name: "Home", href: "#home", icon: Home },
   { name: "Services", href: "/services", icon: Briefcase },
@@ -99,12 +106,6 @@ const navItems: NavItem[] = [
 ];
 
 // ==================== HERO SECTION ====================
-interface HeroStat {
-  number: number;
-  suffix: string;
-  label: string;
-}
-
 const heroStats: HeroStat[] = [
   { number: 23, suffix: "+", label: "Years of Experience" },
   { number: 22, suffix: "+", label: "Valued Clients" },
@@ -122,16 +123,6 @@ const heroTypewriterPhrases = [
 ];
 
 // ==================== SERVICES ====================
-interface Service {
-  id: string;
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-  features: string[];
-  color: string;
-  slug: string;
-}
-
 const services: Service[] = [
   {
     id: "ipo-sme-ipo-advisory",
@@ -242,15 +233,6 @@ const serviceList = [
 ];
 
 // ==================== ABOUT SECTION ====================
-interface Partner {
-  name: string;
-  role: string;
-  image: string;
-  expertise: string[];
-  experience: string;
-  description: string;
-}
-
 const partners: Partner[] = [
   {
     name: "Sandip Sheth",
@@ -273,13 +255,6 @@ const partners: Partner[] = [
       "He is having 14 years of experience in Company Law, FEMA, SEBI and other Corporate Laws. He is having in depth knowledge and expertise in eXtensible Business Reporting Language, drafting and vetting of various agreements, letters, and contracts.",
   },
 ];
-
-interface Achievement {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-  color: string;
-}
 
 const achievements: Achievement[] = [
   {
@@ -336,14 +311,6 @@ const clientLogos = [
 ];
 
 // ==================== EXPERTISE SECTION ====================
-interface ProcessStep {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-  details: string[];
-  color: string;
-}
-
 const expertiseProcessSteps: ProcessStep[] = [
   {
     icon: Target,
@@ -381,13 +348,6 @@ const expertiseProcessSteps: ProcessStep[] = [
   },
 ];
 
-interface ExpertiseArea {
-  category: string;
-  skills: string[];
-  percentage: number;
-  color: string;
-}
-
 const expertiseAreas: ExpertiseArea[] = [
   {
     category: "Capital Markets",
@@ -421,13 +381,6 @@ const expertiseAreas: ExpertiseArea[] = [
 ];
 
 // ==================== PROCESS SECTION ====================
-interface ProcessStepItem {
-  icon: React.ComponentType<{ className?: string }>;
-  number: string;
-  title: string;
-  description: string;
-}
-
 const processSteps: ProcessStepItem[] = [
   {
     icon: LampDesk,
@@ -470,15 +423,6 @@ const processSteps: ProcessStepItem[] = [
 ];
 
 // ==================== TESTIMONIALS SECTION ====================
-interface Testimonial {
-  name: string;
-  position: string;
-  company: string;
-  rating: number;
-  content: string;
-  image: string;
-}
-
 const testimonials: Testimonial[] = [
   {
     name: "Rajesh Kumar",
@@ -512,16 +456,6 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-interface CaseStudy {
-  title: string;
-  company: string;
-  challenge: string;
-  solution: string;
-  result: string;
-  metrics: string[];
-  color: string;
-}
-
 const caseStudies: CaseStudy[] = [
   {
     title: "Successful IPO Launch",
@@ -553,18 +487,6 @@ const caseStudies: CaseStudy[] = [
 ];
 
 // ==================== FOOTER ====================
-interface FooterLink {
-  name: string;
-  href: string;
-}
-
-interface FooterLinks {
-  services: FooterLink[];
-  company: FooterLink[];
-  resources: string[];
-  legal: string[];
-}
-
 const footerLinks: FooterLinks = {
   services: [
     { name: "IPO Advisory", href: "/services/ipo-sme-ipo-advisory" },
@@ -680,12 +602,6 @@ const corporateLawServices = [
   "Regulatory Filings",
 ];
 
-interface MeetingService {
-  title: string;
-  description: string;
-  features: string[];
-}
-
 const corporateLawMeetingServices: MeetingService[] = [
   {
     title: "Board Meetings",
@@ -743,13 +659,6 @@ const ipoFeatures = [
   "Market Research & Analysis",
   "Roadshow & Investor Presentations",
 ];
-
-interface IPOProcessStep {
-  step: string;
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
 
 const ipoProcessSteps: IPOProcessStep[] = [
   {
@@ -830,12 +739,6 @@ const legalDraftingDocumentTypes = [
   "Commercial Contracts",
 ];
 
-interface AuditService {
-  title: string;
-  description: string;
-  features: string[];
-}
-
 const legalDraftingAuditServices: AuditService[] = [
   {
     title: "Secretarial Audit",
@@ -878,12 +781,6 @@ const lawTribunalsServices = [
   "Compliance Advisory",
   "Legal Documentation",
 ];
-
-interface Tribunal {
-  name: string;
-  description: string;
-  cases: string[];
-}
 
 const lawTribunals: Tribunal[] = [
   {
@@ -940,12 +837,6 @@ const loanSyndicationServices = [
   "Syndication Services",
   "Financial Advisory",
 ];
-
-interface FinanceType {
-  title: string;
-  description: string;
-  features: string[];
-}
 
 const loanSyndicationFinanceTypes: FinanceType[] = [
   {
@@ -1005,12 +896,6 @@ const financialAdvisoryServices = [
   "Risk Assessment",
   "Compliance Reporting",
 ];
-
-interface AdvisoryArea {
-  title: string;
-  description: string;
-  features: string[];
-}
 
 const financialAdvisoryAreas: AdvisoryArea[] = [
   {
@@ -1131,27 +1016,4 @@ export {
   financialAdvisoryBenefits,
   // Scheduling
   timeSlots,
-};
-
-// Export types
-export type {
-  ContactInfo,
-  NavItem,
-  HeroStat,
-  Service,
-  Partner,
-  Achievement,
-  ProcessStep,
-  ExpertiseArea,
-  ProcessStepItem,
-  Testimonial,
-  CaseStudy,
-  FooterLink,
-  FooterLinks,
-  MeetingService,
-  IPOProcessStep,
-  AuditService,
-  Tribunal,
-  FinanceType,
-  AdvisoryArea,
 };
