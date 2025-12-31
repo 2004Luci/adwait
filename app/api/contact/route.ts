@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ContactEmailTemplate } from "@/app/components/contact-email-template";
 import { Resend } from "resend";
-import { arcjetConfig } from "../arcjet/route";
+import { arcjetConfig } from "@/lib/arcjet";
 import { getClientIP } from "@/lib/utils";
 import { companyEmails } from "@/lib/constants";
 
