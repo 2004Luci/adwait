@@ -1,5 +1,6 @@
 import arcjet, { tokenBucket, detectBot } from "@arcjet/next";
 import { NextResponse } from "next/server";
+import { getClientIP } from "@/lib/utils";
 
 export const arcjetConfig = arcjet({
   key: process.env.ARCJET_KEY!,
@@ -31,26 +32,6 @@ export const arcjetConfig = arcjet({
     }),
   ],
 });
-
-export function getClientIP(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const realIP = request.headers.get("x-real-ip");
-  const cfConnectingIP = request.headers.get("cf-connecting-ip");
-
-  if (forwarded) {
-    return forwarded.split(",")[0].trim();
-  }
-
-  if (realIP) {
-    return realIP;
-  }
-
-  if (cfConnectingIP) {
-    return cfConnectingIP;
-  }
-
-  return "unknown";
-}
 
 export async function GET(req: Request) {
   const clientIP = getClientIP(req);

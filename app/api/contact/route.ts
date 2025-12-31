@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ContactEmailTemplate } from "@/app/components/contact-email-template";
 import { Resend } from "resend";
-import { arcjetConfig, getClientIP } from "../arcjet/route";
+import { arcjetConfig } from "../arcjet/route";
+import { getClientIP } from "@/lib/utils";
 import { companyEmails } from "@/lib/constants";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
