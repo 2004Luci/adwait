@@ -1,11 +1,15 @@
 import arcjet, { tokenBucket, detectBot } from "@arcjet/next";
+import { env, isDevelopment } from "@/lib/env";
+
+// Use DRY_RUN mode in development to avoid blocking during testing
+const ruleMode = isDevelopment() ? "DRY_RUN" : "LIVE";
 
 export const arcjetConfig = arcjet({
-  key: process.env.ARCJET_KEY!,
+  key: env.ARCJET_KEY!,
   rules: [
-    // Bot detection - Block automated clients
+    // Bot detection - Block automated clients (DRY_RUN in dev for easier testing)
     detectBot({
-      mode: "LIVE",
+      mode: ruleMode,
       allow: [
         "CATEGORY:SEARCH_ENGINE", // Google, Bing, Yahoo, etc.
         "CATEGORY:PREVIEW", // Link previews (Slack, Discord, etc.)
@@ -14,7 +18,7 @@ export const arcjetConfig = arcjet({
     }),
     // Rate limiting for contact form submissions (4 emails per submission)
     tokenBucket({
-      mode: "LIVE",
+      mode: ruleMode,
       characteristics: ["ip"],
       refillRate: 12, // Refill 12 tokens per interval (3 submissions × 4 emails)
       interval: 60,
@@ -22,7 +26,7 @@ export const arcjetConfig = arcjet({
     }),
     // Rate limiting for scheduling consultation (4 emails per submission)
     tokenBucket({
-      mode: "LIVE",
+      mode: ruleMode,
       characteristics: ["ip"],
       refillRate: 8, // Refill 8 tokens per interval (2 submissions × 4 emails)
       interval: 300,

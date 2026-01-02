@@ -4,8 +4,9 @@ import { Resend } from "resend";
 import { arcjetConfig } from "@/lib/arcjet";
 import { getClientIP } from "@/lib/utils";
 import { companyEmails } from "@/lib/constants";
+import { env } from "@/lib/env";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 
 interface ContactRequest {
   name: string;
@@ -49,7 +50,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if Resend API key is configured
-    if (!process.env.RESEND_API_KEY) {
+    if (!env.RESEND_API_KEY) {
       console.error("RESEND_API_KEY is not configured");
       return NextResponse.json({ message: "Email service not configured" }, { status: 500 });
     }
