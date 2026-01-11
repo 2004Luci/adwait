@@ -66,7 +66,7 @@ const TestimonialsSection = () => {
               <div className="flex items-start gap-6">
                 <div className="flex-shrink-0">
                   <ImageWithFallback
-                    src={testimonials[currentTestimonial].image}
+                    src={testimonials[currentTestimonial].tempImage}
                     alt={testimonials[currentTestimonial].name}
                     className="w-20 h-20 rounded-full object-cover border-2 border-sage-200/30"
                   />
