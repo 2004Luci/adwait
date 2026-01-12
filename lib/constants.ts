@@ -250,7 +250,7 @@ const partners: Partner[] = [
     role: "ACS - Partner",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    tempImage: "/photo2.jpg",
+    tempImage: "/photo2.jpeg",
     expertise: ["Company Law", "FEMA", "SEBI", "Corporate Laws"],
     experience: "14 years of experience",
     description:
@@ -435,7 +435,7 @@ const testimonials: Testimonial[] = [
       "Adwait Artha LLP guided us through our IPO process with exceptional expertise. Their understanding of regulatory requirements and market dynamics was instrumental in our successful listing.",
     image:
       "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
-    tempImage: "/photo2.jpg",
+    tempImage: "/photo3.jpg",
   },
   {
     name: "Priya Sharma",
@@ -446,7 +446,7 @@ const testimonials: Testimonial[] = [
       "The team at Adwait Artha provided comprehensive support for our SME listing. Their attention to detail and strategic approach made the entire process seamless and efficient.",
     image:
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
-    tempImage: "/photo2.jpg",
+    tempImage: "/photo3.jpg",
   },
   {
     name: "Arjun Patel",
@@ -457,7 +457,7 @@ const testimonials: Testimonial[] = [
       "Outstanding corporate law services and regulatory compliance support. Their expertise in SEBI matters and corporate governance has been invaluable for our dual listing.",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    tempImage: "/photo2.jpg",
+    tempImage: "/photo3.jpg",
   },
 ];
 
