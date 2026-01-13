@@ -45,6 +45,7 @@ function getCountryCode(phoneNumber: string): number {
 
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   const [step, setStep] = useState<number>(1);
+  const [isDatePopoverOpen, setIsDatePopoverOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<ScheduleDetails["date"] | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<ScheduleDetails["time"]>("");
   const [name, setName] = useState<PersonalDetails["name"]>("");
@@ -61,6 +62,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
 
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
+    setIsDatePopoverOpen(false);
     setSelectedTime(""); // Reset time when date changes
   };
 
@@ -345,7 +347,10 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   {/* Date Selection */}
                   <div>
                     <Label className="text-sage-200 mb-3 block">Select Date *</Label>
-                    <Popover>
+                    <Popover
+                      open={isDatePopoverOpen}
+                      onOpenChange={(open) => setIsDatePopoverOpen(open)}
+                    >
                       <PopoverTrigger asChild>
                         <Button
                           variant="outline"
