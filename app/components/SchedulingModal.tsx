@@ -225,7 +225,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                 >
                   <User className="w-4 h-4" />
                 </div>
-                <div className={`w-12 h-0.5 ${step >= 2 ? "bg-sage-600" : "bg-sage-700"}`}></div>
+                <div className={`w-12 h-0.5 ${step >= 2 ? "bg-sage-600" : "bg-sage-700"}`} />
                 <div
                   className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
                     step >= 2
@@ -346,7 +346,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           variant="outline"
                           data-empty={!selectedDate}
                           className={cn(
-                            "w-full justify-start text-left font-normal bg-sage-800 border-sage-700 text-sage-200 hover:bg-sage-700 hover:border-sage-600",
+                            "w-full justify-start text-left font-normal bg-sage-800 border-sage-700 text-sage-300 hover:bg-sage-700 hover:border-sage-600 hover:text-white cursor-pointer",
                             !selectedDate && "text-sage-400"
                           )}
                         >
@@ -466,7 +466,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   <Button
                     onClick={resetForm}
                     variant="outline"
-                    className="cursor-pointer flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
+                    className="cursor-pointer flex-1 border-sage-700 text-sage-300 hover:bg-sage-800 hover:text-white"
                   >
                     Cancel
                   </Button>
@@ -486,7 +486,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   <Button
                     onClick={handleBack}
                     variant="outline"
-                    className="cursor-pointer flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
+                    className="cursor-pointer flex-1 border-sage-700 text-sage-300 hover:bg-sage-800 hover:text-white"
                   >
                     <div className="flex items-center gap-2">
                       <ArrowLeft className="w-4 h-4" />
@@ -500,7 +500,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   >
                     {isSubmitting ? (
                       <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-sage-900 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-4 h-4 border-2 border-sage-900 border-t-transparent rounded-full animate-spin" />
                         Scheduling...
                       </div>
                     ) : (
