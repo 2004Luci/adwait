@@ -30,7 +30,7 @@ import {
   personalDetailsSchema,
   scheduleDetailsSchema,
 } from "@/lib/schema";
-import { formatRemainingTime } from "@/lib/utils";
+import { formatRemainingTime, getCountryCode } from "@/lib/utils";
 import { timeSlots } from "@/lib/constants";
 
 interface SchedulingModalProps {
@@ -450,7 +450,9 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                         </div>
                         <div className="flex items-center gap-2">
                           <Clock className="w-4 h-4 text-sage-400" />
-                          <span className="text-sage-300">Time: {selectedTime}</span>
+                          <span className="text-sage-300">
+                            Time: {selectedTime} {getCountryCode(phone) != 91 ? "IST" : ""}
+                          </span>
                         </div>
                       </div>
                     </div>
