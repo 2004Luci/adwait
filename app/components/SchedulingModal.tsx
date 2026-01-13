@@ -367,7 +367,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           selected={selectedDate}
                           onSelect={handleDateSelect}
                           disabled={disabledDays}
-                          initialFocus
+                          autoFocus
                           className="bg-sage-800"
                           classNames={{
                             months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
