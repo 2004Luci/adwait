@@ -1,5 +1,4 @@
 import { clsx, type ClassValue } from "clsx";
-import { parsePhoneNumber } from "react-phone-number-input";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -53,9 +52,4 @@ export function getClientIP(request: Request): string {
   }
 
   return "unknown";
-}
-
-export function getCountryCode(phoneNumber: string): number {
-  const phone = parsePhoneNumber(phoneNumber);
-  return Number(phone?.countryCallingCode) ?? 91;
 }

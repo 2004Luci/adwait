@@ -21,7 +21,7 @@ import { Label } from "./ui/label";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { toast } from "sonner";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { cn } from "./ui/utils";
 import {
@@ -30,12 +30,17 @@ import {
   personalDetailsSchema,
   scheduleDetailsSchema,
 } from "@/lib/schema";
-import { formatRemainingTime, getCountryCode } from "@/lib/utils";
+import { formatRemainingTime } from "@/lib/utils";
 import { timeSlots } from "@/lib/constants";
 
 interface SchedulingModalProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+function getCountryCode(phoneNumber: string): number {
+  const phone = parsePhoneNumber(phoneNumber);
+  return Number(phone?.countryCallingCode) ?? 91;
 }
 
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
