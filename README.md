@@ -81,13 +81,19 @@ All changes must follow this branch workflow:
 
 1. **Create a feature/fix branch** from `development`
 2. **Raise a PR** to merge into `development`
-3. Once approved and merged, changes in `development` will be **merged into `main`** via a separate PR
+3. Once approved and merged, raise a PR from `development` to `staging` (pre-production)
+4. After testing in staging, raise a PR from `staging` to `main` (production)
 
 ```
-feature-branch → development → main
+feature-branch → development → staging → main
 ```
 
-> **Important:** Never raise PRs directly to `main`. All PRs must target `development` first.
+**Branch purposes:**
+- `development` - Integration branch for ongoing development
+- `staging` - Pre-production environment for final testing
+- `main` - Production-ready code
+
+> **Important:** Never raise PRs directly to `main` or `staging`. All PRs must follow the workflow: `development` → `staging` → `main`.
 
 ### Branch Naming Conventions
 
@@ -113,7 +119,7 @@ Use the following prefixes for your branch names:
 - Numbers are allowed (0-9)
 - Keep descriptions short but descriptive
 
-> **Note:** Direct commits to `development` and `main` are not allowed. Always create a feature branch and raise a PR.
+> **Note:** Direct commits to `development`, `staging`, and `main` are not allowed. Always create a feature branch and raise a PR.
 
 ### Pull Request Guidelines
 
@@ -131,7 +137,7 @@ Use the following prefixes for your branch names:
    - [ ] Code follows the project's coding standards
    - [ ] All tests pass (if applicable)
    - [ ] No linting errors
-   - [ ] PR targets `development` branch (not `main`)
+   - [ ] PR targets the correct branch (`development` for feature branches)
    - [ ] Commit messages are clear and descriptive
 
 4. **Review Process:**
