@@ -29,27 +29,3 @@ export function formatRemainingTime(seconds: number): string {
   return `${days} day${days !== 1 ? "s" : ""}`;
 }
 
-/**
- * Extracts the client IP address from a request
- * @param request - The request object
- * @returns The client IP address or "unknown" if not found
- */
-export function getClientIP(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const realIP = request.headers.get("x-real-ip");
-  const cfConnectingIP = request.headers.get("cf-connecting-ip");
-
-  if (forwarded) {
-    return forwarded.split(",")[0].trim();
-  }
-
-  if (realIP) {
-    return realIP;
-  }
-
-  if (cfConnectingIP) {
-    return cfConnectingIP;
-  }
-
-  return "unknown";
-}

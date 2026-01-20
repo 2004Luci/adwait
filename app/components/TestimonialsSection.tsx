@@ -94,7 +94,7 @@ const TestimonialsSection = () => {
             </motion.div>
 
             {/* Navigation */}
-            <div className="flex justify-center gap-4 mt-8">
+            {/* <div className="flex justify-center gap-4 mt-8">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -111,10 +111,10 @@ const TestimonialsSection = () => {
               >
                 <ArrowRight className="w-5 h-5" />
               </motion.button>
-            </div>
+            </div> */}
 
             {/* Dots */}
-            <div className="flex justify-center gap-2 mt-6">
+            {/* <div className="flex justify-center gap-2 mt-6">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
@@ -124,7 +124,7 @@ const TestimonialsSection = () => {
                   }`}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 
