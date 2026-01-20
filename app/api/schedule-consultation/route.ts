@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { EmailTemplate } from "@/app/components/email-template";
 import { Resend } from "resend";
 import { arcjetConfig } from "@/lib/arcjet";
-import { getClientIP } from "@/lib/utils";
 import { companyEmails } from "@/lib/constants";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -18,9 +17,7 @@ interface ScheduleRequest {
 
 export async function POST(request: NextRequest) {
   try {
-    const clientIP = getClientIP(request);
     const decision = await arcjetConfig.protect(request, {
-      ip: clientIP,
       requested: 4, // Deduct 4 tokens for scheduling consultation (3 company emails + 1 user email)
     });
 
