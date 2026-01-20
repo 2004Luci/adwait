@@ -71,6 +71,94 @@ Deploy easily on [Vercel](https://vercel.com/) or any platform supporting Next.j
 - **Careers:** Manage open positions in [`app/careers/page.tsx`](app/careers/page.tsx).
 - **Contact:** Adjust contact info and scheduling logic in [`app/components/ContactSection.tsx`](app/components/ContactSection.tsx).
 
+## Contributing Guidelines
+
+We welcome contributions! Please follow these guidelines to maintain a clean and organized codebase.
+
+### Branch Workflow
+
+All changes must follow this branch workflow:
+
+1. **Create a feature/fix branch** from `development`
+2. **Raise a PR** to merge into `development`
+3. Once approved and merged, changes in `development` will be **merged into `main`** via a separate PR
+
+```
+feature-branch → development → main
+```
+
+> **Important:** Never raise PRs directly to `main`. All PRs must target `development` first.
+
+### Branch Naming Conventions
+
+Branch names are enforced by a pre-commit hook and must follow this pattern:
+
+```
+^(feature|bugfix|update|release)/[a-z0-9._-]+$
+```
+
+Use the following prefixes for your branch names:
+
+| Type | Prefix | Example |
+|------|--------|---------|
+| New feature | `feature/` | `feature/add-testimonials-carousel` |
+| Bug fix | `bugfix/` | `bugfix/contact-form-validation` |
+| Update/Enhancement | `update/` | `update/footer-links` |
+| Release | `release/` | `release/v1.2.0` |
+
+**Format:** `<type>/<short-description>`
+
+- Use **lowercase letters only**
+- Use hyphens (`-`), underscores (`_`), or dots (`.`) to separate words
+- Numbers are allowed (0-9)
+- Keep descriptions short but descriptive
+
+> **Note:** Direct commits to `development` and `main` are not allowed. Always create a feature branch and raise a PR.
+
+### Pull Request Guidelines
+
+1. **Title:** Use a clear, descriptive title summarizing the change
+   - Example: `feat: add testimonials carousel component`
+   - Example: `fix: resolve contact form validation error`
+
+2. **Description:** Include:
+   - What changes were made
+   - Why the changes were made
+   - Any relevant issue numbers (e.g., `Closes #123`)
+   - Screenshots (if UI changes)
+
+3. **Checklist before submitting:**
+   - [ ] Code follows the project's coding standards
+   - [ ] All tests pass (if applicable)
+   - [ ] No linting errors
+   - [ ] PR targets `development` branch (not `main`)
+   - [ ] Commit messages are clear and descriptive
+
+4. **Review Process:**
+   - At least one approval is required before merging
+   - Address all review comments before merging
+   - Squash commits if necessary to keep history clean
+
+### Commit Message Convention
+
+Follow the conventional commits format:
+
+```
+<type>: <short description>
+
+[optional body]
+[optional footer]
+```
+
+**Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, etc.)
+- `refactor`: Code refactoring
+- `chore`: Maintenance tasks
+- `test`: Adding or updating tests
+
 ## License
 
 This project is proprietary and intended for Adwait Artha LLP.
