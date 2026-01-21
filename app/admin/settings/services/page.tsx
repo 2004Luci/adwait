@@ -22,7 +22,7 @@ export default async function ServicesSettingsPage() {
   // If services come from DB, they should already have string icons
   // If from constants.ts, we need to convert icon components to strings
   const currentServices = servicesSetting?.value
-    ? (servicesSetting.value as Array<{ icon: string;[key: string]: unknown }>)
+    ? (servicesSetting.value as Array<{ id: string; icon: string; title: string; description: string; features: string[]; color: string; slug: string }>)
     : serializeServices(services);
 
   const currentServiceList = serviceListSetting?.value || serviceList;
@@ -33,7 +33,7 @@ export default async function ServicesSettingsPage() {
   return (
     <ServicesSettingsClient
       user={session.user}
-      initialServices={currentServices}
+      initialServices={currentServices as Array<{ id: string; icon: string; title: string; description: string; features: string[]; color: string; slug: string }>}
       initialServiceList={currentServiceList as string[]}
       defaultServices={defaultServicesSerialized}
       defaultServiceList={serviceList}
