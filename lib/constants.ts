@@ -47,6 +47,10 @@ import type {
   AdvisoryArea,
 } from "./constants.types";
 
+// ==================== SITE CONFIGURATION ====================
+
+export const SITE_URL = "https://adwaitartha.com";
+
 // ==================== CONTACT INFORMATION ====================
 const companyEmails = [
   "contact@adwaitartha.com",

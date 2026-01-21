@@ -1,0 +1,11 @@
+# Robots.txt for Adwait Artha LLP
+# Website: https://adwaitartha.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://adwaitartha.com/sitemap.xml
+
+# Disallow admin or private routes if any
+# Disallow: /api/
