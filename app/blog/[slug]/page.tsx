@@ -5,9 +5,11 @@ import { getPublishedPostBySlug, getPosts } from "@/lib/db/posts";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 import { Button } from "../../components/ui/button";
-import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
+import { Calendar, User, ArrowLeft } from "lucide-react";
 import { format } from "date-fns";
 import { SITE_URL } from "@/lib/constants";
+import { ShareButton } from "./ShareButton";
+import { JSX } from "react";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -40,13 +42,13 @@ export async function generateMetadata({
       authors: post.author?.name ? [post.author.name] : undefined,
       images: post.featured_image
         ? [
-            {
-              url: post.featured_image,
-              width: 1200,
-              height: 630,
-              alt: post.title,
-            },
-          ]
+          {
+            url: post.featured_image,
+            width: 1200,
+            height: 630,
+            alt: post.title,
+          },
+        ]
         : undefined,
     },
     twitter: {
@@ -152,20 +154,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               )}
 
-              <button
-                onClick={() => {
-                  if (typeof navigator !== "undefined" && navigator.share) {
-                    navigator.share({
-                      title: post.title,
-                      url: window.location.href,
-                    });
-                  }
-                }}
-                className="flex items-center gap-2 hover:text-sage-700 transition-colors"
-              >
-                <Share2 className="h-4 w-4" />
-                <span>Share</span>
-              </button>
+              <ShareButton title={post.title} />
             </div>
           </header>
 
