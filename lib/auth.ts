@@ -146,7 +146,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: token.email as string,
           name: (token.name as string) || null,
           role: token.role as AdminUserRole,
-        };
+          emailVerified: null, // Not using email verification with JWT strategy
+        } as typeof session.user;
       }
       return session;
     },
