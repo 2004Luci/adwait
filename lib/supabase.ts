@@ -1,17 +1,21 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Validate environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrlRaw = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKeyRaw = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl) {
+if (!supabaseUrlRaw) {
   throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL environment variable");
 }
 
-if (!supabaseAnonKey) {
+if (!supabaseAnonKeyRaw) {
   throw new Error("Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable");
 }
+
+// Type-safe validated values
+const supabaseUrl: string = supabaseUrlRaw;
+const supabaseAnonKey: string = supabaseAnonKeyRaw;
 
 /**
  * Supabase client for client-side operations.
@@ -35,7 +39,8 @@ export function getSupabaseAdmin() {
     return null;
   }
 
-  return createClient(supabaseUrl, supabaseServiceKey, {
+  // TypeScript now knows supabaseServiceKey is string after the check above
+  return createClient(supabaseUrl, supabaseServiceKey as string, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
