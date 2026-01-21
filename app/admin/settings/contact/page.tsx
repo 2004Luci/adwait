@@ -41,7 +41,7 @@ export default async function ContactSettingsPage() {
   // If contactInfo comes from DB, icons should already be strings
   // If from constants.ts, convert icon components to strings
   const currentContactInfo = contactInfoSetting?.value
-    ? (contactInfoSetting.value as Array<{ icon: string;[key: string]: unknown }>)
+    ? (contactInfoSetting.value as Array<{ icon: string; title: string; details: string[]; color: string; clickable?: boolean }>)
     : serializeArrayWithIcon(contactInfo);
 
   // Serialize default contactInfo for client component
@@ -56,7 +56,7 @@ export default async function ContactSettingsPage() {
       initialBusinessHours={currentBusinessHours as string}
       initialCompanyEmails={currentCompanyEmails as string[]}
       initialOfficeMapsUrl={currentOfficeMapsUrl as string}
-      initialContactInfo={currentContactInfo}
+      initialContactInfo={currentContactInfo as Array<{ icon: string; title: string; details: string[]; color: string; clickable?: boolean }>}
       defaultContactEmail={contactEmail}
       defaultContactPhone={contactPhone}
       defaultContactAddress={contactAddress}

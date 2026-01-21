@@ -26,10 +26,10 @@ export default async function ExpertiseSettingsPage() {
   // If data comes from DB, icons should already be strings
   // If from constants.ts, convert icon components to strings
   const currentExpertiseProcessSteps = expertiseProcessStepsSetting?.value
-    ? (expertiseProcessStepsSetting.value as Array<{ icon: string;[key: string]: unknown }>)
+    ? (expertiseProcessStepsSetting.value as Array<{ icon: string; title: string; description: string; details: string[]; color: string }>)
     : serializeArrayWithIcon(expertiseProcessSteps);
   const currentProcessSteps = processStepsSetting?.value
-    ? (processStepsSetting.value as Array<{ icon: string;[key: string]: unknown }>)
+    ? (processStepsSetting.value as Array<{ icon: string; number: string; title: string; description: string }>)
     : serializeArrayWithIcon(processSteps);
 
   // Serialize defaults for client component
@@ -40,8 +40,8 @@ export default async function ExpertiseSettingsPage() {
     <ExpertiseSettingsClient
       user={session.user}
       initialExpertiseAreas={currentExpertiseAreas as typeof expertiseAreas}
-      initialExpertiseProcessSteps={currentExpertiseProcessSteps}
-      initialProcessSteps={currentProcessSteps}
+      initialExpertiseProcessSteps={currentExpertiseProcessSteps as Array<{ icon: string; title: string; description: string; details: string[]; color: string }>}
+      initialProcessSteps={currentProcessSteps as Array<{ icon: string; number: string; title: string; description: string }>}
       defaultExpertiseAreas={expertiseAreas}
       defaultExpertiseProcessSteps={defaultExpertiseProcessStepsSerialized}
       defaultProcessSteps={defaultProcessStepsSerialized}

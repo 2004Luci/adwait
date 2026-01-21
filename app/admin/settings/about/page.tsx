@@ -26,7 +26,7 @@ export default async function AboutSettingsPage() {
     ? (partnersSetting.value as typeof partners)
     : partners;
   const currentAchievements = achievementsSetting?.value
-    ? (achievementsSetting.value as Array<{ icon: string;[key: string]: unknown }>)
+    ? (achievementsSetting.value as Array<{ icon: string; title: string; description: string; color: string }>)
     : serializeArrayWithIcon(achievements);
   const currentClientLogos = clientLogosSetting?.value || clientLogos;
 
@@ -37,7 +37,7 @@ export default async function AboutSettingsPage() {
     <AboutSettingsClient
       user={session.user}
       initialPartners={currentPartners as typeof partners}
-      initialAchievements={currentAchievements}
+      initialAchievements={currentAchievements as Array<{ icon: string; title: string; description: string; color: string }>}
       initialClientLogos={currentClientLogos as string[]}
       defaultPartners={partners}
       defaultAchievements={defaultAchievementsSerialized}
