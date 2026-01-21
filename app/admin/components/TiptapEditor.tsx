@@ -300,6 +300,7 @@ export function TiptapEditor({
     ],
     content: content || "",
     editable,
+    immediatelyRender: false, // Prevent SSR hydration mismatches
     onUpdate: ({ editor }) => {
       if (onChange) {
         onChange(editor.getJSON());
