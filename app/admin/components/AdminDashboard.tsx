@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { AdminSidebar } from "./AdminSidebar";
 import {
   Card,
@@ -17,7 +18,11 @@ import {
   Settings,
   Plus,
   ArrowRight,
+  Calendar,
+  Edit,
+  ExternalLink,
 } from "lucide-react";
+import { format } from "date-fns";
 
 interface AdminUser {
   id: string;
@@ -28,6 +33,21 @@ interface AdminUser {
 
 interface AdminDashboardProps {
   user: AdminUser;
+}
+
+interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  status: "draft" | "published";
+  published_at: string | null;
+  created_at: string;
+  author: {
+    id: string;
+    name: string | null;
+    email: string;
+  } | null;
 }
 
 const quickActions = [
@@ -63,6 +83,26 @@ const quickActions = [
 
 export function AdminDashboard({ user }: AdminDashboardProps) {
   const greeting = getGreeting();
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchRecentPosts() {
+      try {
+        const response = await fetch("/api/admin/posts?limit=3");
+        if (response.ok) {
+          const data = await response.json();
+          setPosts(data.posts || []);
+        }
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchRecentPosts();
+  }, []);
 
   return (
     <div className="flex min-h-screen">
@@ -188,7 +228,7 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
           </Card>
         </section>
 
-        {/* Recent Activity Placeholder */}
+        {/* Recent Posts */}
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
@@ -202,22 +242,97 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
             </Button>
           </div>
           <Card>
-            <CardContent className="py-12">
-              <div className="text-center">
-                <FileText className="h-12 w-12 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-                <h3 className="font-medium text-slate-900 dark:text-white mb-1">
-                  No posts yet
-                </h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-                  Create your first blog post to get started
-                </p>
-                <Button asChild>
-                  <Link href="/admin/posts/new">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Create Post
-                  </Link>
-                </Button>
-              </div>
+            <CardContent className={posts.length === 0 ? "py-12" : "p-6"}>
+              {isLoading ? (
+                <div className="text-center py-8">
+                  <div className="animate-pulse space-y-4">
+                    <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4 mx-auto" />
+                    <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2 mx-auto" />
+                  </div>
+                </div>
+              ) : posts.length === 0 ? (
+                <div className="text-center">
+                  <FileText className="h-12 w-12 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
+                  <h3 className="font-medium text-slate-900 dark:text-white mb-1">
+                    No posts yet
+                  </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Create your first blog post to get started
+                  </p>
+                  <Button asChild>
+                    <Link href="/admin/posts/new">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Create Post
+                    </Link>
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {posts.map((post) => (
+                    <div
+                      key={post.id}
+                      className="flex items-start justify-between gap-4 p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-medium text-slate-900 dark:text-white truncate">
+                            {post.title}
+                          </h3>
+                          <span
+                            className={`px-2 py-0.5 text-xs font-medium rounded ${post.status === "published"
+                              ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                              : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                              }`}
+                          >
+                            {post.status.charAt(0).toUpperCase() + post.status.slice(1)}
+                          </span>
+                        </div>
+                        {post.excerpt && (
+                          <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-2">
+                            {post.excerpt}
+                          </p>
+                        )}
+                        <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+                          {post.published_at && (
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-3 w-3" />
+                              <time>
+                                {format(
+                                  new Date(post.published_at),
+                                  "MMM d, yyyy"
+                                )}
+                              </time>
+                            </div>
+                          )}
+                          {post.author && (
+                            <span>
+                              by {post.author.name || post.author.email}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <Button variant="ghost" size="sm" asChild>
+                          <Link href={`/admin/posts/${post.id}`}>
+                            <Edit className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                        {post.status === "published" && (
+                          <Button variant="ghost" size="sm" asChild>
+                            <Link
+                              href={`/blog/${post.slug}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
         </section>
