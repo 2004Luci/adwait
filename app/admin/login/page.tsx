@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -17,11 +17,9 @@ import {
 import { AlertCircle, Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
 
 /**
- * Admin Login Page
- *
- * Handles authentication for CMS administrators using email/password.
+ * Login Form Component (uses useSearchParams)
  */
-export default function AdminLoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/admin";
@@ -190,5 +188,31 @@ export default function AdminLoginPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+/**
+ * Admin Login Page
+ *
+ * Handles authentication for CMS administrators using email/password.
+ */
+export default function AdminLoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sage-900 via-slate-900 to-sage-800">
+          <Card className="w-full max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-2xl border-sage-200/20">
+            <CardContent className="py-12">
+              <div className="text-center">
+                <Loader2 className="h-8 w-8 animate-spin mx-auto text-sage-600" />
+                <p className="mt-4 text-sage-600 dark:text-sage-400">Loading...</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }
