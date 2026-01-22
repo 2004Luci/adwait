@@ -88,6 +88,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  icons: {
+    icon: [
+      { url: "/logo-symbol-nobg.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/logo-symbol-nobg.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
 };
 
 // JSON-LD structured data for better search engine understanding
@@ -219,6 +229,10 @@ export default function RootLayout({
         <link rel="canonical" href={SITE_URL} />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#1a365d" />
+        {/* Favicon links for better search engine recognition */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/logo-symbol-nobg.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo-symbol-nobg.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
