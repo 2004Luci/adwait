@@ -512,6 +512,7 @@ const footerLinks: FooterLinks = {
     { name: "Testimonials", href: "#testimonials" },
     { name: "Careers", href: "/careers" },
     { name: "Contact", href: "#contact" },
+    { name: "Sandip Sheth & Associates", href: "https://www.ssacs.in" },
   ],
   resources: ["Blog", "Newsletter", "Whitepapers", "Webinars", "FAQ", "Support"],
   legal: [
