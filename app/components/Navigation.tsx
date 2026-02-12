@@ -40,7 +40,6 @@ const Navigation = () => {
 
     const runScrollLogic = () => {
       const currentScrollY = window.scrollY;
-      console.log("currentScrollY", currentScrollY);
       const lastScrollY = lastScrollYRef.current;
 
       // Check if at top of page
