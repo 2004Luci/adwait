@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { navItems } from "@/lib/constants";
+
+const THROTTLE_MS = 100;
 
 const Navigation = () => {
   const router = useRouter();
@@ -13,12 +15,32 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
+
+  const lastScrollYRef = useRef(0);
+  const throttleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastRunRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      const now = Date.now();
+      if (now - lastRunRef.current < THROTTLE_MS) {
+        if (!throttleTimeoutRef.current) {
+          throttleTimeoutRef.current = setTimeout(() => {
+            throttleTimeoutRef.current = null;
+            lastRunRef.current = Date.now();
+            runScrollLogic();
+          }, THROTTLE_MS);
+        }
+        return;
+      }
+      lastRunRef.current = now;
+      runScrollLogic();
+    };
+
+    const runScrollLogic = () => {
       const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
 
       // Check if at top of page
       setIsAtTop(currentScrollY <= 50);
@@ -40,12 +62,17 @@ const Navigation = () => {
         setIsVisible(false);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (throttleTimeoutRef.current) {
+        clearTimeout(throttleTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
