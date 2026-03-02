@@ -32,6 +32,7 @@ interface Partner {
   name: string;
   role: string;
   image: string;
+  tempImage: string;
   expertise: string[];
   experience: string;
   description: string;
@@ -73,6 +74,7 @@ interface Testimonial {
   rating: number;
   content: string;
   image: string;
+  tempImage: string;
 }
 
 interface CaseStudy {

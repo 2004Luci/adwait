@@ -21,7 +21,7 @@ import { Label } from "./ui/label";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { toast } from "sonner";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { cn } from "./ui/utils";
 import {
@@ -38,8 +38,14 @@ interface SchedulingModalProps {
   onClose: () => void;
 }
 
+function getCountryCode(phoneNumber: string): number {
+  const phone = parsePhoneNumber(phoneNumber);
+  return Number(phone?.countryCallingCode) ?? 91;
+}
+
 export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
   const [step, setStep] = useState<number>(1);
+  const [isDatePopoverOpen, setIsDatePopoverOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<ScheduleDetails["date"] | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<ScheduleDetails["time"]>("");
   const [name, setName] = useState<PersonalDetails["name"]>("");
@@ -56,6 +62,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
 
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
+    setIsDatePopoverOpen(false);
     setSelectedTime(""); // Reset time when date changes
   };
 
@@ -225,7 +232,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                 >
                   <User className="w-4 h-4" />
                 </div>
-                <div className={`w-12 h-0.5 ${step >= 2 ? "bg-sage-600" : "bg-sage-700"}`}></div>
+                <div className={`w-12 h-0.5 ${step >= 2 ? "bg-sage-600" : "bg-sage-700"}`} />
                 <div
                   className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
                     step >= 2
@@ -340,13 +347,16 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   {/* Date Selection */}
                   <div>
                     <Label className="text-sage-200 mb-3 block">Select Date *</Label>
-                    <Popover>
+                    <Popover
+                      open={isDatePopoverOpen}
+                      onOpenChange={(open) => setIsDatePopoverOpen(open)}
+                    >
                       <PopoverTrigger asChild>
                         <Button
                           variant="outline"
                           data-empty={!selectedDate}
                           className={cn(
-                            "w-full justify-start text-left font-normal bg-sage-800 border-sage-700 text-sage-200 hover:bg-sage-700 hover:border-sage-600",
+                            "w-full justify-start text-left font-normal bg-sage-800 border-sage-700 text-sage-300 hover:bg-sage-700 hover:border-sage-600 hover:text-white cursor-pointer",
                             !selectedDate && "text-sage-400"
                           )}
                         >
@@ -367,7 +377,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           selected={selectedDate}
                           onSelect={handleDateSelect}
                           disabled={disabledDays}
-                          initialFocus
+                          autoFocus
                           className="bg-sage-800"
                           classNames={{
                             months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
@@ -450,7 +460,9 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                         </div>
                         <div className="flex items-center gap-2">
                           <Clock className="w-4 h-4 text-sage-400" />
-                          <span className="text-sage-300">Time: {selectedTime}</span>
+                          <span className="text-sage-300">
+                            Time: {selectedTime} {getCountryCode(phone) != 91 ? "IST" : ""}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -466,7 +478,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   <Button
                     onClick={resetForm}
                     variant="outline"
-                    className="cursor-pointer flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
+                    className="cursor-pointer flex-1 border-sage-700 text-sage-300 hover:bg-sage-800 hover:text-white"
                   >
                     Cancel
                   </Button>
@@ -486,7 +498,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   <Button
                     onClick={handleBack}
                     variant="outline"
-                    className="cursor-pointer flex-1 border-sage-700 text-sage-200 hover:bg-sage-800"
+                    className="cursor-pointer flex-1 border-sage-700 text-sage-300 hover:bg-sage-800 hover:text-white"
                   >
                     <div className="flex items-center gap-2">
                       <ArrowLeft className="w-4 h-4" />
@@ -500,7 +512,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                   >
                     {isSubmitting ? (
                       <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-sage-900 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-4 h-4 border-2 border-sage-900 border-t-transparent rounded-full animate-spin" />
                         Scheduling...
                       </div>
                     ) : (

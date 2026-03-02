@@ -172,9 +172,10 @@ const AboutSection = () => {
               >
                 <div className="flex items-start space-x-6">
                   <ImageWithFallback
-                    src={partner.image}
+                    // src={partner.image}
+                    src={partner.tempImage}
                     alt={partner.name}
-                    className="w-24 h-24 rounded-full object-cover"
+                    className="w-24 h-24 rounded-full object-cover object-top"
                   />
                   <div className="flex-1">
                     <h4 className="text-xl font-bold text-sage-100 mb-2">{partner.name}</h4>
