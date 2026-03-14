@@ -52,7 +52,7 @@ const CareersPage = () => {
             />
           </h1>
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
-            Build your career with Adwait Artha LLP and be part of a team that's shaping the future
+            Build your career with Adwait Artha LLP and be part of a team that&apos;s shaping the future
             of legal and financial services in India.
           </p>
         </motion.div>
@@ -194,9 +194,9 @@ const CareersPage = () => {
             viewport={{ once: true }}
             className="text-center bg-sage-800/30 backdrop-blur-sm rounded-2xl p-12 border border-sage-700/30"
           >
-            <h2 className="text-3xl font-bold text-sage-50 mb-4">Don't See the Right Fit?</h2>
+            <h2 className="text-3xl font-bold text-sage-50 mb-4">Don&apos;t See the Right Fit?</h2>
             <p className="text-lg text-sage-300 mb-8">
-              We're always looking for talented professionals. Send us your resume and we'll keep
+              We&apos;re always looking for talented professionals. Send us your resume and we&apos;ll keep
               you in mind for future opportunities.
             </p>
             <div className="flex justify-center">

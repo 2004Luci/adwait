@@ -84,7 +84,7 @@ const ContactSection = () => {
     }
   };
 
-  const onError = (errors: any) => {
+  const onError = (errors: Record<string, unknown>) => {
     const errorCount = Object.keys(errors).length;
     toast.error(`Please fix ${errorCount} error${errorCount > 1 ? "s" : ""} in the form`, {
       description: "Please review the highlighted fields and correct the errors.",
@@ -141,7 +141,7 @@ const ContactSection = () => {
                 <CheckCircle className="w-16 h-16 text-sage-200 mx-auto mb-4" />
                 <h4 className="text-xl font-semibold text-sage-100 mb-2">Message Sent!</h4>
                 <p className="text-sage-300">
-                  Thank you for contacting us. We'll get back to you soon.
+                  Thank you for contacting us. We&apos;ll get back to you soon.
                 </p>
               </motion.div>
             ) : (
@@ -313,7 +313,7 @@ const ContactSection = () => {
               <h3 className="text-2xl font-bold text-sage-100 mb-6">Contact Information</h3>
               <p className="text-sage-300 leading-relaxed mb-8">
                 Get in touch with our expert team for personalized financial advisory services.
-                We're here to help you navigate complex financial landscapes with confidence.
+                We&apos;re here to help you navigate complex financial landscapes with confidence.
               </p>
             </div>
             <div className="space-y-6">
