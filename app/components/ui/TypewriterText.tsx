@@ -23,6 +23,7 @@ export function TypewriterText({
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!phrases || phrases.length === 0) return;
     const currentPhrase = phrases[currentPhraseIndex];
 
     if (!isDeleting) {
