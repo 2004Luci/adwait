@@ -1,11 +1,10 @@
-import { NextResponse } from "next/server";
-import { getClientIP } from "@/lib/utils";
+import { NextRequest, NextResponse } from "next/server";
 import { arcjetConfig } from "@/lib/arcjet";
 
-export async function GET(req: Request) {
-  const clientIP = getClientIP(req);
-  const decision = await arcjetConfig.protect(req, { ip: clientIP, requested: 1 });
+export async function GET(req: NextRequest) {
+  const decision = await arcjetConfig.protect(req, { requested: 1 });
   console.log("Arcjet decision", decision);
+  console.log("Client IP detected by Arcjet:", decision.ip);
 
   if (decision.isDenied()) {
     // Handle bot detection or rate limiting

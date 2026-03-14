@@ -19,7 +19,7 @@ export const arcjetConfig = arcjet({
     // Rate limiting for contact form submissions (4 emails per submission)
     tokenBucket({
       mode: ruleMode,
-      characteristics: ["ip"],
+      characteristics: ["ip.src"],
       refillRate: 12, // Refill 12 tokens per interval (3 submissions × 4 emails)
       interval: 60,
       capacity: 12,
@@ -27,7 +27,7 @@ export const arcjetConfig = arcjet({
     // Rate limiting for scheduling consultation (4 emails per submission)
     tokenBucket({
       mode: ruleMode,
-      characteristics: ["ip"],
+      characteristics: ["ip.src"],
       refillRate: 8, // Refill 8 tokens per interval (2 submissions × 4 emails)
       interval: 300,
       capacity: 8,

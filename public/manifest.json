@@ -1,0 +1,23 @@
+{
+  "name": "Adwait Artha LLP",
+  "short_name": "Adwait Artha",
+  "description": "Premier financial advisory firm providing IPO advisory, loan syndication, corporate law, and comprehensive financial services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a365d",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "categories": ["business", "finance"]
+}

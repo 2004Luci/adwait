@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { navItems } from "@/lib/constants";
+
+const THROTTLE_MS = 100;
 
 const Navigation = () => {
   const router = useRouter();
@@ -13,12 +15,32 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
+
+  const lastScrollYRef = useRef(0);
+  const throttleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastRunRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      const now = Date.now();
+      if (now - lastRunRef.current < THROTTLE_MS) {
+        if (!throttleTimeoutRef.current) {
+          throttleTimeoutRef.current = setTimeout(() => {
+            throttleTimeoutRef.current = null;
+            lastRunRef.current = Date.now();
+            runScrollLogic();
+          }, THROTTLE_MS);
+        }
+        return;
+      }
+      lastRunRef.current = now;
+      runScrollLogic();
+    };
+
+    const runScrollLogic = () => {
       const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
 
       // Check if at top of page
       setIsAtTop(currentScrollY <= 50);
@@ -40,12 +62,17 @@ const Navigation = () => {
         setIsVisible(false);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (throttleTimeoutRef.current) {
+        clearTimeout(throttleTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -76,30 +103,35 @@ const Navigation = () => {
                 </motion.div>
 
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center space-x-8">
+                <div className="hidden md:flex items-center gap-6 lg:gap-8 min-w-0 flex-1 justify-end overflow-x-auto">
                   {navItems.map((item) => {
                     return (
                       <motion.a
                         key={item.name}
                         href={item.href}
                         whileHover={{ y: -2 }}
-                        className="text-sage-100 hover:text-sage-200 px-3 py-2 font-medium transition-colors relative group"
+                        className="text-sage-100 hover:text-sage-200 px-2 py-2 font-medium transition-colors relative group whitespace-nowrap flex-shrink-0"
                       >
                         {item.name}
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300" />
                       </motion.a>
                     );
                   })}
-                  <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(200, 180, 160, 0.3)" }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      window.location.href = "/#contact";
-                    }}
-                    className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
-                  >
-                    Get Started
-                  </motion.button>
+                  <div className="overflow-hidden rounded-xl flex-shrink-0 py-0.5">
+                    <motion.button
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0 10px 25px rgba(200, 180, 160, 0.3)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        window.location.href = "/#contact";
+                      }}
+                      className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium whitespace-nowrap"
+                    >
+                      Get Started
+                    </motion.button>
+                  </div>
                 </div>
 
                 {/* Mobile menu button */}
@@ -164,57 +196,61 @@ const Navigation = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-sage-900/95 backdrop-blur-md shadow-2xl border-2 border-sage-200/30 rounded-2xl overflow-hidden"
-            style={{ minWidth: "320px", maxWidth: "95vw" }}
+            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-sage-900/95 backdrop-blur-md shadow-2xl border-2 border-sage-200/30 rounded-2xl overflow-hidden min-w-[320px] w-max max-w-[95vw]"
           >
-            <div className="px-4 py-2">
-              <div className="flex items-center justify-between">
+            <div className="px-4 pt-3 pb-3">
+              <div className="flex items-center justify-between gap-3 h-14 min-w-0">
                 {/* Logo - smaller version for floating navbar */}
-                <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
-                  <div className="rounded-lg flex items-center justify-center shadow-lg overflow-hidden bg-sage-800/50 backdrop-blur-sm border border-sage-700/30">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex flex-shrink-0 items-center h-full"
+                >
+                  <div className="rounded-lg flex items-center justify-center shadow-lg overflow-hidden bg-sage-800/50 backdrop-blur-sm border border-sage-700/30 h-11 w-auto">
                     <Image
                       src="/logo.jpg"
                       alt="Adwait Artha LLP Logo"
-                      className="w-auto object-contain cursor-pointer"
+                      className="block w-auto h-full object-contain cursor-pointer object-center"
                       width={120}
-                      height={60}
+                      height={44}
                       onClick={() => router.push("/")}
                     />
                   </div>
                 </motion.div>
 
-                {/* Desktop Navigation - compact spacing */}
-                <div className="hidden lg:flex items-center space-x-4 ml-4 flex-shrink-0">
+                {/* Desktop Navigation - compact spacing, scrolls when needed */}
+                <div className="hidden lg:flex items-center gap-3 ml-2 min-w-0 overflow-x-auto flex-1 justify-end">
                   {navItems.map((item) => {
                     return (
                       <motion.a
                         key={item.name}
                         href={item.href}
                         whileHover={{ y: -1 }}
-                        className="text-sage-100 hover:text-sage-200 px-2 py-1 text-sm font-medium transition-colors relative group whitespace-nowrap"
+                        className="text-sage-100 hover:text-sage-200 px-2 py-1 text-sm font-medium transition-colors relative group whitespace-nowrap flex-shrink-0"
                       >
                         {item.name}
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-sage-200 to-sage-300 group-hover:w-full transition-all duration-300" />
                       </motion.a>
                     );
                   })}
-                  <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(200, 180, 160, 0.3)" }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      window.location.href = "/#contact";
-                    }}
-                    className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm ml-2 whitespace-nowrap"
-                  >
-                    Get Started
-                  </motion.button>
+                  <div className="overflow-hidden rounded-lg flex-shrink-0 py-0.5">
+                    <motion.button
+                      whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(200, 180, 160, 0.3)" }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        window.location.href = "/#contact";
+                      }}
+                      className="cursor-pointer bg-gradient-to-r from-sage-200 to-sage-300 text-sage-900 px-4 py-1.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm whitespace-nowrap"
+                    >
+                      Get Started
+                    </motion.button>
+                  </div>
                 </div>
 
                 {/* Mobile menu button - smaller for floating navbar */}
-                <div className="lg:hidden ml-4 flex items-center">
+                <div className="lg:hidden ml-4 flex flex-shrink-0 items-center h-14 justify-center">
                   <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="text-sage-100 hover:text-sage-200 transition-colors p-1.5 rounded-lg hover:bg-sage-800/50"
+                    className="text-sage-100 hover:text-sage-200 transition-colors p-1.5 rounded-lg hover:bg-sage-800/50 flex items-center justify-center"
                   >
                     {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                   </button>
@@ -227,7 +263,7 @@ const Navigation = () => {
                 animate={
                   isMobileMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }
                 }
-                className="lg:hidden overflow-hidden bg-sage-800/50 backdrop-blur-md rounded-xl mt-2 border border-sage-700/30 shadow-lg"
+                className={`lg:hidden overflow-hidden bg-sage-800/50 backdrop-blur-md rounded-xl border border-sage-700/30 shadow-lg ${isMobileMenuOpen ? "mt-2" : ""}`}
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">
                   {navItems.map((item) => {

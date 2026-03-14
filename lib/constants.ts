@@ -47,6 +47,10 @@ import type {
   AdvisoryArea,
 } from "./constants.types";
 
+// ==================== SITE CONFIGURATION ====================
+
+export const SITE_URL = "https://adwaitartha.com";
+
 // ==================== CONTACT INFORMATION ====================
 const companyEmails = [
   "contact@adwaitartha.com",
@@ -100,7 +104,7 @@ const navItems: NavItem[] = [
   { name: "Home", href: "#home", icon: Home },
   { name: "Services", href: "/services", icon: Briefcase },
   { name: "Expertise", href: "#expertise", icon: Award },
-  { name: "Careers", href: "/careers", icon: Users },
+  // { name: "Careers", href: "/careers", icon: Users },
   { name: "About", href: "#about", icon: User },
   { name: "Contact", href: "#contact", icon: Phone },
 ];
@@ -426,20 +430,20 @@ const processSteps: ProcessStepItem[] = [
 
 // ==================== TESTIMONIALS SECTION ====================
 const testimonials: Testimonial[] = [
+  // {
+  //   name: "Rajesh Kumar",
+  //   position: "CEO, Stovec Industries",
+  //   company: "Stovec Industries (MNC)",
+  //   rating: 5,
+  //   content:
+  //     "Adwait Artha LLP guided us through our IPO process with exceptional expertise. Their understanding of regulatory requirements and market dynamics was instrumental in our successful listing.",
+  //   image:
+  //     "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
+  //   tempImage: "/photo3.jpg",
+  // },
   {
-    name: "Rajesh Kumar",
-    position: "CEO, Stovec Industries",
-    company: "Stovec Industries (MNC)",
-    rating: 5,
-    content:
-      "Adwait Artha LLP guided us through our IPO process with exceptional expertise. Their understanding of regulatory requirements and market dynamics was instrumental in our successful listing.",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
-    tempImage: "/photo3.jpg",
-  },
-  {
-    name: "Priya Sharma",
-    position: "CFO, Accent Microcell",
+    name: "Ghanshyam Patel",
+    position: "CEO, Accent Microcell",
     company: "Accent Microcell (NSE Emerge)",
     rating: 5,
     content:
@@ -448,17 +452,17 @@ const testimonials: Testimonial[] = [
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
     tempImage: "/photo3.jpg",
   },
-  {
-    name: "Arjun Patel",
-    position: "Managing Director, Diamines & Chemicals",
-    company: "Diamines & Chemicals (NSE/BSE)",
-    rating: 5,
-    content:
-      "Outstanding corporate law services and regulatory compliance support. Their expertise in SEBI matters and corporate governance has been invaluable for our dual listing.",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    tempImage: "/photo3.jpg",
-  },
+  // {
+  //   name: "Arjun Patel",
+  //   position: "Managing Director, Diamines & Chemicals",
+  //   company: "Diamines & Chemicals (NSE/BSE)",
+  //   rating: 5,
+  //   content:
+  //     "Outstanding corporate law services and regulatory compliance support. Their expertise in SEBI matters and corporate governance has been invaluable for our dual listing.",
+  //   image:
+  //     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+  //   tempImage: "/photo3.jpg",
+  // },
 ];
 
 const caseStudies: CaseStudy[] = [
@@ -508,6 +512,7 @@ const footerLinks: FooterLinks = {
     { name: "Testimonials", href: "#testimonials" },
     { name: "Careers", href: "/careers" },
     { name: "Contact", href: "#contact" },
+    { name: "Sandip Sheth & Associates", href: "https://www.ssacs.in" },
   ],
   resources: ["Blog", "Newsletter", "Whitepapers", "Webinars", "FAQ", "Support"],
   legal: [

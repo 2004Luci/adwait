@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { ContactEmailTemplate } from "@/app/components/contact-email-template";
 import { Resend } from "resend";
 import { arcjetConfig } from "@/lib/arcjet";
-import { getClientIP } from "@/lib/utils";
 import { companyEmails } from "@/lib/constants";
 import { env } from "@/lib/env";
 
@@ -19,9 +18,7 @@ interface ContactRequest {
 
 export async function POST(request: NextRequest) {
   try {
-    const clientIP = getClientIP(request);
     const decision = await arcjetConfig.protect(request, {
-      ip: clientIP,
       requested: 4, // Deduct 4 tokens for contact form submission (3 company emails + 1 user email)
     });
 

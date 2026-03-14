@@ -145,6 +145,8 @@ const Footer = () => {
                           router.push(item.href);
                         }
                       }}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     >
                       {item.name}
                     </a>
