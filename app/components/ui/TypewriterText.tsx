@@ -18,11 +18,12 @@ export function TypewriterText({
   deletingSpeed = 50,
   pauseTime = 2000,
 }: TypewriterTextProps) {
-  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState<number>(0);
+  const [currentText, setCurrentText] = useState<string>("");
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!phrases || phrases.length === 0) return;
     const currentPhrase = phrases[currentPhraseIndex];
 
     if (!isDeleting) {
@@ -47,9 +48,17 @@ export function TypewriterText({
         }, deletingSpeed);
         return () => clearTimeout(timeout);
       } else {
-        // Finished deleting, move to next phrase
-        setIsDeleting(false);
-        setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+        // Finished deleting, move to next phrase - defer setState to avoid cascading renders
+        let cancelled = false;
+        queueMicrotask(() => {
+          if (!cancelled) {
+            setIsDeleting(false);
+            setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+          }
+        });
+        return () => {
+          cancelled = true;
+        };
       }
     }
   }, [currentText, isDeleting, currentPhraseIndex, phrases, typingSpeed, deletingSpeed, pauseTime]);
