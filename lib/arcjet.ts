@@ -4,8 +4,12 @@ import { env, isLocal } from "@/lib/env";
 // Use DRY_RUN mode locally to avoid blocking during testing
 const ruleMode = isLocal() ? "DRY_RUN" : "LIVE";
 
+if (!env.ARCJET_KEY) {
+  throw new Error("Missing ARCJET_KEY environment variable");
+}
+
 export const arcjetConfig = arcjet({
-  key: env.ARCJET_KEY!,
+  key: env.ARCJET_KEY,
   rules: [
     // Bot detection - Block automated clients (DRY_RUN locally for easier testing)
     detectBot({
