@@ -11,11 +11,11 @@ export type AppEnvironment = "local" | "staging" | "production";
 
 /**
  * Get the current application environment
- * Uses NEXT_PUBLIC_APP_ENV for explicit environment control,
- * falls back to NODE_ENV (production → production, else → local)
+ * Uses APP_ENV (server-only)
+ * Falls back to NODE_ENV (production → production, else → local)
  */
 export function getAppEnv(): AppEnvironment {
-  const appEnv = process.env.NEXT_PUBLIC_APP_ENV;
+  const appEnv = process.env.APP_ENV;
 
   if (appEnv === "production" || appEnv === "staging" || appEnv === "local") {
     return appEnv;
