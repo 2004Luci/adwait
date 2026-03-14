@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
+import { Star, Quote } from "lucide-react";
+// import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { ImageWithFallback } from "./ui/ImageWithFallback";
 import { BackgroundElements } from "./ui/BackgroundElements";
@@ -9,15 +10,16 @@ import { AnimatedText } from "./ui/AnimatedText";
 import { testimonials, caseStudies } from "@/lib/constants";
 
 const TestimonialsSection = () => {
-  const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
+  // const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
+  const [currentTestimonial] = useState<number>(0);
 
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
+  // const nextTestimonial = () => {
+  //   setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  // };
 
-  const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  // const prevTestimonial = () => {
+  //   setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  // };
 
   return (
     <section
@@ -48,7 +50,7 @@ const TestimonialsSection = () => {
           </h2>
           <p className="text-xl text-sage-300 max-w-3xl mx-auto">
             Hear from our valued clients about their experience working with our expert team and the
-            results we've achieved together.
+            results we&apos;ve achieved together.
           </p>
         </motion.div>
 
@@ -78,7 +80,7 @@ const TestimonialsSection = () => {
                     ))}
                   </div>
                   <blockquote className="text-sage-200 text-lg leading-relaxed mb-6">
-                    "{testimonials[currentTestimonial].content}"
+                    &quot;{testimonials[currentTestimonial].content}&quot;
                   </blockquote>
                   <div>
                     <div className="font-semibold text-sage-100">

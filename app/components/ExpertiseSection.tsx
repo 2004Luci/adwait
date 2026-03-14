@@ -7,7 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
-import { expertiseProcessSteps, expertiseAreas } from "@/lib/constants";
+import { expertiseAreas } from "@/lib/constants";
+// import { expertiseProcessSteps } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -3,16 +3,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import Link from "next/link";
-import {
-  Banknote,
-  CheckCircle,
-  ArrowLeft,
-  Phone,
-  Mail,
-  TrendingUp,
-  Building,
-  Globe,
-} from "lucide-react";
+import { Banknote, CheckCircle, ArrowLeft, Phone, Mail, Building } from "lucide-react";
 import { SchedulingModal } from "../../components/SchedulingModal";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
@@ -23,7 +14,7 @@ import {
 } from "@/lib/constants";
 
 export default function LoanSyndicationPage() {
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
@@ -87,7 +78,7 @@ export default function LoanSyndicationPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100 mb-6">Service Overview</h2>
               <p className="text-sage-300 leading-relaxed mb-6">
-                In the field of Finance, the firm's scope of work would be to assist various
+                In the field of Finance, the firm&apos;s scope of work would be to assist various
                 corporates in organizing Term Loan and Working Capital Finance and other structured
                 loan facilities (fund based and non fund based) including funding in Foreign
                 currency from Institution/ Banks for proposed project/ going concern on a best

@@ -45,7 +45,7 @@ const HeroSection = () => {
         }, 500);
         return () => clearTimeout(timer);
       }
-    }, [isVisible, number]);
+    }, [number]);
 
     return (
       <motion.div
@@ -183,8 +183,8 @@ const HeroSection = () => {
             className="space-y-6 text-center"
           >
             <p className="text-lg text-sage-300 max-w-2xl mx-auto">
-              The Firm "Adwait Artha LLP" is in the field of fund raising, equity capital market
-              (IPO's) primary market or secondary market, debt syndication, corporate law, finance,
+              The Firm &quot;Adwait Artha LLP&quot; is in the field of fund raising, equity capital market
+              (IPO&apos;s) primary market or secondary market, debt syndication, corporate law, finance,
               management audit, budgeting, legal drafting and other related areas. With 23+ years of
               experience and a team of dedicated professionals, we provide niche solutions to our
               valued clients.
@@ -257,8 +257,8 @@ const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-lg text-sage-300 max-w-2xl"
               >
-                The Firm "Adwait Artha LLP" is in the field of fund raising, equity capital market
-                (IPO's) primary market or secondary market, debt syndication, corporate law,
+                The Firm &quot;Adwait Artha LLP&quot; is in the field of fund raising, equity capital market
+                (IPO&apos;s) primary market or secondary market, debt syndication, corporate law,
                 finance, management audit, budgeting, legal drafting and other related areas. With
                 23+ years of experience and a team of dedicated professionals, we provide niche
                 solutions to our valued clients.
