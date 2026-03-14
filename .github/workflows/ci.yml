@@ -7,14 +7,43 @@ on:
     branches: [main, staging]
 
 jobs:
-  ci:
+  ci-staging:
+    name: CI (Staging)
     runs-on: ubuntu-latest
-    # Use production env for main, staging for staging branch (enables branch-specific secrets)
-    environment: ${{ (github.ref == 'refs/heads/main' || github.base_ref == 'main') && 'production' || 'staging' }}
+    # Run only on push to staging, or PR targeting staging
+    if: github.ref == 'refs/heads/staging' || github.base_ref == 'staging'
     env:
-      ARCJET_KEY: ${{ secrets.ARCJET_KEY }}
-      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-      APP_ENV: ${{ (github.ref == 'refs/heads/main' || github.base_ref == 'main') && 'production' || 'staging' }}
+      ARCJET_KEY: ${{ secrets.ARCJET_KEY_STAGING }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY_STAGING }}
+      APP_ENV: staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  ci-production:
+    name: CI (Production)
+    runs-on: ubuntu-latest
+    # Run only on push to main, or PR targeting main (e.g. staging → main)
+    if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
+    env:
+      ARCJET_KEY: ${{ secrets.ARCJET_KEY_PRODUCTION }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY_PRODUCTION }}
+      APP_ENV: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
