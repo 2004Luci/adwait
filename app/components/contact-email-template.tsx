@@ -53,7 +53,7 @@ export function ContactEmailTemplate({
             Thank you for your inquiry, {name}!
           </h2>
           <p style={{ color: "#4a5568", lineHeight: "1.6", marginBottom: "20px" }}>
-            We have received your inquiry and our expert team will review it carefully. We'll get
+            We have received your inquiry and our expert team will review it carefully. We&apos;ll get
             back to you within 24 hours with a detailed response.
           </p>
           <div
@@ -114,13 +114,13 @@ export function ContactEmailTemplate({
             <h3 style={{ margin: "0 0 10px 0" }}>What Happens Next</h3>
             <ul style={{ margin: "0", paddingLeft: "20px", opacity: "0.9" }}>
               <li>Our expert team will review your inquiry within 24 hours</li>
-              <li>We'll provide a detailed response with relevant solutions</li>
-              <li>If needed, we'll schedule a consultation call</li>
-              <li>You'll receive personalized recommendations for your needs</li>
+              <li>We&apos;ll provide a detailed response with relevant solutions</li>
+              <li>If needed, we&apos;ll schedule a consultation call</li>
+              <li>You&apos;ll receive personalized recommendations for your needs</li>
             </ul>
           </div>
           <p style={{ color: "#4a5568", lineHeight: "1.6" }}>
-            If you have any urgent questions, please don't hesitate to contact us directly at{" "}
+            If you have any urgent questions, please don&apos;t hesitate to contact us directly at{" "}
             {contactPhone}.
           </p>
         </div>

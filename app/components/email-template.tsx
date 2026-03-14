@@ -53,7 +53,7 @@ export function EmailTemplate({
             Thank you for scheduling your consultation, {clientName}!
           </h2>
           <p style={{ color: "#4a5568", lineHeight: "1.6", marginBottom: "20px" }}>
-            We're excited to discuss your financial advisory needs and explore how we can support
+            We&apos;re excited to discuss your financial advisory needs and explore how we can support
             your business growth.
           </p>
           <div
@@ -95,7 +95,7 @@ export function EmailTemplate({
           >
             <h3 style={{ margin: "0 0 10px 0" }}>What to Expect</h3>
             <p style={{ margin: "0", opacity: "0.9" }}>
-              During this call, we'll discuss your specific needs, explore potential solutions, and
+              During this call, we&apos;ll discuss your specific needs, explore potential solutions, and
               outline how our services can benefit your business.
             </p>
           </div>
@@ -103,13 +103,13 @@ export function EmailTemplate({
             <h4 style={{ color: "#2d3748", marginBottom: "10px" }}>Important Notes:</h4>
             <ul style={{ color: "#4a5568", lineHeight: "1.6", paddingLeft: "20px" }}>
               <li>Please be ready 5 minutes before the scheduled time</li>
-              <li>We'll call you at {clientPhone} for the consultation</li>
+              <li>We&apos;ll call you at {clientPhone} for the consultation</li>
               <li>Feel free to prepare any questions you may have</li>
               <li>If you need to reschedule, please contact us at least 24 hours in advance</li>
             </ul>
           </div>
           <p style={{ color: "#4a5568", lineHeight: "1.6" }}>
-            If you have any questions before the consultation, please don't hesitate to reach out to
+            If you have any questions before the consultation, please don&apos;t hesitate to reach out to
             us.
           </p>
         </div>

@@ -160,8 +160,8 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
           });
         }
       }
-    } catch (error) {
-      console.error("Error scheduling consultation:", error);
+    } catch (err) {
+      console.error("Error scheduling consultation:", err);
       toast.error("Failed to schedule consultation", {
         description:
           "Please check your internet connection and try again. If the problem persists, please contact us directly.",
@@ -303,7 +303,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                     </div>
                     {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
                     <p className="text-xs text-sage-400 mt-2">
-                      We'll call you at this number for the consultation
+                      We&apos;ll call you at this number for the consultation
                     </p>
                   </div>
 
@@ -330,7 +330,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                     </div>
                     {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
                     <p className="text-xs text-sage-400 mt-2">
-                      We'll send confirmation details to this email address
+                      We&apos;ll send confirmation details to this email address
                     </p>
                   </div>
                 </motion.div>

@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import { TrendingUp, Users, FileText, CheckCircle, ArrowLeft, Phone, Mail } from "lucide-react";
+import { TrendingUp, CheckCircle, ArrowLeft, Phone, Mail } from "lucide-react";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
 import { SchedulingModal } from "../../components/SchedulingModal";
@@ -83,7 +83,7 @@ export default function IPOSMEIPOAdvisoryPage() {
               </p>
               <p className="text-sage-300 leading-relaxed">
                 Our expertise spans both main board IPOs and SME IPOs, providing tailored solutions
-                based on your company's size, growth stage, and market positioning. We work closely
+                based on your company&apos;s size, growth stage, and market positioning. We work closely
                 with SEBI, stock exchanges, and other regulatory bodies to ensure smooth and
                 compliant listing processes.
               </p>
@@ -98,9 +98,7 @@ export default function IPOSMEIPOAdvisoryPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100">Our 6-Step IPO Process</h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {ipoProcessSteps.map((step, index) => {
-                  const IconComponent = step.icon;
-                  return (
+                {ipoProcessSteps.map((step, index) => (
                     <motion.div
                       key={step.step}
                       initial={{ opacity: 0, y: 20 }}
@@ -120,8 +118,7 @@ export default function IPOSMEIPOAdvisoryPage() {
                         </div>
                       </div>
                     </motion.div>
-                  );
-                })}
+                ))}
               </div>
             </motion.div>
           </div>

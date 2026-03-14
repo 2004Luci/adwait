@@ -10,8 +10,6 @@ import {
   Phone,
   Mail,
   TrendingUp,
-  FileText,
-  Shield,
 } from "lucide-react";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
@@ -87,8 +85,8 @@ export default function FinancialAdvisoryPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100 mb-6">Service Overview</h2>
               <p className="text-sage-300 leading-relaxed mb-6">
-                The Firm's strength lies in its partner's ability to advise on presentation of
-                financial statement, its advisory on how the financial of the client's shall be
+                The Firm&apos;s strength lies in its partner&apos;s ability to advise on presentation of
+                financial statement, its advisory on how the financial of the client&apos;s shall be
                 presented in annual statement, disclosure requirements, Governance compliance,
                 transparency and assist and advising client on structuring and restructuring of
                 financial on need based requirement.

@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import Link from "next/link";
-import { FileText, CheckCircle, Shield, ArrowLeft, Phone, Mail, Search, Users } from "lucide-react";
+import { FileText, CheckCircle, ArrowLeft, Phone, Mail } from "lucide-react";
 import { SchedulingModal } from "../../components/SchedulingModal";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";

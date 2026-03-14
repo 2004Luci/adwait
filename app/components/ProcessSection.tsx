@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Rocket } from "lucide-react";
@@ -15,13 +15,6 @@ gsap.registerPlugin(ScrollTrigger);
 const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const processLineRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 1, 1, 0.6]);
 
   useEffect(() => {
     if (!processLineRef.current) return;
@@ -42,7 +35,7 @@ const ProcessSection = () => {
     );
 
     const steps = document.querySelectorAll(".process-step");
-    steps.forEach((step, index) => {
+    steps.forEach((step) => {
       gsap.fromTo(
         step,
         { opacity: 0, y: 30 },

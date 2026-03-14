@@ -78,7 +78,7 @@ export default function LoanSyndicationPage() {
             >
               <h2 className="text-2xl font-bold text-sage-100 mb-6">Service Overview</h2>
               <p className="text-sage-300 leading-relaxed mb-6">
-                In the field of Finance, the firm's scope of work would be to assist various
+                In the field of Finance, the firm&apos;s scope of work would be to assist various
                 corporates in organizing Term Loan and Working Capital Finance and other structured
                 loan facilities (fund based and non fund based) including funding in Foreign
                 currency from Institution/ Banks for proposed project/ going concern on a best
