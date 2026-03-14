@@ -49,10 +49,16 @@ export function TypewriterText({
         return () => clearTimeout(timeout);
       } else {
         // Finished deleting, move to next phrase - defer setState to avoid cascading renders
+        let cancelled = false;
         queueMicrotask(() => {
-          setIsDeleting(false);
-          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+          if (!cancelled) {
+            setIsDeleting(false);
+            setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+          }
         });
+        return () => {
+          cancelled = true;
+        };
       }
     }
   }, [currentText, isDeleting, currentPhraseIndex, phrases, typingSpeed, deletingSpeed, pauseTime]);
