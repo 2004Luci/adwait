@@ -9,6 +9,12 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    # Use production env for main, staging for staging branch (enables branch-specific secrets)
+    environment: ${{ (github.ref == 'refs/heads/main' || github.base_ref == 'main') && 'production' || 'staging' }}
+    env:
+      ARCJET_KEY: ${{ secrets.ARCJET_KEY }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      APP_ENV: ${{ (github.ref == 'refs/heads/main' || github.base_ref == 'main') && 'production' || 'staging' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
