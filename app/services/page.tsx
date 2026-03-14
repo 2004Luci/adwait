@@ -89,7 +89,7 @@ export default function ServicesPage() {
                     <li key={featureIndex} className="flex items-center text-sage-300">
                       <div
                         className={`w-2 h-2 bg-gradient-to-r ${service.color} rounded-full mr-3`}
-                      ></div>
+                      />
                       {feature}
                     </li>
                   ))}
