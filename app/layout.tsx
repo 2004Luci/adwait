@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_URL } from "@/lib/constants";
+import { isProduction } from "@/lib/env";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -226,8 +227,8 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-        <Analytics />
-        <SpeedInsights />
+        {isProduction() && <Analytics />}
+        {isProduction() && <SpeedInsights />}
       </body>
     </html>
   );
