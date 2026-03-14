@@ -1,40 +1,49 @@
 /**
  * Environment configuration utilities
  *
- * This module provides environment-aware configuration for the application.
- * It distinguishes between development and production environments.
+ * Three environments:
+ * - local: .env.local, localhost:3000 (development branch uses this when running locally)
+ * - staging: staging branch deployments
+ * - production: main branch deployments
  */
 
-export type AppEnvironment = "development" | "production";
+export type AppEnvironment = "local" | "staging" | "production";
 
 /**
  * Get the current application environment
  * Uses NEXT_PUBLIC_APP_ENV for explicit environment control,
- * falls back to NODE_ENV
+ * falls back to NODE_ENV (production → production, else → local)
  */
 export function getAppEnv(): AppEnvironment {
   const appEnv = process.env.NEXT_PUBLIC_APP_ENV;
 
-  if (appEnv === "production" || appEnv === "development") {
+  if (appEnv === "production" || appEnv === "staging" || appEnv === "local") {
     return appEnv;
   }
 
-  // Fallback to NODE_ENV
-  return process.env.NODE_ENV === "production" ? "production" : "development";
+  // Fallback: NODE_ENV=production → production, otherwise local
+  return process.env.NODE_ENV === "production" ? "production" : "local";
 }
 
 /**
- * Check if running in production environment
+ * Check if running in production environment (main branch)
  */
 export function isProduction(): boolean {
   return getAppEnv() === "production";
 }
 
 /**
- * Check if running in development environment
+ * Check if running in staging environment (staging branch)
  */
-export function isDevelopment(): boolean {
-  return getAppEnv() === "development";
+export function isStaging(): boolean {
+  return getAppEnv() === "staging";
+}
+
+/**
+ * Check if running locally (localhost:3000, .env.local)
+ */
+export function isLocal(): boolean {
+  return getAppEnv() === "local";
 }
 
 /**
@@ -45,7 +54,8 @@ export const env = {
   // App environment
   APP_ENV: getAppEnv(),
   IS_PRODUCTION: isProduction(),
-  IS_DEVELOPMENT: isDevelopment(),
+  IS_STAGING: isStaging(),
+  IS_LOCAL: isLocal(),
 
   // API Keys (server-side only)
   RESEND_API_KEY: process.env.RESEND_API_KEY,

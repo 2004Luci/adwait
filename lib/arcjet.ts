@@ -1,13 +1,13 @@
 import arcjet, { tokenBucket, detectBot } from "@arcjet/next";
-import { env, isDevelopment } from "@/lib/env";
+import { env, isLocal } from "@/lib/env";
 
-// Use DRY_RUN mode in development to avoid blocking during testing
-const ruleMode = isDevelopment() ? "DRY_RUN" : "LIVE";
+// Use DRY_RUN mode locally to avoid blocking during testing
+const ruleMode = isLocal() ? "DRY_RUN" : "LIVE";
 
 export const arcjetConfig = arcjet({
   key: env.ARCJET_KEY!,
   rules: [
-    // Bot detection - Block automated clients (DRY_RUN in dev for easier testing)
+    // Bot detection - Block automated clients (DRY_RUN locally for easier testing)
     detectBot({
       mode: ruleMode,
       allow: [
