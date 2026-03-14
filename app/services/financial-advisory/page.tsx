@@ -23,7 +23,7 @@ import {
 } from "@/lib/constants";
 
 export default function FinancialAdvisoryPage() {
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">

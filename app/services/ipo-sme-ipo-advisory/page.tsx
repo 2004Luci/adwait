@@ -10,7 +10,7 @@ import { SchedulingModal } from "../../components/SchedulingModal";
 import { ipoFeatures, ipoProcessSteps, ipoBenefits } from "@/lib/constants";
 
 export default function IPOSMEIPOAdvisoryPage() {
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">

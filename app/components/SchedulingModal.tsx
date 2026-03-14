@@ -161,6 +161,7 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
         }
       }
     } catch (error) {
+      console.error("Error scheduling consultation:", error);
       toast.error("Failed to schedule consultation", {
         description:
           "Please check your internet connection and try again. If the problem persists, please contact us directly.",

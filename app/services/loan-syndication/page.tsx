@@ -3,16 +3,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import Link from "next/link";
-import {
-  Banknote,
-  CheckCircle,
-  ArrowLeft,
-  Phone,
-  Mail,
-  TrendingUp,
-  Building,
-  Globe,
-} from "lucide-react";
+import { Banknote, CheckCircle, ArrowLeft, Phone, Mail, Building } from "lucide-react";
 import { SchedulingModal } from "../../components/SchedulingModal";
 import { BackgroundElements } from "../../components/ui/BackgroundElements";
 import { AnimatedText } from "../../components/ui/AnimatedText";
@@ -23,7 +14,7 @@ import {
 } from "@/lib/constants";
 
 export default function LoanSyndicationPage() {
-  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState(false);
+  const [isSchedulingModalOpen, setIsSchedulingModalOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage-900 via-black to-sage-800">
