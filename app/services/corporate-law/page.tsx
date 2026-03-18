@@ -171,7 +171,7 @@ export default function CorporateLawPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    window.location.href = "/#contact";
+                    window.location.href = `/?service=${encodeURIComponent("Corporate Law Services")}#contact`;
                   }}
                   className="cursor-pointer w-full border border-sage-500/30 text-sage-500 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
                 >

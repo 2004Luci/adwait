@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Navigation from "./components/Navigation";
 import HeroSection from "./components/HeroSection";
 import ServicesSection from "./components/ServicesSection";
@@ -21,7 +22,9 @@ export default function Home() {
       <ExpertiseSection />
       <TestimonialsSection />
       <AboutSection />
-      <ContactSection />
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <ContactSection />
+      </Suspense>
       <Footer />
       <Toaster />
     </div>
