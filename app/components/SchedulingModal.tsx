@@ -466,6 +466,11 @@ export function SchedulingModal({ isOpen, onClose }: SchedulingModalProps) {
                           </span>
                         </div>
                       </div>
+                      <p className="mt-3 pt-3 border-t border-sage-700/50 text-xs text-sage-400 italic">
+                        The chosen time slot is your preferred time slot. We will try our best to
+                        schedule the meeting during that time but cannot assure it. We may contact
+                        you to discuss or schedule at a different time during the day.
+                      </p>
                     </div>
                   )}
                 </motion.div>
