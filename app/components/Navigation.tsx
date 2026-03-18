@@ -4,13 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { navItems } from "@/lib/constants";
 
 const THROTTLE_MS = 100;
 
 const Navigation = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
@@ -20,6 +21,14 @@ const Navigation = () => {
   const lastScrollYRef = useRef(0);
   const throttleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastRunRef = useRef(0);
+
+  const handleLogoClick = () => {
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,7 +105,7 @@ const Navigation = () => {
                       className="w-auto object-contain cursor-pointer"
                       width={250}
                       height={100}
-                      onClick={() => router.push("/")}
+                      onClick={() => handleLogoClick()}
                       priority
                     />
                   </div>
@@ -212,7 +221,7 @@ const Navigation = () => {
                       className="block w-auto h-full object-contain cursor-pointer object-center"
                       width={120}
                       height={44}
-                      onClick={() => router.push("/")}
+                      onClick={() => handleLogoClick()}
                     />
                   </div>
                 </motion.div>
