@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { Home, ArrowLeft, FileQuestion } from "lucide-react";
 import { BackgroundElements } from "./components/ui/BackgroundElements";
 
 export default function NotFound() {
+  const router = useRouter();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sage-900 via-black to-sage-800">
       <BackgroundElements showGrid={true} showFloatingElements={true} showCornerElements={true} />
@@ -69,7 +72,7 @@ export default function NotFound() {
             </Link>
             <button
               type="button"
-              onClick={() => window.history.back()}
+              onClick={() => router.back()}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-sage-200/30 text-sage-200 font-medium hover:bg-sage-200/10 transition-all duration-300 cursor-pointer"
             >
               <ArrowLeft className="w-5 h-5" />
