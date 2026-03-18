@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Mail, Send, CheckCircle } from "lucide-react";
 import { BackgroundElements } from "./ui/BackgroundElements";
 import { AnimatedText } from "./ui/AnimatedText";
@@ -17,9 +18,21 @@ import { contactFormSchema, type ContactFormData } from "@/lib/schema";
 import { formatRemainingTime } from "@/lib/utils";
 import Link from "next/link";
 
+const getServiceFromUrl = (): string => {
+  if (typeof window === "undefined") return "";
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get("service");
+  return service && serviceList.includes(service) ? service : "";
+};
+
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+
+  const serviceParam = searchParams.get("service");
+  const initialService =
+    serviceParam && serviceList.includes(serviceParam) ? serviceParam : getServiceFromUrl();
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -28,11 +41,19 @@ const ContactSection = () => {
       email: "",
       company: "",
       phone: "",
-      service: "",
+      service: initialService,
       message: "",
     },
     mode: "onSubmit",
   });
+
+  // Sync service from URL when it becomes available (useSearchParams can be delayed)
+  useEffect(() => {
+    const urlService = getServiceFromUrl();
+    if (urlService && form.getValues("service") !== urlService) {
+      form.setValue("service", urlService);
+    }
+  }, [searchParams, form]);
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -237,7 +258,7 @@ const ContactSection = () => {
                         <FormLabel className="text-sage-200 font-medium data-[error=true]:text-sage-200">
                           Service Required *
                         </FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} value={field.value || undefined}>
                           <FormControl>
                             <SelectTrigger className="bg-sage-700/50 border-sage-600/30 text-sage-100 focus:ring-sage-200/50 focus:border-sage-200/50">
                               <SelectValue placeholder="Select a service" />

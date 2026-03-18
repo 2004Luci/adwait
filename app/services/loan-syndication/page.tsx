@@ -188,7 +188,7 @@ export default function LoanSyndicationPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    window.location.href = "/#contact";
+                    window.location.href = `/?service=${encodeURIComponent("Loan Syndication")}#contact`;
                   }}
                   className="cursor-pointer w-full border border-sage-600/30 text-sage-600 px-6 py-3 rounded-xl font-medium flex items-center justify-center"
                 >
