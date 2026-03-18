@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { Mail, Send, CheckCircle } from "lucide-react";
 import { BackgroundElements } from "./ui/BackgroundElements";
@@ -28,6 +28,7 @@ const getServiceFromUrl = (): string => {
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const searchParams = useSearchParams();
 
   const serviceParam = searchParams.get("service");
@@ -54,6 +55,20 @@ const ContactSection = () => {
       form.setValue("service", urlService);
     }
   }, [searchParams, form]);
+
+  // Scroll to contact section (query params delay native scroll)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash !== "#contact") return;
+
+    const scrollToContact = () => {
+      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    // Delay to ensure DOM is ready (For slower hydration)
+    const timer = setTimeout(scrollToContact, 150);
+    return () => clearTimeout(timer);
+  }, []);
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -115,6 +130,7 @@ const ContactSection = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="contact"
       className="relative py-24 bg-gradient-to-br from-sage-300 via-sage-400 to-sage-500 overflow-hidden"
     >
