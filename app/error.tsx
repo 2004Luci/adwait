@@ -57,6 +57,11 @@ export default function Error({
                 <pre className="mt-2 p-4 rounded-lg bg-sage-900/80 text-amber-200 text-xs overflow-x-auto max-h-40 overflow-y-auto">
                   {error.message}
                 </pre>
+                {error.digest && (
+                  <pre className="mt-2 p-4 rounded-lg bg-sage-900/80 text-amber-200 text-xs overflow-x-auto max-h-40 overflow-y-auto">
+                    {error.digest}
+                  </pre>
+                )}
               </details>
             )}
           </motion.div>
