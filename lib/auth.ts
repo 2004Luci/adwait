@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { getSupabaseAdminOrThrow } from "./supabase";
-import type { AdminUser, AdminUserRole } from "./db/types";
+import type { AdminUserRole } from "./db/types";
 
 /**
  * NextAuth.js v5 Configuration

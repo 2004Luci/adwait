@@ -5,17 +5,18 @@ import { AnnouncementBanner } from "./AnnouncementBanner";
  * Server Component wrapper that fetches announcements
  */
 export async function AnnouncementBannerWrapper() {
+  let announcements;
   try {
-    const announcements = await getActiveAnnouncements();
-
-    if (announcements.length === 0) {
-      return null;
-    }
-
-    return <AnnouncementBanner announcements={announcements} />;
+    announcements = await getActiveAnnouncements();
   } catch (error) {
-    // Silently fail - don't break the page if announcements can't be fetched
+    // Silently fail: Don't break the page if announcements can't be fetched
     console.error("[Announcements] Failed to fetch:", error);
     return null;
   }
+
+  if (announcements.length === 0) {
+    return null;
+  }
+
+  return <AnnouncementBanner announcements={announcements} />;
 }

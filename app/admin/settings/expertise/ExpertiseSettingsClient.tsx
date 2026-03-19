@@ -444,7 +444,7 @@ export function ExpertiseSettingsClient({
               ))}
               {expertiseAreas.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No expertise areas configured. Click "Add Area" to create one.
+                  No expertise areas configured. Click &quot;Add Area&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -574,7 +574,7 @@ export function ExpertiseSettingsClient({
               ))}
               {expertiseProcessSteps.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No process steps configured. Click "Add Step" to create one.
+                  No process steps configured. Click &quot;Add Step&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -663,7 +663,7 @@ export function ExpertiseSettingsClient({
               ))}
               {processSteps.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No process steps configured. Click "Add Step" to create one.
+                  No process steps configured. Click &quot;Add Step&quot; to create one.
                 </p>
               )}
             </CardContent>

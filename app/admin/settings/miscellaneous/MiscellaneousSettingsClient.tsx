@@ -71,6 +71,7 @@ export function MiscellaneousSettingsClient({
   initialSettings,
   defaultSettings,
 }: MiscellaneousSettingsClientProps) {
+  void defaultSettings; // Reserved for future reset-to-defaults feature
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);

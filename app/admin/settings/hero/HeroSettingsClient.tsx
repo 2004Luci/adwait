@@ -211,7 +211,7 @@ export function HeroSettingsClient({
                 <div>
                   <CardTitle>Hero Stats</CardTitle>
                   <CardDescription>
-                    Statistics displayed in the hero section (e.g., "23+ Years of Experience")
+                    Statistics displayed in the hero section (e.g., &quot;23+ Years of Experience&quot;)
                   </CardDescription>
                 </div>
                 <div className="flex gap-2">
@@ -273,7 +273,7 @@ export function HeroSettingsClient({
               ))}
               {stats.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No stats configured. Click "Add Stat" to create one.
+                  No stats configured. Click &quot;Add Stat&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -286,7 +286,7 @@ export function HeroSettingsClient({
                 <div>
                   <CardTitle>Typewriter Phrases</CardTitle>
                   <CardDescription>
-                    Phrases that animate in the hero section (e.g., "IPO & SME IPO Advisory")
+                    Phrases that animate in the hero section (e.g., &quot;IPO & SME IPO Advisory&quot;)
                   </CardDescription>
                 </div>
                 <div className="flex gap-2">
@@ -326,7 +326,7 @@ export function HeroSettingsClient({
               ))}
               {phrases.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No phrases configured. Click "Add Phrase" to create one.
+                  No phrases configured. Click &quot;Add Phrase&quot; to create one.
                 </p>
               )}
             </CardContent>

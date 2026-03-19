@@ -387,7 +387,7 @@ export function TestimonialsSettingsClient({
               ))}
               {testimonials.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No testimonials configured. Click "Add Testimonial" to create one.
+                  No testimonials configured. Click &quot;Add Testimonial&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -535,7 +535,7 @@ export function TestimonialsSettingsClient({
               ))}
               {caseStudies.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No case studies configured. Click "Add Case Study" to create one.
+                  No case studies configured. Click &quot;Add Case Study&quot; to create one.
                 </p>
               )}
             </CardContent>

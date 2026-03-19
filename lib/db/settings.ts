@@ -6,7 +6,7 @@
  */
 
 import { getSupabaseAdminOrThrow } from "../supabase";
-import type { SiteSetting, SiteSettingInsert, SiteSettingUpdate, SettingsCategory } from "./types";
+import type { SiteSetting, SiteSettingUpdate, SettingsCategory } from "./types";
 
 /**
  * Get all site settings

@@ -374,7 +374,7 @@ export function ContactSettingsClient({
               ))}
               {companyEmails.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No emails configured. Click "Add Email" to create one.
+                  No emails configured. Click &quot;Add Email&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -499,7 +499,7 @@ export function ContactSettingsClient({
               ))}
               {contactInfo.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No contact info cards configured. Click "Add Contact Card" to create one.
+                  No contact info cards configured. Click &quot;Add Contact Card&quot; to create one.
                 </p>
               )}
             </CardContent>

@@ -383,7 +383,7 @@ export function ServicesSettingsClient({
               ))}
               {services.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No services configured. Click "Add Service" to create one.
+                  No services configured. Click &quot;Add Service&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -436,7 +436,7 @@ export function ServicesSettingsClient({
               ))}
               {serviceList.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No items configured. Click "Add Item" to create one.
+                  No items configured. Click &quot;Add Item&quot; to create one.
                 </p>
               )}
             </CardContent>

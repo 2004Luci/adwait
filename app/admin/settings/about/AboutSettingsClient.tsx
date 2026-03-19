@@ -435,7 +435,7 @@ export function AboutSettingsClient({
               ))}
               {partners.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No partners configured. Click "Add Partner" to create one.
+                  No partners configured. Click &quot;Add Partner&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -528,7 +528,7 @@ export function AboutSettingsClient({
               ))}
               {achievements.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No achievements configured. Click "Add Achievement" to create one.
+                  No achievements configured. Click &quot;Add Achievement&quot; to create one.
                 </p>
               )}
             </CardContent>
@@ -581,7 +581,7 @@ export function AboutSettingsClient({
               ))}
               {clientLogos.length === 0 && (
                 <p className="text-center text-slate-500 py-4">
-                  No client logos configured. Click "Add Client" to create one.
+                  No client logos configured. Click &quot;Add Client&quot; to create one.
                 </p>
               )}
             </CardContent>

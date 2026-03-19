@@ -86,7 +86,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
     await signOut({ callbackUrl: "/admin/login" });
   };
 
-  const NavContent = () => (
+  const navContent = (
     <>
       {/* Logo */}
       <div className="p-4 border-b border-slate-200 dark:border-slate-700">
@@ -100,12 +100,8 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             />
           </div>
           <div>
-            <h1 className="font-semibold text-slate-900 dark:text-white">
-              Adwait Artha
-            </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              CMS Dashboard
-            </p>
+            <h1 className="font-semibold text-slate-900 dark:text-white">Adwait Artha</h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400">CMS Dashboard</p>
           </div>
         </Link>
       </div>
@@ -131,9 +127,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
               <Icon
                 className={cn(
                   "h-5 w-5 flex-shrink-0",
-                  active
-                    ? "text-sage-600 dark:text-sage-400"
-                    : "text-slate-400 dark:text-slate-500"
+                  active ? "text-sage-600 dark:text-sage-400" : "text-slate-400 dark:text-slate-500"
                 )}
               />
               <span>{item.title}</span>
@@ -154,9 +148,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
                 <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
                   {user.name || user.email}
                 </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400 capitalize">
-                  {user.role}
-                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 capitalize">{user.role}</p>
               </div>
               <ChevronDown className="w-4 h-4 text-slate-400" />
             </button>
@@ -164,9 +156,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
           <DropdownMenuContent align="end" className="w-56">
             <div className="px-2 py-1.5">
               <p className="text-sm font-medium truncate">{user.email}</p>
-              <p className="text-xs text-muted-foreground capitalize">
-                {user.role}
-              </p>
+              <p className="text-xs text-muted-foreground capitalize">{user.role}</p>
             </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
@@ -198,11 +188,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="bg-white dark:bg-slate-800 shadow-md"
         >
-          {isMobileMenuOpen ? (
-            <X className="h-5 w-5" />
-          ) : (
-            <Menu className="h-5 w-5" />
-          )}
+          {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
       </div>
 
@@ -218,12 +204,10 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       <aside
         className={cn(
           "fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 flex flex-col transform transition-transform duration-200 ease-in-out",
-          isMobileMenuOpen
-            ? "translate-x-0"
-            : "-translate-x-full lg:translate-x-0"
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
-        <NavContent />
+        {navContent}
       </aside>
     </>
   );
