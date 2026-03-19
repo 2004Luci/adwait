@@ -107,7 +107,6 @@ const navItems: NavItem[] = [
   { name: "Blog", href: "/blog", icon: FileText },
   // { name: "Careers", href: "/careers", icon: Users },
   { name: "About", href: "#about", icon: User },
-  { name: "Contact", href: "#contact", icon: Phone },
 ];
 
 // ==================== HERO SECTION ====================
