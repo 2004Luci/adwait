@@ -1,5 +1,5 @@
 async function simulateError(searchParams: { simulate?: string } | undefined) {
-  if (searchParams?.simulate === "error") {
+  if (process.env.NODE_ENV === "development" && searchParams?.simulate === "error") {
     throw new Error(
       "Simulated error: Unable to fetch posts. The database server may be unreachable or the connection pool has been exhausted."
     );
