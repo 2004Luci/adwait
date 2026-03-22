@@ -1,6 +1,6 @@
 # Adwait Artha LLP
 
-Official website for **Adwait Artha LLP**—financial advisory and legal consulting in India. Built with Next.js (App Router), TypeScript, and Tailwind CSS.
+Official website for **Adwait Artha LLP** : Financial advisory and legal consulting in India. Built with Next.js (App Router), TypeScript and Tailwind CSS.
 
 ## Stack
 
@@ -46,7 +46,7 @@ Content-heavy values live in `lib/constants.ts` (and related types). API routes 
 
 ## Contributing
 
-See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for branches, PR flow, naming, and commits.
+See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for branches, PR flow, naming and commits.
 
 ## License
 
