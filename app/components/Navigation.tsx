@@ -93,7 +93,8 @@ const Navigation = () => {
             animate={{ y: 0 }}
             exit={{ y: -100 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 right-0 z-50 bg-transparent"
+            className="fixed left-0 right-0 z-40 bg-transparent"
+            style={{ top: "calc(var(--announcement-banner-height, 0px) + 0.75rem)" }}
           >
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
               <div className="flex items-center justify-between h-20">
@@ -205,7 +206,12 @@ const Navigation = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-sage-900/95 backdrop-blur-md shadow-2xl border-2 border-sage-200/30 rounded-2xl overflow-hidden min-w-[320px] w-max max-w-[95vw]"
+            className="fixed left-1/2 transform -translate-x-1/2 z-40 bg-sage-900/95 backdrop-blur-md shadow-2xl border-2 border-sage-200/30 rounded-2xl overflow-hidden"
+            style={{
+              minWidth: "320px",
+              maxWidth: "95vw",
+              top: "calc(1rem + var(--announcement-banner-height, 0px))",
+            }}
           >
             <div className="px-4 pt-3 pb-3">
               <div className="flex items-center justify-between gap-3 h-14 min-w-0">
