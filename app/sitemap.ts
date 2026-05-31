@@ -1,11 +1,12 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
+import { CAREERS_ENABLED } from "@/lib/flags";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date().toISOString();
 
   // Main pages
-  const mainPages = [
+  const mainPages: MetadataRoute.Sitemap = [
     {
       url: SITE_URL,
       lastModified: currentDate,
@@ -18,13 +19,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
-    {
+  ];
+
+  if (CAREERS_ENABLED) {
+    mainPages.push({
       url: `${SITE_URL}/careers`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
       priority: 0.7,
-    },
-  ];
+    });
+  }
 
   // Service pages
   const servicePages = [

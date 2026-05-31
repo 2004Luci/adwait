@@ -46,6 +46,7 @@ import type {
   FinanceType,
   AdvisoryArea,
 } from "./constants.types";
+import { CAREERS_ENABLED } from "./flags";
 
 // ==================== SITE CONFIGURATION ====================
 
@@ -510,7 +511,7 @@ const footerLinks: FooterLinks = {
     { name: "Our Team", href: "#team" },
     { name: "Case Studies", href: "#case-studies" },
     { name: "Testimonials", href: "#testimonials" },
-    { name: "Careers", href: "/careers" },
+    ...(CAREERS_ENABLED ? [{ name: "Careers", href: "/careers" }] : []),
     { name: "Contact", href: "#contact" },
     { name: "Sandip Sheth & Associates", href: "https://www.ssacs.in" },
   ],

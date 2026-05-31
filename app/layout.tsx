@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_URL } from "@/lib/constants";
+import { CAREERS_ENABLED } from "@/lib/flags";
 import { isProduction } from "@/lib/env";
 
 const geistSans = Geist({
@@ -196,13 +197,17 @@ const navigationSchema = {
       description: "Financial statement advisory and restructuring",
       url: `${SITE_URL}/services/financial-advisory`,
     },
-    {
-      "@type": "SiteNavigationElement",
-      position: 6,
-      name: "Careers",
-      description: "Join our team of financial experts",
-      url: `${SITE_URL}/careers`,
-    },
+    ...(CAREERS_ENABLED
+      ? [
+          {
+            "@type": "SiteNavigationElement" as const,
+            position: 6,
+            name: "Careers",
+            description: "Join our team of financial experts",
+            url: `${SITE_URL}/careers`,
+          },
+        ]
+      : []),
   ],
 };
 
