@@ -19,7 +19,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: FacebookIcon, href: "#", label: "Facebook" },
     { icon: XIcon, href: "#", label: "Twitter" },
-    { icon: LinkedinIcon, href: "#", label: "LinkedIn" },
+    { icon: LinkedinIcon, href: "https://www.linkedin.com/company/adwait-artha-llp/about/", label: "LinkedIn" },
     { icon: InstagramIcon, href: "#", label: "Instagram" },
   ];
 
